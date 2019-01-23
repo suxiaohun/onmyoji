@@ -30,6 +30,12 @@ gem 'turbolinks', '~> 5'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+gem 'unicorn'
+
+gem 'capistrano-rails'
+gem 'capistrano-rvm'
+# gem 'capistrano-bundler'
+gem 'capistrano3-unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
