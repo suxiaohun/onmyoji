@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'chat_rooms#index'
+  root 'chat_rooms#su'
 
   match '/auth',to: 'chat_rooms#auth',:via => [:get,:post]
 

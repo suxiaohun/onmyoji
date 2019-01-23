@@ -1,10 +1,34 @@
 
+<script type="text/javascript">
 
-<div style="width: 400px;background: yellowgreen;padding-top: 40px;text-align: center;height: 400px;vertical-align: middle;line-height: 80px;margin:0 auto;font-size: 30px;font-weight: bold;">
 
-  <%= @days1 %><br><br>
+function test(obj) {
+    var converter = new showdown.Converter();
+        var text      = '# hello, markdown!';
+        text= '> wqq';
+        text = '```\n' +
+            'def test\n' +
+            '   puts "111"\n' +
+            'end```';
+        var html      = converter.makeHtml(text);
+
+    $(obj).html(html)
+
+}
+
+
+</script>
+
+<div style="text-align: center;">
+
+  <%= @days1 %><br><br><br><br><br><br>
   <%= @percent %>%
 
 </div>
+
+
+<!--<div style="background: yellowgreen;min-height: 200px;" id="test_div" onclick="test(this)">-->
+<!--  click me-->
+<!--</div>-->
 
 
