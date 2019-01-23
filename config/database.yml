@@ -14,12 +14,12 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: 123456
   socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
-  database: onmyoji_development
+  database: onmyoji
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: onmyoji_production
-  username: onmyoji
+  database: onmyoji
+  username: root
   password: <%= ENV['ONMYOJI_DATABASE_PASSWORD'] %>
