@@ -1,0 +1,86 @@
+<style type="text/css">
+  .std {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin: 0 auto;
+    /*top: 100px;*/
+    /*position: relative;*/
+    background: yellowgreen;
+    text-align: center;
+    line-height: 100px
+  }
+
+  .container {
+    /*position: relative;*/
+    width: 680px;
+    height: 300px;
+    overflow: auto;
+    margin: 0 auto;
+    border: 1px solid black;
+  }
+
+  .send_container {
+    margin: 0 auto;
+    width: 800px;
+    /*display: none;*/
+  }
+
+</style>
+
+<script type="text/javascript">
+  var area1;
+  $(function () {
+      $("#DataToSend").keypress(function(evt)
+      {
+          if (evt.keyCode == 13)
+          {
+              $("#SendData").click();
+              evt.preventDefault();
+          }
+      })
+  });
+
+  bkLib.onDomLoaded(function() {
+      area1 = new nicEditor().panelInstance('DataToSend');
+  });
+</script>
+
+
+<div style="text-align: center;">
+  <button id="chat_btn" chat="0" class="std" type="button" onclick="subscript()">connect</button>
+  自动加入：<%= check_box_tag 'auto_connect',1,true %><br>
+
+</div>
+
+
+
+<div id='LogContainer' class='container'>
+
+</div>
+
+<div id='SendDataContainer' class="send_container">
+
+  <textarea  id="DataToSend" style="width: 800px;height: 300px;"></textarea>
+
+
+  <button id='SendData' type="button" onclick="send_message()">发送</button>
+
+
+</div>
+
+<!--<div class="std" style="width: 600px;height: 400px;background: wheat">-->
+
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
