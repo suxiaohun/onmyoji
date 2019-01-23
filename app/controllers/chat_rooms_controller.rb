@@ -3,6 +3,7 @@ class ChatRoomsController < ApplicationController
 
   before_action :require_auth, :except => [:auth]
 
+  skip_before_action :verify_authenticity_token
 
   # GET /chat_rooms
   def index
