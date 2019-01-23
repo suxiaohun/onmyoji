@@ -26,7 +26,7 @@ append :linked_files, "config/database.yml","config/master.key"
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
-set :unicorn_pid, -> { File.join("tmp", "pids", "unicorn.pid") }
+set :unicorn_pid, -> { File.join(current_path,"tmp", "pids", "unicorn.pid") }
 set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
 
 after 'deploy:publishing', 'deploy:restart'
