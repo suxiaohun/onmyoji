@@ -14,7 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
-//= require nicEdit/nicEdit
+//= require_directory ./nicEdit
 //= require cable
 //= require channels/chat
 //= require_self
