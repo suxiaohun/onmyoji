@@ -1,12 +1,15 @@
 function subscript() {
     var obj = $("#chat_btn");
     var v1 = obj.attr("chat");
-    if (v1 === "0") {
+    var v2 = obj.attr("sama");
+
+    if(v2==="1"){
+        obj.removeAttr("sama");
         App.chat = App.cable.subscriptions.create("ChatChannel", {
             connected: function () {
                 // Called when the subscription is ready for use on the server
                 obj.attr("chat", "1");
-                obj.css('background', 'pink');
+                obj.css('background', 'yellowgreen');
                 obj.html("connecting");
                 $("#SendDataContainer").show();
                 //notice all users "new user join in the chat"
@@ -26,18 +29,27 @@ function subscript() {
                 // Called when there's incoming data on the websocket for this channel
             }
         });
+        return false;
+    }
+
+
+    if (v1 === "0") {
+        App.chat.consumer.send("subscribe");
+        obj.attr("chat", "1");
+        obj.css('background', 'yellowgreen');
+        obj.html("connecting");
+        $("#SendDataContainer").show();
         user_join();
     } else if (v1 === "1") {
 
         // alert(1);
-        App.chat.consumer.disconnect();
+        App.chat.consumer.send("unsubscribe");
         obj.attr("chat", "0");
-        obj.css('background', 'yellowgreen');
+        obj.css('background', 'rgb(221, 221, 221)');
         obj.html("connect");
         $("#SendDataContainer").hide();
         // count total online users
         user_leave();
-
     }
 }
 
