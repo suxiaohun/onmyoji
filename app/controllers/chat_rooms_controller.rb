@@ -74,6 +74,7 @@ class ChatRoomsController < ApplicationController
 
   # GET /chat_rooms/1/edit
   def edit
+
   end
 
   # POST /chat_rooms

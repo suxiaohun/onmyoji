@@ -40,16 +40,20 @@
           }
       })
   });
-
-  bkLib.onDomLoaded(function() {
-      area1 = new nicEditor().panelInstance('DataToSend');
-  });
+  // tinyMCE.init({
+  //
+  //     selector:"#DataToSend"             //页面元素选择器
+  //
+  // })
+  // bkLib.onDomLoaded(function() {
+  //     area1 = new nicEditor().panelInstance('DataToSend');
+  // });
 </script>
 
 
 <div style="text-align: center;">
   <button id="chat_btn" chat="0" sama="1" class="std" type="button" onclick="subscript()">connect</button>
-  自动加入：<%= check_box_tag 'auto_connect',1,true %><br>
+<!--  自动加入：<%#= check_box_tag 'auto_connect',1,true %><br>-->
 
 </div>
 
