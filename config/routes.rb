@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   match '/auth',to: 'chat_rooms#auth',:via => [:get,:post]
 
   get '/su',to: 'chat_rooms#su'
+  get '/canvas',to: 'chat_rooms#canvas'
 
   get '/chat_rooms/join',to: 'chat_rooms#join'
   get '/chat_rooms/leave',to: 'chat_rooms#leave'

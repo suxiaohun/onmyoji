@@ -67,6 +67,10 @@ class ChatRoomsController < ApplicationController
 
   end
 
+  def canvas
+    
+  end
+
   # GET /chat_rooms/new
   def new
     @chat_room = ChatRoom.new
