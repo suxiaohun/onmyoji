@@ -1,7 +1,7 @@
 class ChatRoomsController < ApplicationController
   before_action :set_chat_room, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_auth, :except => [:auth,:canvas]
+  before_action :require_auth, :except => [:auth,:canvas,:su]
 
   skip_before_action :verify_authenticity_token
 
@@ -62,8 +62,10 @@ class ChatRoomsController < ApplicationController
     @days1 = (end_day - today).to_i
     @days2 = (today - start_day).to_i
 
-    @percent = (@days2/365.0).round(4)*100
+    @percent = ((@days2/365.0)*100).round(2)
 
+    Math.round
+    binding.pry
 
   end
 
