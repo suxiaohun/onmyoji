@@ -89,6 +89,7 @@ function send_message() {
     // var msg = nicEditors.findEditor('DataToSend').getContent();
     //
     //
+    $("#DataToSend").val('').focus();
     App.chat.send({ color:"purple", message: msg })
 
     // $.post('/messages', {msg: msg}, function (result) {
