@@ -28,3 +28,4 @@
 /test/*
 .idea
 /db/schema.rb
+dd.sh

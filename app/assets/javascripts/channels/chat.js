@@ -93,6 +93,7 @@ function send_message() {
     if (msg==="") return false;
 
     obj.val('').focus();
+    $('.notifyjs-corner').empty();
     App.chat.send({ color:"purple", message: msg })
 
     // $.post('/messages', {msg: msg}, function (result) {
