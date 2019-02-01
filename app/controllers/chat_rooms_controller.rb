@@ -64,9 +64,6 @@ class ChatRoomsController < ApplicationController
 
     @percent = ((@days2/365.0)*100).round(2)
 
-    Math.round
-    binding.pry
-
   end
 
   def canvas
