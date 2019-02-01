@@ -85,11 +85,14 @@ function subscript() {
 }
 
 function send_message() {
-    var msg = $("#DataToSend").val();
+    var obj = $("#DataToSend");
+    var msg = obj.val().replace(/(\s*$)/g, "");
     // var msg = nicEditors.findEditor('DataToSend').getContent();
     //
     //
-    $("#DataToSend").val('').focus();
+    if (msg==="") return false;
+
+    obj.val('').focus();
     App.chat.send({ color:"purple", message: msg })
 
     // $.post('/messages', {msg: msg}, function (result) {
