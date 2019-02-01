@@ -78,6 +78,8 @@ function subscript() {
         obj.attr("chat", "0");
         obj.css('background', 'rgb(221, 221, 221)');
         obj.html("connect");
+        $('.notifyjs-corner').empty();
+
         $("#SendDataContainer").hide();
         // count total online users
         user_leave();
@@ -93,7 +95,6 @@ function send_message() {
     if (msg==="") return false;
 
     obj.val('').focus();
-    $('.notifyjs-corner').empty();
     App.chat.send({ color:"purple", message: msg })
 
     // $.post('/messages', {msg: msg}, function (result) {
