@@ -30,7 +30,7 @@ gem 'redis', '~> 4.0'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-gem 'unicorn'
+gem 'unicorn', '~> 5.4.1'
 
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
