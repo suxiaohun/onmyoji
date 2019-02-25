@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
 
 
-  root 'chat_rooms#su'
+  # get 'common/index'
+  root 'common#index'
 
   match '/auth',to: 'chat_rooms#auth',:via => [:get,:post]
 
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
 
   #  Boolean to anchor a <tt>match</tt> pattern. Default is true. When set to
   #  false, the pattern matches any request prefixed with the given path.
-  match '/',to: 'chat_rooms#index',anchor: false, via: :get
+  match '/',to: 'common#index',anchor: false, via: :get
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
