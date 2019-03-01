@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   # users must auth
   def require_auth
     if cookies[:nick_name]
+    	Rails.logger.info("====================#{cookies[:nick_name]}==============================")
       true
     else
       redirect_to '/auth'
