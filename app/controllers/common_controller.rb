@@ -1,22 +1,13 @@
 class CommonController < ApplicationController
+
   before_action :require_auth, :only => [:xiuxian]
 
   def xiuxian
     render :layout => 'xiuxian'
   end
 
-  #
-  # def index
-  #
-  #   CrystalMailer.welcome.deliver_later
-  #
-  #   render :json => {:msg=>11111}
-  #
-  #
-  # end
 
-  def welcome
-
+  def index
   end
 
 
@@ -37,6 +28,5 @@ class CommonController < ApplicationController
       cookies.delete :nick_name
     end
   end
-
 
 end

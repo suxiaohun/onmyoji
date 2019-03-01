@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   match '/auth', to: 'common#auth', :via => [:get, :post]
 
-
   get 'xiuxian', to: 'common#xiuxian'
 
   root 'chat_rooms#su'
