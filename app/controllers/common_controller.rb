@@ -25,7 +25,7 @@ class CommonController < ApplicationController
       flash[:nick_name] = params[:name]
       redirect_to '/xiuxian'
     else
-      cookies.delete :nick_name
+      # cookies.delete :nick_name
     end
   end
 

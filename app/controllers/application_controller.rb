@@ -7,9 +7,11 @@ class ApplicationController < ActionController::Base
   # users must auth
   def require_auth
     if cookies[:nick_name]
+    	binding.pry
     	Rails.logger.info("====================#{cookies[:nick_name]}==============================")
       true
     else
+    	binding.pry
     	Rails.logger.info("---------------------#{cookies[:nick_name]}-----------------------------")
       redirect_to '/auth'
     end
