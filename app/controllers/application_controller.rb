@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     	Rails.logger.info("====================#{cookies[:nick_name]}==============================")
       true
     else
+    	Rails.logger.info("---------------------#{cookies[:nick_name]}-----------------------------")
       redirect_to '/auth'
     end
   end
