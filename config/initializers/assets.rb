@@ -12,3 +12,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( nicEdit.js )
+
+#
+Rails.application.config.assets.precompile += %w( vue/vue.js vue/click.js vue/timer.js
+bigNumber/bignumber.min.js xiuxian/level.js xiuxian/stand.js xiuxian/skill.js
+xiuxian/item.js xiuxian/nameMaker.js LZstring/lz-string.min.js)

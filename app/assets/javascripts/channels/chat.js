@@ -44,7 +44,7 @@ function subscript() {
                     // Called when the subscription is ready for use on the server
                     obj.attr("chat", "1");
                     obj.css('background', 'yellowgreen');
-                    obj.html("connecting");
+                    obj.html("已进入聊天室");
                     $("#SendDataContainer").show();
                     //notice all users "new user join in the chat"
                     user_join();

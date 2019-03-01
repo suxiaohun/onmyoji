@@ -10,19 +10,7 @@ class ChatRoomsController < ApplicationController
     # @chat_rooms = ChatRoom.all
   end
 
-  def auth
 
-    if request.post?
-      # cookies[:name] = {
-      #   value: 'a yummy cookie',
-      #   expires: 1.year,
-      #   domain: 'domain.com'
-      # }
-      cookies[:nick_name] = {value: params[:name], expires: 7.days}
-      redirect_to '/'
-    end
-
-  end
 
   def join
     # _ip = request.env['HTTP_X_FORWARDED_FOR'] || request.remote_ip
@@ -118,13 +106,4 @@ class ChatRoomsController < ApplicationController
     params.require(:chat_room).permit(:name, :remark)
   end
 
-  # users must auth
-  def require_auth
-    if cookies[:nick_name]
-      true
-    else
-      redirect_to '/auth'
-    end
-
-  end
 end
