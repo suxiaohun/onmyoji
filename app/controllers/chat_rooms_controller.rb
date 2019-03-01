@@ -1,7 +1,7 @@
 class ChatRoomsController < ApplicationController
   before_action :set_chat_room, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_auth, :except => [:auth,:canvas,:su]
+  # before_action :require_auth, :except => [:auth,:canvas,:su]
 
   skip_before_action :verify_authenticity_token
 
