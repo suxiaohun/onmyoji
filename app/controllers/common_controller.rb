@@ -7,6 +7,12 @@ class CommonController < ApplicationController
   end
 
 
+  def novels
+
+  end
+
+
+
   def index
   end
 
@@ -19,29 +25,22 @@ class CommonController < ApplicationController
   }
 =end
   def auth
-
     if request.post?
       cookies[:nick_name] = {value: params[:name], expires: 7.days}
       flash[:nick_name] = params[:name]
       redirect_to '/xiuxian'
     else
-      # cookies.delete :nick_name
+      cookies.delete :nick_name
     end
   end
 
 
   # users must auth
   def require_auth
-    Rails.logger.info("@@@@@@@@@@@@#{cookies[:nick_name]}@@@@@@@@@@@@@@")
 
     if cookies[:nick_name]
-
-      # Rails.logger.info("====================#{cookies.size}==============================")
-      Rails.logger.info("====================#{cookies[:nick_name]}==============================")
       true
     else
-      # Rails.logger.info("====================#{cookies.size}==============================")
-      Rails.logger.info("---------------------#{cookies[:nick_name]}-----------------------------")
       redirect_to '/auth'
     end
   end
