@@ -41,13 +41,27 @@ end
 namespace :udesk do
   desc 'link books'
   task :setup_property_file do
-    on roles(:all) do |host|
+    on roles(:all) do
       within release_path do
         puts "============aaaa=============="
         execute :ln, '-s', "/home/crystal/books public/"
       end
     end
   end
+
+   desc 'init data'
+  task :init_data do
+    on roles(:all) do
+      within release_path do
+        puts "============bbbbb=============="
+        execute 'rake db:seed'
+      end
+    end
+  end
+
+
+
+
 
   #
   # task :hello do
@@ -58,6 +72,7 @@ namespace :udesk do
 
 
   after 'deploy:updating',   'udesk:setup_property_file'
+  after 'deploy:updating',   'udesk:init_data'
 
 end
 
