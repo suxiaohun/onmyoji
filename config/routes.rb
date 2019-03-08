@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
 
-  resources :books, :only => [:index, :show]
+  get 'books/download', to: 'books#download'
+
+  resources :books
+
+
   resources :authors
   resources :categories
   match '/auth', to: 'common#auth', :via => [:get, :post]
