@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>千羽阁</title>
-    <%= favicon_link_tag 'favicon3.ico' %>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= action_cable_meta_tag %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+<head>
+  <title>千羽阁</title>
+  <%= favicon_link_tag 'favicon3.ico' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= action_cable_meta_tag %>
+  <%= javascript_include_tag 'application' %>
 
-  <body>
-  <div class="container">
-    <%= yield %>
 
-  </div>
-  </body>
+  <%= javascript_include_tag "bigNumber/bignumber.min.js" %>
+  <%= javascript_include_tag "LZstring/lz-string.min.js" %>
+
+  <%= javascript_include_tag "vue/vue.js" %>
+
+  <%= javascript_include_tag "xiuxian/stand.js" %>
+  <%= javascript_include_tag "xiuxian/level.js" %>
+
+  <%= javascript_include_tag "vue/click.js" %>
+  <%= javascript_include_tag "vue/timer.js" %>
+
+  <%= javascript_include_tag "xiuxian/skill.js" %>
+  <%= javascript_include_tag "xiuxian/item.js" %>
+  <%= javascript_include_tag "xiuxian/nameMaker.js" %>
+
+</head>
+
+<body>
+
+<%= yield %>
+</body>
 </html>

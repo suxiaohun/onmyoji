@@ -15,7 +15,6 @@
 //= require jquery
 //= require_directory ./notify
 //= require_directory ./tinymce
-//= require_directory ./tinymce
 //= require cable
 //= require channels/chat
 //= require_self

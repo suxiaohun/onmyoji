@@ -14,6 +14,11 @@ class CommonController < ApplicationController
 
 
   def index
+
+    @books = Book.all
+
+
+    render :layout => 'layui'
   end
 
 

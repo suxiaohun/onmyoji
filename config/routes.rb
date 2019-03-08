@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
 
+  resources :books, :only => [:index, :show]
+  resources :authors
+  resources :categories
   match '/auth', to: 'common#auth', :via => [:get, :post]
 
   get 'xiuxian', to: 'common#xiuxian'
+  get 'index', to: 'common#index'
 
   root 'chat_rooms#su'
 

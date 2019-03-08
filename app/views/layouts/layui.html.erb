@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <title>千羽阁</title>
+  <%= favicon_link_tag 'favicon4.ico' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= action_cable_meta_tag %>
+
+  <%= stylesheet_link_tag 'layui/layui', media: 'all' %>
+  <%= stylesheet_link_tag 'layui/book', media: 'all' %>
+  <%= javascript_include_tag 'layui/layui' %>
+</head>
+
+<body>
+<div class="container">
+  <%= yield %>
+
+</div>
+</body>
+</html>

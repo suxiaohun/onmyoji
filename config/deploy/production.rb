@@ -22,6 +22,13 @@ server "116.196.82.122", user: "crystal", roles: %w{app db web}, my_property: :m
 # role :db,  %w{deploy@example.com}
 
 
+task :execute_on_server do
+ on "crystal@116.196.82.122" do
+  execute "ln -s /home/crystal/books public/books"
+ end
+end
+
+
 
 # Configuration
 # =============
