@@ -39,7 +39,7 @@ end
 
 desc 'link books'
 task :setup_property_file do
-  on roles(:all), in: :parallel do
+  on "crystal@116.196.82.122" do
     within release_path do
       execute :ln, '-s', "/home/crystal/books public/books"
     end
