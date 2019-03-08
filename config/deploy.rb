@@ -72,7 +72,7 @@ namespace :udesk do
 
 
   after 'deploy:updating',   'udesk:setup_property_file'
-  after 'deploy:publishing',   'udesk:init_data'
+  # after 'deploy:publishing',   'udesk:init_data'
 
 end
 
