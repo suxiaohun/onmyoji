@@ -54,7 +54,7 @@ namespace :udesk do
     on roles(:all) do
       within release_path do
         puts "============bbbbb=============="
-        execute 'rake db:seed'
+        execute 'bundle exec rake db:seed'
       end
     end
   end
@@ -72,7 +72,7 @@ namespace :udesk do
 
 
   after 'deploy:updating',   'udesk:setup_property_file'
-  after 'deploy:updating',   'udesk:init_data'
+  after 'deploy:publishing',   'udesk:init_data'
 
 end
 
