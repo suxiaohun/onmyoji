@@ -37,17 +37,29 @@ namespace :deploy do
 end
 
 
-desc 'link books'
-task :setup_property_file do
-  on "crystal@116.196.82.122" do
-    within release_path do
-      execute :ln, '-s', "/home/crystal/books public/books"
+
+namespace :udesk do
+  desc 'link books'
+  task :setup_property_file do
+    on roles(:all) do |host|
+      within release_path do
+        puts "============aaaa=============="
+        execute :ln, '-s', "/home/crystal/books public/books"
+      end
     end
   end
+
+  #
+  # task :hello do
+  #   on roles(:all) do |host|
+  #     execute :sudo, :cp, '~/something', '/something'
+  #   end
+  # end
+
+
+  after 'deploy:updating',   'udesk:setup_property_file'
+
 end
-
-
-after 'deploy:updating',   'setup_property_file'
 
 
 
