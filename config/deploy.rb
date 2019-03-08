@@ -44,7 +44,7 @@ namespace :udesk do
     on roles(:all) do |host|
       within release_path do
         puts "============aaaa=============="
-        execute :ln, '-s', "/home/crystal/books public/books"
+        execute :ln, '-s', "/home/crystal/books public/"
       end
     end
   end
