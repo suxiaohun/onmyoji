@@ -54,7 +54,7 @@ namespace :udesk do
     on roles(:all) do
       within release_path do
         puts "============bbbbb=============="
-        execute 'bundle exec rake db:seed'
+        execute 'RAILS_ENV=production rake db:seed'
       end
     end
   end
