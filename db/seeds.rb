@@ -15,6 +15,7 @@ author_array = [{name: '佚名'},
                 {name: '冰山男子'},
                 {name: '玄雨'},
                 {name: '李鸿天'},
+                {name: 'zhttty'},
                 {name: '苏小魂'}]
 
 @authors = Author.create(author_array).inject({}) {|r, x| r[x.id] = x.name; r}
@@ -34,6 +35,7 @@ category_array = [
     {name: '异能'},
     {name: '都市'},
     {name: '异界'},
+    {name: '无限流'},
     {name: '架空'}
 ]
 
@@ -41,13 +43,21 @@ categories = Category.create(category_array).inject({}) {|r, x| r[x.id] = x.name
 
 Book.delete_all
 book_array = [
+    # {
+    #     name: '墨邪录',
+    #     display_name: '墨邪录',
+    #     author_id: get_author('苏小魂'),
+    #     tag: '玄幻|修真|异界|神话',
+    #     category_id: categories.key('玄幻'),
+    #     path: 'books/yaodaoji.txt'
+    # },
     {
-        name: '墨邪录',
-        display_name: '墨邪录',
-        author_id: get_author('苏小魂'),
-        tag: '玄幻|修真|异界|神话',
-        category_id: categories.key('玄幻'),
-        path: 'books/yaodaoji.txt'
+        name: '无限恐怖',
+        display_name: '无限恐怖',
+        author_id: get_author('默默猴'),
+        tag: '无限流|轮回',
+        category_id: categories.key('无限流'),
+        path: 'books/wuxiankongbu.txt'
     },
     {
         name: '妖刀记',

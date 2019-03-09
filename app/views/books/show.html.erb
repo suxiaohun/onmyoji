@@ -1,8 +1,12 @@
 <h1><%= @book.name %></h1>
 <hr>
-<h2><%= @book.display_name %></h2>
-
+<h2><%= @book.display_name %>
+  <span style="color:#ab8248"> #<%= @book.tag %># </span>
+</h2>
 <hr>
 
-<%= link_to 'download',{:action => 'download',:id=>@book.id} %>
 
+<hr>
+<div style="text-align: center;">
+  <%= link_to 'download',{:action => 'download',:id=>@book.id},:style=>'color:white',:class => 'layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' %>
+</div>
