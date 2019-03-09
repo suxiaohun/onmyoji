@@ -177,11 +177,11 @@ a cite {
 
 @font-face {
     font-family: layui-icon;
-    src: font_path('iconfont.eot');
-    src: font_path('iconfont.eot') format('embedded-opentype'),
-    font_path('iconfont.svg') format('svg'),
-    font_path('iconfont.woff') format('woff'),
-    font_path('iconfont.ttf') format('truetype')
+    src: font_path('fonts/iconfont.eot');
+    src: font_path('fonts/iconfont.eot') format('embedded-opentype'),
+    font_path('fonts/iconfont.svg') format('svg'),
+    font_path('fonts/iconfont.woff') format('woff'),
+    font_path('fonts/iconfont.ttf') format('truetype')
 }
 
 .layui-icon {
