@@ -21,6 +21,9 @@
 /yarn-error.log
 
 /public/assets
+/public/books
+
+
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.

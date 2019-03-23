@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
 
-  get 'books/download', to: 'books#download'
+  get 'books/test', to: 'books#test'
+  get 'books/download/:id', to: 'books#download'
+
+  # get 'books/previous/:curr_pre/:pre_pos/:id',to: 'books#previous'
+  get 'books/next/:next_pos/:id',to: 'books#next'
+
 
   resources :books
 

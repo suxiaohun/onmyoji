@@ -37,6 +37,11 @@ gem 'capistrano-rvm'
 # gem 'capistrano-bundler'
 gem 'capistrano3-unicorn'
 
+gem 'kaminari'
+
+gem 'elasticsearch'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -9,6 +9,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :desc, :default => '...'
       t.string :path
       t.string :remark
+      t.text :pre_content # 预展示内容，一般展示书籍前10行
 
       t.timestamps
     end

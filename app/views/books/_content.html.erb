@@ -1,0 +1,18 @@
+<div id="article-related">
+  <div class="article-neighbour">
+
+<!--    <div class="article-prev-next">-->
+      <%#= link_to 'Previous Page', {:action => 'previous', :curr_pos=>data[:curr_pos],:pre_pos => data[:pre_pos], :id => data[:id]}, remote: true %>
+<!--    </div>-->
+
+    <div class="article-prev-next">
+      <%= link_to 'Next Page', {:action => 'next',:next_pos => data[:next_pos], :id => data[:id]}, remote: true %>
+    </div>
+
+  </div>
+</div>
+<ul>
+  <% data[:lines].each do |line| %>
+    <li><%= line %></li>
+  <% end %>
+</ul>
