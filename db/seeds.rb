@@ -70,7 +70,7 @@ book_array = [
     #     author_id: get_author('苏小魂'),
     #     tag: '玄幻|修真|异界|神话',
     #     category_id: categories.key('玄幻'),
-    #     path: '/home/crystal/books/yaodaoji.txt'
+    #     path: 'public/books/yaodaoji.txt'
     # },
     {
         name: '无限恐怖',
@@ -78,7 +78,7 @@ book_array = [
         author_id: get_author('默默猴'),
         tag: '无限流|轮回',
         category_id: categories.key('无限流'),
-        path: '/home/crystal/books/wuxiankongbu.txt'
+        path: 'public/books/wuxiankongbu.txt'
     },
     {
         name: '妖刀记',
@@ -86,7 +86,7 @@ book_array = [
         author_id: get_author('默默猴'),
         tag: '武侠',
         category_id: categories.key('武侠'),
-        path: '/home/crystal/books/yaodaoji.txt'
+        path: 'public/books/yaodaoji.txt'
     },
     {
         name: '照日天劫',
@@ -94,7 +94,7 @@ book_array = [
         author_id: get_author('默默猴'),
         tag: '武侠',
         category_id: categories.key('武侠'),
-        path: '/home/crystal/books/zhaoritianjie.txt'
+        path: 'public/books/zhaoritianjie.txt'
     },
     {
         name: '回归战队',
@@ -102,7 +102,7 @@ book_array = [
         author_id: get_author('默默猴'),
         tag: '都市|机甲',
         category_id: categories.key('都市'),
-        path: '/home/crystal/books/huiguizhandui.txt'
+        path: 'public/books/huiguizhandui.txt'
     },
     {
         name: '升龙道',
@@ -110,7 +110,7 @@ book_array = [
         author_id: get_author('血红'),
         tag: '都市|玄幻',
         category_id: categories.key('玄幻'),
-        path: '/home/crystal/books/shenglongdao.txt'
+        path: 'public/books/shenglongdao.txt'
     },
     {
         name: '逆龙道',
@@ -118,7 +118,7 @@ book_array = [
         author_id: get_author('血红'),
         tag: '都市|玄幻',
         category_id: categories.key('玄幻'),
-        path: '/home/crystal/books/nilongdao.txt'
+        path: 'public/books/nilongdao.txt'
     },
     {
         name: '征神领域',
@@ -126,7 +126,7 @@ book_array = [
         author_id: get_author('冰山男子'),
         tag: '都市|异能',
         category_id: categories.key('异能'),
-        path: '/home/crystal/books/zhengshenlingyu.txt'
+        path: 'public/books/zhengshenlingyu.txt'
     },
     {
         name: '小兵传奇',
@@ -134,7 +134,7 @@ book_array = [
         author_id: get_author('玄雨'),
         tag: '未来|科幻|舰队',
         category_id: categories.key('科幻'),
-        path: '/home/crystal/books/xiaobingchuanqi.txt'
+        path: 'public/books/xiaobingchuanqi.txt'
     },
     {
         name: '异世界的美食家',
@@ -142,7 +142,7 @@ book_array = [
         author_id: get_author('李鸿天'),
         tag: '异界|厨神|修真',
         category_id: categories.key('玄幻'),
-        path: '/home/crystal/books/yishijiedemeishijia.txt'
+        path: 'public/books/yishijiedemeishijia.txt'
     }
 ]
 books = Book.create(book_array)

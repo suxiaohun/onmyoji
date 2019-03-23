@@ -59,8 +59,8 @@ class BooksController < ApplicationController
 
   def download
 
-    filename = @book.path
-    send_file(filename, :buffer_size => 10*1024*1024)
+    filename = "#{Rails.root}/" + @book.path
+    send_file(filename)
 
     # send_data head_info + body_info, :filename => file_name, :type => 'text/plain;charset=GBK;'
   end
