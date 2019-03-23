@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show,:next,:previous, :edit, :update, :destroy, :download]
+  before_action :set_book, only: [:show, :next, :previous, :edit, :update, :destroy, :download]
 
   layout 'tag'
 
@@ -59,9 +59,8 @@ class BooksController < ApplicationController
 
   def download
 
-
     filename = @book.path
-    send_file(filename)
+    send_file(filename, :stream => false)
 
     # send_data head_info + body_info, :filename => file_name, :type => 'text/plain;charset=GBK;'
   end
