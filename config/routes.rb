@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   #  Boolean to anchor a <tt>match</tt> pattern. Default is true. When set to
   #  false, the pattern matches any request prefixed with the given path.
-  match '/', to: 'chat_rooms#su', anchor: false, via: :get
+  # match '/', to: 'chat_rooms#su', anchor: false, via: :get
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
