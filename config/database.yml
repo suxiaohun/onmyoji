@@ -51,4 +51,4 @@ production:
   <<: *default
   database: onmyoji
   username: root
-  password: <%= ENV['ONMYOJI_DATABASE_PASSWORD'] %>
+  password: 123456

@@ -32,3 +32,6 @@
 .idea
 /db/schema.rb
 dd.sh
+
+
+config/database.yml
