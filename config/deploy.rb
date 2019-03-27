@@ -21,13 +21,13 @@ set :deploy_to, "/home/crystal/onmyoji"
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml","config/master.key"
+append :linked_files, "config/database.yml", "config/master.key"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
-set :unicorn_pid, -> { File.join(current_path,"tmp", "pids", "unicorn.pid") }
-set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
+set :unicorn_pid, -> {File.join(current_path, "tmp", "pids", "unicorn.pid")}
+set :unicorn_config_path, -> {File.join(current_path, "config", "unicorn.rb")}
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
@@ -37,30 +37,26 @@ namespace :deploy do
 end
 
 
-
-namespace :udesk do
+namespace :xiaosu do
   desc 'link books'
-  task :setup_property_file do
+  task :link_books do
     on roles(:all) do
       within release_path do
-        puts "============aaaa=============="
+        puts "start link books...".bold.bg_green
         execute :ln, '-s', "/home/crystal/books public/"
       end
     end
   end
 
-   desc 'init data'
-  task :init_data do
+  desc 'init data'
+  task :rake_db_seed do
     on roles(:all) do
       within release_path do
-        puts "============bbbbb=============="
+        puts "init db books...".bold.bg_red
         execute 'RAILS_ENV=production rake db:seed'
       end
     end
   end
-
-
-
 
 
   #
@@ -71,12 +67,11 @@ namespace :udesk do
   # end
 
 
-  after 'deploy:updating',   'udesk:setup_property_file'
+  after 'deploy:publishing', 'xiaosu:link_books'
+  after 'deploy:publishing', 'xiaosu:rake_db_seed'
   # after 'deploy:publishing',   'udesk:init_data'
 
 end
-
-
 
 
 # Default value for default_env is {}

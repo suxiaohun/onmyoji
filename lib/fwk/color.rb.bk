@@ -1,0 +1,48 @@
+# color the output message
+module Fwk
+  module Color
+
+    # colorization
+    def colorize2(color_code)
+      "\e[#{color_code}m#{self}\e[0m"
+    end
+
+
+=begin
+    memo:
+    1:bold
+    3:italic
+    4:underline
+    5:blink
+    7:reverse_color
+=end
+    def colorize(color_code, memo = 1)
+      "\e[48;5;#{color_code}m\033[#{memo}m #{self } \e[0m"
+    end
+
+    def red
+      colorize(31)
+    end
+
+    def green
+      colorize(32)
+    end
+
+    def yellow
+      colorize(33)
+    end
+
+    def blue
+      colorize(34)
+    end
+
+    def pink
+      colorize(35)
+    end
+
+    def light_blue
+      colorize(36)
+    end
+
+  end
+end
