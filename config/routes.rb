@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   # get '/doc',to: 'chat_rooms#index'
   #
-  # get '/su',to: 'chat_rooms#su'
+  get '/su',to: 'chat_rooms#index'
 
   get '/canvas', to: 'chat_rooms#canvas'
 
