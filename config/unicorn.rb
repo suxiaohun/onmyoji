@@ -38,16 +38,16 @@ before_exec { |server| ENV["BUNDLE_GEMFILE"] = "#{Rails.root}/Gemfile" }
 # end
 
 #
-# before_fork do |server, worker|
-#   old_pid ="#{Rails.root}/tmp/pids/unicorn.pid.oldbin"
-#   if File.exists?(old_pid) && server.pid != old_pid
-#     begin
-#       Process.kill("QUIT", File.read(old_pid).to_i)
-#     rescue Errno::ENOENT, Errno::ESRCH
-#       puts "Send 'QUIT' signal to unicorn error!"
-#     end
-#   end
-# end
+before_fork do |server, worker|
+  old_pid ="#{Rails.root}/tmp/pids/unicorn.pid.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      puts "Send 'QUIT' signal to unicorn error!"
+    end
+  end
+end
 #
 # before_fork do |server, worker|
 #   server.logger.info("worker=#{worker.nr} spawning in #{Dir.pwd}")
