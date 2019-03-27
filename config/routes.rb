@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+
+  # this is for test development environment action cable
+  # mount ActionCable.server => '/cable'
+
   get 'books/test', to: 'books#test'
   get 'books/download/:id', to: 'books#download'
 
