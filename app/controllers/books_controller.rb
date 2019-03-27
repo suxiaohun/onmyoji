@@ -5,9 +5,21 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.includes(:author)
+    @books = Book.includes(:author, :category)
+    category_ids = Book.pluck(:category_id).uniq
+
+    @categories = Category.find(category_ids)
+
 
     # Encoding:ASCII-8BIT
+  end
+
+  def category
+    if params[:id] == 'all'
+      @books = Book.includes(:author).all
+    else
+      @books = Book.includes(:author).where(:category_id => params[:id])
+    end
   end
 
 
