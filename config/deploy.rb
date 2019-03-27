@@ -26,8 +26,9 @@ append :linked_files, "config/database.yml", "config/master.key"
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
-set :unicorn_pid, -> {File.join(current_path, "tmp", "pids", "unicorn.pid")}
-set :unicorn_config_path, -> {File.join(current_path, "config", "unicorn.rb")}
+# tmp/pids/unicorn.pid
+set :unicorn_pid, -> {File.join(release_path, "tmp", "pids", "unicorn.pid")}
+set :unicorn_config_path, -> {File.join(release_path, "config", "unicorn.rb")}
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
@@ -42,8 +43,9 @@ namespace :xiaosu do
   task :link_books do
     on roles(:all) do
       within release_path do
-        puts "start link books...".bold.bg_green
+        puts_front "start link books..."
         execute :ln, '-s', "/home/crystal/books public/"
+        puts_end
       end
     end
   end
@@ -52,10 +54,28 @@ namespace :xiaosu do
   task :rake_db_seed do
     on roles(:all) do
       within release_path do
-        puts "init db books...".bold.bg_red
-        execute 'RAILS_ENV=production rake db:seed'
+        puts_front "init db books..."
+        execute :rake, 'db:seed', 'RAILS_ENV=production'
+        puts_end
       end
     end
+  end
+
+  def puts_front(str)
+    puts
+    puts '+----------------------------------------------------------------------------------------+'
+    puts '|                                                                                        |'
+    puts '|                                                                                        |'
+    puts "\e[48;5;34m\033[5m #{str} \e[0m"
+
+  end
+
+  def puts_end
+    puts '|                                                                                        |'
+    puts '|                                                                                        |'
+    puts '+----------------------------------------------------------------------------------------+'
+
+    puts
   end
 
 

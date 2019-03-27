@@ -29,25 +29,45 @@ GC.respond_to?(:copy_on_write_friendly=) and
     GC.copy_on_write_friendly = true
 check_client_connection false
 
+
+before_exec { |server| ENV["BUNDLE_GEMFILE"] = "#{Rails.root}/Gemfile" }
+
 # before_fork do |server, worker|
 #   defined?(ActiveRecord::Base) and
 #       ActiveRecord::Base.connection.disconnect!
 # end
 
-
-before_fork do |server, worker|
-  old_pid ="#{Rails.root}/tmp/pids/unicorn.pid.oldbin"
-  if File.exists?(old_pid) && server.pid != old_pid
-    begin
-      Process.kill("QUIT", File.read(old_pid).to_i)
-    rescue Errno::ENOENT, Errno::ESRCH
-      puts "Send 'QUIT' signal to unicorn error!"
-    end
-  end
-end
-
-
-after_fork do |server, worker|
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.establish_connection
-end
+#
+# before_fork do |server, worker|
+#   old_pid ="#{Rails.root}/tmp/pids/unicorn.pid.oldbin"
+#   if File.exists?(old_pid) && server.pid != old_pid
+#     begin
+#       Process.kill("QUIT", File.read(old_pid).to_i)
+#     rescue Errno::ENOENT, Errno::ESRCH
+#       puts "Send 'QUIT' signal to unicorn error!"
+#     end
+#   end
+# end
+#
+# before_fork do |server, worker|
+#   server.logger.info("worker=#{worker.nr} spawning in #{Dir.pwd}")
+#
+#   # graceful shutdown.
+#   old_pid_file = project_home + '/tmp/pids/unicorn.pid.oldbin'
+#   if File.exists?(old_pid_file) && server.pid != old_pid_file
+#     begin
+#       old_pid = File.read(old_pid_file).to_i
+#       server.logger.info("sending QUIT to #{old_pid}")
+#       # we're killing old unicorn master right there
+#       Process.kill("QUIT", old_pid)
+#     rescue Errno::ENOENT, Errno::ESRCH
+#       # someone else did our job for us
+#     end
+#   end
+# end
+#
+#
+# after_fork do |server, worker|
+#   defined?(ActiveRecord::Base) and
+#       ActiveRecord::Base.establish_connection
+# end
