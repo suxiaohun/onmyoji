@@ -1,16 +1,12 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :next, :previous, :edit, :update, :destroy, :download]
 
+  before_action :set_category, only: [:show, :index]
   layout 'tag'
 
   # GET /books
   def index
     @books = Book.includes(:author, :category)
-    category_ids = Book.pluck(:category_id).uniq
-
-    @categories = Category.find(category_ids)
-
-
     # Encoding:ASCII-8BIT
   end
 
@@ -117,6 +113,11 @@ class BooksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params[:id])
+  end
+
+  def set_category
+    category_ids = Book.pluck(:category_id).uniq
+    @categories = Category.find(category_ids)
   end
 
   # Only allow a trusted parameter "white list" through.
