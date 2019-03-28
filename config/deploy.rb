@@ -30,13 +30,6 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 set :unicorn_pid, -> {File.join(release_path, "tmp", "pids", "unicorn.pid")}
 set :unicorn_config_path, -> {File.join(release_path, "config", "unicorn.rb")}
 
-after 'deploy:publishing', 'deploy:restart'
-namespace :deploy do
-  task :restart do
-    invoke 'unicorn:legacy_restart'
-  end
-end
-
 
 namespace :xiaosu do
   desc 'link books'
@@ -60,6 +53,45 @@ namespace :xiaosu do
       end
     end
   end
+
+  desc 'check unicorn restart correct'
+  task :check_unicorn_restart_correct do
+    on roles(:all) do
+      within release_path do
+        puts_front "init db books..."
+        execute :rake, 'db:seed', 'RAILS_ENV=production'
+        puts_end
+      end
+    end
+  end
+
+
+  # task :restart do
+  #   invoke 'unicorn:legacy_restart'
+  # end
+
+
+  task :restart do
+    on roles(:all) do
+      puts "-------------||-----------------"
+      within release_path do
+        puts_front "restart_unicorn..."
+        print 'old unicorn pid:  '
+        execute :cat, 'tmp/pids/unicorn.pid'
+        puts_end
+      end
+
+      invoke 'unicorn:legacy_restart'
+
+      within release_path do
+        puts_front "restart_unicorn..."
+        print 'new unicorn pid:  '
+        execute :cat, 'tmp/pids/unicorn.pid'
+        puts_end
+      end
+    end
+  end
+
 
   def puts_front(str)
     puts
@@ -89,7 +121,7 @@ namespace :xiaosu do
 
   after 'deploy:publishing', 'xiaosu:link_books'
   after 'deploy:publishing', 'xiaosu:rake_db_seed'
-  # after 'deploy:publishing',   'udesk:init_data'
+  after 'deploy:publishing', 'xiaosu:restart'
 
 end
 
