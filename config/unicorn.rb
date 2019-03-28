@@ -35,23 +35,23 @@ check_client_connection false
 before_exec do |server|
   ENV['BUNDLE_GEMFILE'] ||= "#{Rails.root}/Gemfile"
 end
-
-before_fork do |server, worker|
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.connection.disconnect!
-
-  old_pid = "#{server.config[:pid]}.oldbin"
-  if old_pid != server.pid
-    begin
-      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
-      Process.kill(sig, File.read(old_pid).to_i)
-    rescue Errno::ENOENT, Errno::ESRCH
-      puts "Send 'QUIT' signal to unicorn error!"
-    end
-  end
-
-  sleep 1
-end
+#
+# before_fork do |server, worker|
+#   defined?(ActiveRecord::Base) and
+#       ActiveRecord::Base.connection.disconnect!
+#
+#   old_pid = "#{server.config[:pid]}.oldbin"
+#   if old_pid != server.pid
+#     begin
+#       sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+#       Process.kill(sig, File.read(old_pid).to_i)
+#     rescue Errno::ENOENT, Errno::ESRCH
+#       puts "Send 'QUIT' signal to unicorn error!"
+#     end
+#   end
+#
+#   sleep 1
+# end
 
 # after_fork do |server, worker|
 #   worker_address = "127.0.0.1:#{master_port + worker.nr + 1}"
@@ -76,16 +76,16 @@ end
 # # end
 #
 # #
-# before_fork do |server, worker|
-#   old_pid ="#{Rails.root}/tmp/pids/unicorn.pid.oldbin"
-#   if File.exists?(old_pid) && server.pid != old_pid
-#     begin
-#       Process.kill("QUIT", File.read(old_pid).to_i)
-#     rescue Errno::ENOENT, Errno::ESRCH
-#       puts "Send 'QUIT' signal to unicorn error!"
-#     end
-#   end
-# end
+before_fork do |server, worker|
+  old_pid ="#{Rails.root}/tmp/pids/unicorn.pid.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      puts "Send 'QUIT' signal to unicorn error!"
+    end
+  end
+end
 #
 # before_fork do |server, worker|
 #   server.logger.info("worker=#{worker.nr} spawning in #{Dir.pwd}")
