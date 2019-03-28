@@ -53,16 +53,16 @@ before_fork do |server, worker|
   sleep 1
 end
 
-after_fork do |server, worker|
-  worker_address = "127.0.0.1:#{master_port + worker.nr + 1}"
-  server.listen(worker_address, tries: -1, delay: 5, tcp_nopush: true)
-
-  worker_pid = server.config[:pid].sub('.pid', ".#{worker.nr}.pid")
-  system "echo #{Process.pid} > #{worker_pid}"
-
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.establish_connection
-end
+# after_fork do |server, worker|
+#   worker_address = "127.0.0.1:#{master_port + worker.nr + 1}"
+#   server.listen(worker_address, tries: -1, delay: 5, tcp_nopush: true)
+#
+#   worker_pid = server.config[:pid].sub('.pid', ".#{worker.nr}.pid")
+#   system "echo #{Process.pid} > #{worker_pid}"
+#
+#   defined?(ActiveRecord::Base) and
+#       ActiveRecord::Base.establish_connection
+# end
 
 
 
