@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :next, :previous, :edit, :update, :destroy, :download]
 
-  before_action :set_category, only: [:show, :index]
   layout 'tag'
 
   # GET /books
@@ -115,10 +114,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
-  def set_category
-    category_ids = Book.pluck(:category_id).uniq
-    @categories = Category.find(category_ids)
-  end
+
 
   # Only allow a trusted parameter "white list" through.
   def book_params

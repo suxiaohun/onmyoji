@@ -16,7 +16,7 @@
     <li>
       <%= link_to 'Home', {action: 'category', :id => 'all'}, remote: true %>
     </li>
-    <% @categories.each do |x| %>
+    <% category_list.each do |x| %>
       <li>
         <%= link_to x.name, {action: 'category', :id => x.id}, remote: true %>
       </li>

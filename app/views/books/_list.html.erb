@@ -1,29 +1,32 @@
-<% books.each do |book| %>
-  <article class="post-card">
-    <h2 class="post-card-title">
-      <%= link_to book.name, book %>
-    </h2>
-    <div class="post-card-info">
-      <span class="date"><%= book.tag %></span>
-      <span class="comments">
+<!-- 文章预览列表 -->
+<section id="post-feed">
+  <% books.each do |book| %>
+    <article class="post-card">
+      <h2 class="post-card-title">
+        <%= link_to book.name, book %>
+      </h2>
+      <div class="post-card-info">
+        <span class="date"><%= book.tag %></span>
+        <span class="comments">
 
         <a href="https://www.zxing.top/15452779284716.html#disqus_thread">评论</a>
       </span>
-    </div>
+      </div>
 
-    <div class="post-card-excerpt">
-      <h4><%= book.display_name %></h4>
-      <ul>
-        <li><%= book.pre_content %></li>
-      </ul>
-    </div>
+      <div class="post-card-excerpt">
+        <h4><%= book.display_name %></h4>
+        <ul>
+          <li><%= book.pre_content %></li>
+        </ul>
+      </div>
 
-    <% if book.pre_content == '......' %>
-      <span class="post-card-error">书籍丢失，联系管理员.</span>
-    <% else %>
-      <%= link_to 'download', {:action => 'download', :id => book.id}, :class => 'post-card-download' %>
-      <%= link_to 'Read more', book, :class => 'post-card-readmore' %>
-    <% end %>
+      <% if book.pre_content == '......' %>
+        <span class="post-card-error">书籍丢失，联系管理员.</span>
+      <% else %>
+        <%= link_to 'download', {:action => 'download', :id => book.id}, :class => 'post-card-download' %>
+        <%= link_to 'Read more', book, :class => 'post-card-readmore' %>
+      <% end %>
 
-  </article>
-<% end %>
+    </article>
+  <% end %>
+</section>
