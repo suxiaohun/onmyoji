@@ -30,7 +30,7 @@ GC.respond_to?(:copy_on_write_friendly=) and
 check_client_connection false
 
 
-before_exec { |server| ENV["BUNDLE_GEMFILE"] = "#{Rails.root}/Gemfile" }
+# before_exec { |server| ENV["BUNDLE_GEMFILE"] = "#{Rails.root}/Gemfile" }
 
 # before_fork do |server, worker|
 #   defined?(ActiveRecord::Base) and
