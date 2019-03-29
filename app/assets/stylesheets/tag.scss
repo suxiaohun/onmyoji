@@ -322,8 +322,35 @@ nav > ul {
   left: 20px;
 }
 
+#comment-area{
+  float: left;
+  width: 300px;
+  min-height: 300px;
+  margin: 2.5rem 1vw 20px;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
 
+#comment-main {
+  float: left;
+  width: 824px;
+  margin: 2.5rem 10vw 20px;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
 
+#comment-main>* {
+  padding: 20px 60px 50px;
+  border-radius: 15px;
+  background: #fafafa;
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+
+#comment-main>*+* {
+  margin-top: 1.5rem;
+}
 
 #post-main {
   margin: 2.5rem 10vw 20px;

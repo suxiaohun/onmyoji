@@ -1,4 +1,5 @@
 require './lib/fwk/color'
-class String
-  include Fwk::Color
-end
+require './lib/fwk/time_extend'
+
+String.send(:include, Fwk::Color)
+ActiveSupport::TimeWithZone.send(:include, Fwk::TimeExtend)

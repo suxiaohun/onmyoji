@@ -1,0 +1,13 @@
+
+var html = "<div id=\"comments-wrap\">\n" +
+    "    <div class=\"share-comments\">\n" +
+    "\n" +
+    "      <div id=\"disqus_thread\"><%= j @comment.content %></div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "    </div>"
+
+
+$('#comment-main').prepend(html);

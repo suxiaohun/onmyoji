@@ -2,9 +2,11 @@ Rails.application.routes.draw do
 
 
 
+  resources :comments
   # this is for test development environment action cable
   # mount ActionCable.server => '/cable'
 
+  get 'books/comment', to: 'books#comment'
   get 'books/category/:id', to: 'books#category'
 
   get 'books/test', to: 'books#test'

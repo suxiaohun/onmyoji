@@ -1,0 +1,25 @@
+<%= paginate comments, remote: true %>
+<section id="comment-main">
+  <% comments.each do |ct| %>
+    <div id="comments-wrap">
+      <div class="share-comments">
+
+        <div id="disqus_thread"><%= ct.content %></div>
+
+      </div>
+      <span style="color:#ab8248;position:relative;left: 500px;"> #<%= ct.created_at.to_strf %></span>
+
+    </div>
+  <% end %>
+
+</section>
+<section id="comment-area">
+  <div>
+    <%= form_tag("comments", method: 'post', remote: true) do %>
+      <%= text_area_tag 'comment[content]', '', :placeholder => '给楼主留言', :rows => 20, :cols => 35 %>
+      <%= submit_tag 'submit' %>
+    <% end %>
+  </div>
+</section>
+
+

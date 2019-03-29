@@ -21,12 +21,18 @@
         <%= link_to x.name, {action: 'category', :id => x.id}, remote: true %>
       </li>
     <% end %>
-
+      <li>
+        <%= link_to '留言',{action: 'comment'}, remote: true  %>
+      </li>
   </ul>
 </nav>
 <div class="container">
   <%= yield %>
 
 </div>
+<footer>
+  <p class="copyright">Copyright © 2019
+    Powered by XiaoSu</p>
+</footer>
 </body>
 </html>

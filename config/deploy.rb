@@ -66,31 +66,31 @@ namespace :xiaosu do
   end
 
 
-  # task :restart do
-  #   invoke 'unicorn:legacy_restart'
-  # end
-
-
   task :restart do
-    on roles(:all) do
-      puts "-------------||-----------------"
-      within release_path do
-        puts_front "restart_unicorn..."
-        print 'old unicorn pid:  '
-        execute :cat, 'tmp/pids/unicorn.pid'
-        puts_end
-      end
-
-      invoke 'unicorn:legacy_restart'
-
-      within release_path do
-        puts_front "restart_unicorn..."
-        print 'new unicorn pid:  '
-        execute :cat, 'tmp/pids/unicorn.pid'
-        puts_end
-      end
-    end
+    invoke 'unicorn:legacy_restart'
   end
+
+
+  # task :restart do
+  #   on roles(:all) do
+  #     puts "-------------||-----------------"
+  #     within release_path do
+  #       puts_front "restart_unicorn..."
+  #       print 'old unicorn pid:  '
+  #       execute :cat, 'tmp/pids/unicorn.pid'
+  #       puts_end
+  #     end
+  #
+  #     invoke 'unicorn:legacy_restart'
+  #
+  #     within release_path do
+  #       puts_front "restart_unicorn..."
+  #       print 'new unicorn pid:  '
+  #       execute :cat, 'tmp/pids/unicorn.pid'
+  #       puts_end
+  #     end
+  #   end
+  # end
 
 
   def puts_front(str)
