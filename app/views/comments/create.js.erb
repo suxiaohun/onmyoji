@@ -7,6 +7,6 @@ var html = "<div id=\"comments-wrap\">\n" +
     "\n" + " <span style=\"color:#ab8248;position:relative;left: 500px;\"> #<%= j @comment.created_at.to_strf %></span>" +
     "\n" +
     "    </div>"
-
+$("#comment_content").val('');
 
 $('#comment-main').prepend(html);
