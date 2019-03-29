@@ -1,11 +1,10 @@
-
 var html = "<div id=\"comments-wrap\">\n" +
     "    <div class=\"share-comments\">\n" +
     "\n" +
     "      <div id=\"disqus_thread\"><%= j @comment.content %></div>\n" +
     "\n" +
     "    </div>\n" +
-    "\n" +
+    "\n" + " <span style=\"color:#ab8248;position:relative;left: 500px;\"> #<%= j @comment.created_at.to_strf %></span>" +
     "\n" +
     "    </div>"
 

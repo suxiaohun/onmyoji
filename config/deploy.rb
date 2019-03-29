@@ -27,8 +27,8 @@ append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # tmp/pids/unicorn.pid
-set :unicorn_pid, -> {File.join(release_path, "tmp", "pids", "unicorn.pid")}
-set :unicorn_config_path, -> {File.join(release_path, "config", "unicorn.rb")}
+set :unicorn_pid, -> {File.join(current_path, "tmp", "pids", "unicorn.pid")}
+set :unicorn_config_path, -> {File.join(current_path, "config", "unicorn.rb")}
 
 
 namespace :xiaosu do
