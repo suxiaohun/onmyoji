@@ -6,6 +6,9 @@ class ChatRoomsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
 
+  def room1
+
+  end
   def room
 
 
@@ -124,7 +127,7 @@ class ChatRoomsController < ApplicationController
 
   def require_auth
     if cookies[:nick_name]
-      true
+
     else
       redirect_to '/auth'
     end

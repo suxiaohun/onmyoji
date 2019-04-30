@@ -1,0 +1,136 @@
+<style type="text/css">
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0 0;
+    padding: 0 0;
+    box-sizing: border-box;
+  }
+
+  #chatRoom {
+    width: 80%;
+    height: 100%;
+    /*display: inline-block;*/
+    margin: 0 auto;
+    /*text-align: center;*/
+    /*font-family: verdana, arial, helvetica, sans-serif;*/
+    /*font-size: 13px;*/
+    /*line-height: 18px;*/
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    box-sizing: border-box;
+  }
+
+
+  .std {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin: 0 auto;
+    /*top: 100px;*/
+    /*position: relative;*/
+    /*background: yellowgreen;*/
+    text-align: center;
+    line-height: 100px
+  }
+
+  .log {
+    /*position: relative;*/
+    /*background: #f590c5;*/
+    /*width: 680px;*/
+    height: 300px;
+    overflow: auto;
+    margin: 0 auto;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding-left: 10px;
+  }
+
+  .send_container {
+    margin: 0 auto;
+    display: none;
+  }
+
+  .chat_span{
+    display: inline-block;
+    background: rgb(222,224,227);
+    border-radius: 5px;
+    padding: 6px 12px;
+  }
+
+
+</style>
+<!--<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">-->
+<!--    //<![CDATA[-->
+<!--    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });-->
+<!--    //bkLib.onDomLoaded(function() { nicEditors.findEditor('myArea2'); });-->
+<!--    //]]>-->
+<!--    </script>-->
+
+<script type="text/javascript">
+
+
+    $(function () {
+        subscript();
+        // $("#tinymce").keypress(function (evt) {
+        //     if (evt.keyCode == 13) {
+        //         $("#SendData").click();
+        //         evt.preventDefault();
+        //     }
+        // });
+        tinymce.init({
+            selector: '#DataToSend',
+            menubar: false,
+            init_instance_callback: function (editor) {
+                // editor.on('keypress', function (e) {
+                //     console.log('Editor was keypress!');
+                // });
+                // editor.on('keyup', function (e) {
+                //     console.log('Editor was keyup!');
+                // });
+                editor.on('keydown', function (e) {
+                    if (e.keyCode == 13) {
+                        $("#SendData").click();
+                        e.preventDefault();
+                    }
+                    // console.log('Editor was keydown!');
+                });
+            }
+        });
+
+
+        // tinymce.init({
+        //     selector: 'myArea2',
+        //     height: 500,
+        //     menubar: false,
+        //     plugins: ['advlist autolink lists link image charmap print preview anchor textcolor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code help wordcount'],
+        //     toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        //     content_css: ['//fonts.googleapis.com/css?family=Lato:300,300i,400,400i', '//www.tiny.cloud/css/codepen.min.css']
+        // })
+
+        // nicEditors.allTextAreas();
+    });
+</script>
+<div id="chatRoom">
+  <div style="text-align: center;">
+    <button id="chat_btn" chat="0" sama="1" class="std" type="button" onclick="subscript()">加入聊天室</button>
+
+  </div>
+
+
+  <div id='LogContainer' class="log">
+
+  </div>
+
+  <div id='SendDataContainer' class="send_container">
+
+    <textarea id="DataToSend"></textarea>
+
+
+    <button id='SendData' type="button" onclick="send_message()">发送</button>
+
+
+  </div>
+
+</div>
+
