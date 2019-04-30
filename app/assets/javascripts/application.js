@@ -17,5 +17,6 @@
 //= require_directory ./nicEdit
 //= require cable
 //= require channels/chat
+//= require tinymce.min
 //= require_self
 
