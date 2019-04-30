@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'xiuxian', to: 'common#xiuxian'
   get 'books', to: 'books#index'
 
-  get 'room',to: 'chat_rooms#room1'
+  get 'room',to: 'chat_rooms#room'
   match '/auth', to: 'chat_rooms#auth', :via => [:get, :post]
 
 

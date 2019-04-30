@@ -6,13 +6,9 @@ class ChatRoomsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
 
-  def room1
 
-  end
   def room
-
-
-    respond_to(&:html)
+    # respond_to(&:html)
   end
 
 
