@@ -8,6 +8,8 @@ class ChatRoomsController < ApplicationController
 
   def room
 
+    respond_to :html
+
   end
 
 
