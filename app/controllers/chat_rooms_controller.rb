@@ -1,9 +1,16 @@
 class ChatRoomsController < ApplicationController
   before_action :set_chat_room, only: [:show, :edit, :update, :destroy]
 
-  # before_action :require_auth, :except => [:auth,:canvas,:su]
+  before_action :require_auth, :only => [:room]
 
   skip_before_action :verify_authenticity_token
+
+
+  def room
+
+  end
+
+
 
   # GET /chat_rooms
   def index
@@ -39,20 +46,7 @@ class ChatRoomsController < ApplicationController
   def show
   end
 
-  def su
-    today = Date.today
 
-
-
-    start_day = Date.parse('2019-01-07')
-    end_day = Date.parse('2020-01-07')
-
-    @days1 = (end_day - today).to_i
-    @days2 = (today - start_day).to_i
-
-    @percent = ((@days2/365.0)*100).round(2)
-
-  end
 
   def canvas
 
@@ -94,6 +88,24 @@ class ChatRoomsController < ApplicationController
     redirect_to chat_rooms_url, notice: 'Chat room was successfully destroyed.'
   end
 
+
+=begin
+    cookies[:name] = {
+        value: 'a yummy cookie',
+        expires: 1.year,
+        domain: 'domain.com'
+    }
+=end
+  def auth
+    if request.post?
+      cookies[:nick_name] = {value: params[:name], expires: 7.days}
+      flash[:nick_name] = params[:name]
+      redirect_to '/room'
+    else
+      cookies.delete :nick_name
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -104,6 +116,16 @@ class ChatRoomsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def chat_room_params
     params.require(:chat_room).permit(:name, :remark)
+  end
+
+
+
+  def require_auth
+    if cookies[:nick_name]
+      true
+    else
+      redirect_to '/auth'
+    end
   end
 
 end

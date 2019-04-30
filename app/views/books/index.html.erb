@@ -1,4 +1,73 @@
-<main id="site-main">
-  <%= render partial: 'list', locals: {books: @books} %>
-  <div></div>
-</main>
+<style type="text/css">
+  .list_p{
+    margin: 10px;
+  }
+  .item{
+    display: block;
+    border: 1px solid #d2d2d2;
+    padding: 1px;
+    margin: 5px 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+
+  }
+  .text{
+    padding: 3px;
+    margin: 5px;
+    display: block;
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow: hidden;
+    max-height: 24px;
+
+  }
+</style>
+<div class="layui-fluid" style="padding: 0px 0px;">
+  <div class="layui-row" id="head">
+    <div class="header">
+      <div class="logo"><a href="/"></a></div>
+    </div>
+
+    <div class="layui-container">
+      <div class="layui-row nav">
+        <div class="layui-col-xs4 layui-col-lg2">
+          <a style="color:#e36c02;" href="/">首页</a></div>
+        <div class="layui-col-xs4 layui-col-lg2">
+          <a href="/list/2">诗词古韵</a></div>
+        <div class="layui-col-xs4 layui-col-lg2">
+          <a href="/list/4">风水文化</a></div>
+        <div class="layui-col-xs4 layui-col-lg2">
+          <a href="/list/1">国学经典</a></div>
+        <div class="layui-col-xs4 layui-col-lg2">
+          <a  href="/list/3">古诗大全</a></div>
+        <div class="layui-col-xs4 layui-col-lg2">
+          <a href="/short/list">美句摘抄</a></div>
+      </div>
+    </div>
+    <div class="navbg"></div>
+  </div>
+</div>
+<div class="layui-container" style="padding: 0px 0px;">
+  <div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+      <legend>百家小说</legend>
+    </fieldset>
+
+    <% @books.each do |book| %>
+
+      <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+        <div class="item">
+          <div class="list_p">
+            <div class="text">
+              <i class="layui-icon" style="font-size: 20px; color: #1E9FFF;">&#xe705;</i>
+              <%= link_to book.name,book %>
+              <span style="color:#ab8248"> #<%= book.tag %># </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+
+  </div>
+</div>

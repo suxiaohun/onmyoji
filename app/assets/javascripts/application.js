@@ -14,6 +14,7 @@
 //= require activestorage
 //= require jquery
 //= require_directory ./notify
+//= require_directory ./nicEdit
 //= require cable
 //= require channels/chat
 //= require_self

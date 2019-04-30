@@ -2,9 +2,22 @@ class CommonController < ApplicationController
 
   before_action :require_auth, :only => [:xiuxian]
 
+  def su
+    today = Date.today
+    start_day = Date.parse('2019-01-07')
+    end_day = Date.parse('2020-01-07')
+
+    @days1 = (end_day - today).to_i
+    @days2 = (today - start_day).to_i
+
+    @percent = ((@days2 / 365.0) * 100).round(2)
+  end
+
+
   def xiuxian
     render :layout => 'xiuxian'
   end
+
 
 
   def novels
@@ -13,13 +26,6 @@ class CommonController < ApplicationController
 
 
 
-  def index
-
-    @books = Book.all
-
-
-    render :layout => 'layui'
-  end
 
 
 =begin

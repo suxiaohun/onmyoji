@@ -57,8 +57,13 @@ function subscript() {
                 },
 
                 received: function (data) {
-                    var _msg = "<pre style='color:" + data.color + "'><b>" + data.user + ": </b>" + data.message + "</pre>";
-                    $('#LogContainer').append(_msg);
+                    // var _msg = "<pre style='color:" + data.color + "'><b>" + data.user + ": </b>" + data.message + "</pre>";
+                    // $('#LogContainer').append(_msg);
+
+                    $('#LogContainer').append("<span style='display: block;'>"+data.user+"</span>");
+                    var msg = "<span class='chat_span' style='color: "+data.color+"'>"+data.message+"</span>";
+
+                    $('#LogContainer').append(msg);
                     var LogContainer = document.getElementById("LogContainer");
                     LogContainer.scrollTop = LogContainer.scrollHeight;
 
@@ -77,7 +82,7 @@ function subscript() {
         App.chat.unsubscribe();
         obj.attr("chat", "0");
         obj.css('background', 'rgb(221, 221, 221)');
-        obj.html("connect");
+        obj.html("已离开聊天室");
         $('.notifyjs-corner').empty();
 
         $("#SendDataContainer").hide();
@@ -87,15 +92,19 @@ function subscript() {
 }
 
 function send_message() {
+
     var obj = $("#DataToSend");
-    var msg = obj.val().replace(/(\s*$)/g, "");
+    // console.log(tinyMCE.get('DataToSend').getContent());
+    // var msg = tinyMCE.get('DataToSend').getContent().replace(/(\s*$)/g, "");
+    var msg = tinyMCE.get('DataToSend').getContent().replace(/(&nbsp;)*/g, "").replace(/(<p>)*/g, "").replace(/<(\/)?p[^>]*>/g, "").replace(/(\s*$)/g, "");
     // var msg = nicEditors.findEditor('DataToSend').getContent();
     //
     //
+
     if (msg==="") return false;
 
-    obj.val('').focus();
-    App.chat.send({ color:"purple", message: msg })
+    tinyMCE.get('DataToSend').setContent('');
+    App.chat.send({ color:"black", message: msg })
 
     // $.post('/messages', {msg: msg}, function (result) {
     //     $("#DataToSend").val('').focus();

@@ -5,8 +5,10 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.includes(:author, :category)
-    # Encoding:ASCII-8BIT
+    @books = Book.all
+
+
+    render :layout => 'layui'
   end
 
   def category

@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  root 'common#su'
+
+  get 'xiuxian', to: 'common#xiuxian'
+  get 'books', to: 'books#index'
+
+  get 'room',to: 'chat_rooms#room'
+  match '/auth', to: 'chat_rooms#auth', :via => [:get, :post]
+
+
+
+
+
 
 
   resources :comments
@@ -21,12 +33,11 @@ Rails.application.routes.draw do
 
   resources :authors
   resources :categories
-  match '/auth', to: 'common#auth', :via => [:get, :post]
+  # match '/auth', to: 'common#auth', :via => [:get, :post]
 
-  get 'xiuxian', to: 'common#xiuxian'
-  get 'index', to: 'common#index'
 
-  root 'chat_rooms#su'
+  # get 'index', to: 'common#index'
+
 
 
   # get '/doc',to: 'chat_rooms#index'
