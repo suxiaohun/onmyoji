@@ -96,10 +96,9 @@ function send_message() {
     var obj = $("#DataToSend");
     // console.log(tinyMCE.get('DataToSend').getContent());
     // var msg = tinyMCE.get('DataToSend').getContent().replace(/(\s*$)/g, "");
-    var msg = tinyMCE.get('DataToSend').getContent().replace(/(&nbsp;)*/g, "").replace(/(<p>)*/g, "").replace(/<(\/)?p[^>]*>/g, "").replace(/(\s*$)/g, "");
-    // var msg = nicEditors.findEditor('DataToSend').getContent();
-    //
-    //
+    // var msg = tinyMCE.get('DataToSend').getContent().replace(/(&nbsp;)*/g, "").replace(/(<p>)*/g, "").replace(/<(\/)?p[^>]*>/g, "").replace(/(\s*$)/g, "");
+    var msg = tinyMCE.get('DataToSend').getContent().replace(/<p>&nbsp;<\/p>/, "");
+
 
     if (msg==="") return false;
 

@@ -51,52 +51,76 @@
     display: none;
   }
 
-    .chat_span{
-      display: inline-block;
-      background: rgb(222,224,227);
-      border-radius: 5px;
-      padding: 6px 12px;
-    }
+  .chat_span {
+    display: inline-block;
+    background: rgb(222, 224, 227);
+    border-radius: 5px;
+    padding: 6px 12px;
+  }
 
 
 </style>
-<!--<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">-->
-<!--    //<![CDATA[-->
-<!--    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });-->
-<!--    //bkLib.onDomLoaded(function() { nicEditors.findEditor('myArea2'); });-->
-<!--    //]]>-->
-<!--    </script>-->
+
 
 <script type="text/javascript">
 
 
     $(function () {
         subscript();
+        $(function () {
+            tinymce.init({
+                selector: 'textarea#DataToSend',
+                menubar: false,
+                toolbar: 'undo redo | bold italic forecolor',
+                init_instance_callback: function (editor) {
+                    editor.on('keydown', function (e) {
+                        if (e.keyCode == 13) {
+                            $("#SendData").click();
+                            e.preventDefault();
+                        }
+                    });
+                }
+            })
+        });
+
+        // tinymce.init({
+        //     selector: 'textarea#DataToSend',
+        //     init_instance_callback: function (editor) {
+        //         editor.on('keydown', function (e) {
+        //             if (e.keyCode == 13) {
+        //                 $("#SendData").click();
+        //                 e.preventDefault();
+        //             }
+        //         });
+        //     }
+        // });
+
+
         // $("#tinymce").keypress(function (evt) {
         //     if (evt.keyCode == 13) {
         //         $("#SendData").click();
         //         evt.preventDefault();
         //     }
         // });
-        tinymce.init({
-            selector: '#DataToSend',
-            menubar: false,
-            init_instance_callback: function (editor) {
-                // editor.on('keypress', function (e) {
-                //     console.log('Editor was keypress!');
-                // });
-                // editor.on('keyup', function (e) {
-                //     console.log('Editor was keyup!');
-                // });
-                editor.on('keydown', function (e) {
-                    if (e.keyCode == 13) {
-                        $("#SendData").click();
-                        e.preventDefault();
-                    }
-                    // console.log('Editor was keydown!');
-                });
-            }
-        });
+        // tinymce.init({
+        //     selector: '#DataToSend',
+        //     menubar: false,
+        //     init_instance_callback: function (editor) {
+        //         // editor.on('keypress', function (e) {
+        //         //     console.log('Editor was keypress!');
+        //         // });
+        //         // editor.on('keyup', function (e) {
+        //         //     console.log('Editor was keyup!');
+        //         // });
+        //         editor.on('keydown', function (e) {
+        //             if (e.keyCode == 13) {
+        //                 $("#SendData").click();
+        //                 e.preventDefault();
+        //             }
+        //             // console.log('Editor was keydown!');
+        //         });
+        //     }
+        // });
 
 
         // tinymce.init({
@@ -110,6 +134,8 @@
 
         // nicEditors.allTextAreas();
     });
+
+
 </script>
 <div id="chatRoom">
   <div style="text-align: center;">
@@ -124,8 +150,8 @@
 
   <div id='SendDataContainer' class="send_container">
 
-    <textarea id="DataToSend"></textarea>
-
+    <%= text_area_tag :DataToSend, "", :class => "tinymce", :rows => 40, :cols => 120 %>
+    <%#= tinymce :alternate %>
 
     <button id='SendData' type="button" onclick="send_message()">发送</button>
 
