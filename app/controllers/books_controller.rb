@@ -6,9 +6,7 @@ class BooksController < ApplicationController
   # GET /books
   def index
     @books = Book.all
-
-
-    render :layout => 'layui'
+    
   end
 
   def category
