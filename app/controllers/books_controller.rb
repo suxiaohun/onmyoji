@@ -6,7 +6,7 @@ class BooksController < ApplicationController
   # GET /books
   def index
     @books = Book.all
-    
+
   end
 
   def category
@@ -79,6 +79,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+
   end
 
   # POST /books
