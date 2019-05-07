@@ -108,7 +108,7 @@ class BooksController < ApplicationController
     redirect_to books_url, notice: 'Book was successfully destroyed.'
   end
 
-  def comment
+  def comments
     @comments = Comment.order("created_at desc").page params[:page]
   end
 

@@ -15,7 +15,7 @@
 </section>
 <section id="comment-area">
   <div>
-    <%= form_tag("comments", method: 'post', remote: true) do %>
+    <%= form_tag("/comments", method: 'post', remote: true) do %>
       <%= text_area_tag 'comment[content]', '', :placeholder => '给楼主留言', :rows => 20, :cols => 35 %>
       <%= submit_tag 'submit' %>
     <% end %>

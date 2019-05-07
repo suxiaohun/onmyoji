@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'room',to: 'chat_rooms#room'
   match '/auth', to: 'chat_rooms#auth', :via => [:get, :post]
 
+  get 'books/comments', to: 'books#comments'
 
 
 
@@ -18,7 +19,6 @@ Rails.application.routes.draw do
   # this is for test development environment action cable
   # mount ActionCable.server => '/cable'
 
-  get 'books/comment', to: 'books#comment'
   get 'books/category/:id', to: 'books#category'
 
   get 'books/test', to: 'books#test'
