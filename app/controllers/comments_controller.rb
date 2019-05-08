@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = Comment.new(comment_params)
+    @comment.created_by = cookies[:nick_name]
     @comment.save
     # if @comment.save
     #   redirect_to @comment, notice: 'Comment was successfully created.'
@@ -53,6 +54,6 @@ class CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.require(:comment).permit(:content, :created_by)
+      params.require(:comment).permit(:content)
     end
 end

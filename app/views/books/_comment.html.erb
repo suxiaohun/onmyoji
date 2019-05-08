@@ -7,7 +7,10 @@
         <div id="disqus_thread"><%= ct.content %></div>
 
       </div>
-      <span style="color:#ab8248;position:relative;left: 500px;"> #<%= ct.created_at.to_strf %></span>
+      <span style="color:#ab8248;position:relative;left: 500px;">
+        #<%= ct.created_at.to_strf %>
+        <span style="color:blue">（<%= ct.created_by %>）</span>
+      </span>
 
     </div>
   <% end %>
