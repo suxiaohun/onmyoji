@@ -5,14 +5,10 @@ Rails.application.routes.draw do
   get 'xiuxian', to: 'common#xiuxian'
   get 'books', to: 'books#index'
 
-  get 'room',to: 'chat_rooms#room'
+  get 'rooms', to: 'chat_rooms#rooms'
   match '/auth', to: 'chat_rooms#auth', :via => [:get, :post]
 
   get 'books/comments', to: 'books#comments'
-
-
-
-
 
 
   resources :comments
@@ -25,7 +21,7 @@ Rails.application.routes.draw do
   get 'books/download/:id', to: 'books#download'
 
   # get 'books/previous/:curr_pre/:pre_pos/:id',to: 'books#previous'
-  get 'books/next/:next_pos/:id',to: 'books#next'
+  get 'books/next/:next_pos/:id', to: 'books#next'
 
 
   resources :books
@@ -37,7 +33,6 @@ Rails.application.routes.draw do
 
 
   # get 'index', to: 'common#index'
-
 
 
   # get '/doc',to: 'chat_rooms#index'

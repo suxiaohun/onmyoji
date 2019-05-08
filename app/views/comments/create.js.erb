@@ -4,7 +4,7 @@ var html = "<div id=\"comments-wrap\">\n" +
     "      <div id=\"disqus_thread\"><%= j @comment.content %></div>\n" +
     "\n" +
     "    </div>\n" +
-    "\n" + " <span style=\"color:#ab8248;position:relative;left: 500px;\"> #<%= j @comment.created_at.to_strf %></span>" +
+    "\n" + " <span style=\"color:#ab8248;position:relative;left: 500px;\"> #<%= j @comment.created_at.to_strf %><span style=\"color:blue\">（<%= j @comment.created_by %>）</span></span>" +
     "\n" +
     "    </div>"
 $("#comment_content").val('');

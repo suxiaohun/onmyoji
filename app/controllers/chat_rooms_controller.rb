@@ -1,13 +1,13 @@
 class ChatRoomsController < ApplicationController
   before_action :set_chat_room, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_auth, :only => [:room]
+  before_action :require_auth, :only => [:rooms]
 
   skip_before_action :verify_authenticity_token
 
 
 
-  def room
+  def rooms
     # respond_to(&:html)
   end
 
@@ -101,7 +101,7 @@ class ChatRoomsController < ApplicationController
     if request.post?
       cookies[:nick_name] = {value: params[:name], expires: 7.days}
       flash[:nick_name] = params[:name]
-      redirect_to '/room'
+      redirect_to '/rooms'
     else
       cookies.delete :nick_name
     end
