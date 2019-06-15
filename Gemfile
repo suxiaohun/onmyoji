@@ -1,4 +1,4 @@
-source 'https://gems.ruby-china.com'
+#source 'https://gems.ruby-china.com'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.0'
@@ -43,11 +43,15 @@ gem 'capistrano3-unicorn'
 
 gem 'kaminari'
 
+gem 'spreadsheet'
+
 gem 'elasticsearch'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'ruby-pinyin','0.5.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
