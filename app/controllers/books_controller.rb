@@ -20,9 +20,12 @@ class BooksController < ApplicationController
 
   def test
 
-    @books = Book.search_filter(params[:name])
+    puts "......start"
+    sleep 5
+    puts ".....end"
     # @books = Book.all
     # binding.pry
+    render json: {:message=>'ok'}
   end
 
   # GET /books/1
