@@ -25,7 +25,9 @@ class BooksController < ApplicationController
     puts ".....end"
     # @books = Book.all
     # binding.pry
-    render json: {:message=>'ok'}
+    result = {}
+    result[:data] = {:message=>'ok'}
+    render json: result
   end
 
   # GET /books/1
