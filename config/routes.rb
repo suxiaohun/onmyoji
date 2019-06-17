@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   get 'books/category/:id', to: 'books#category'
 
-  get 'books/test', to: 'books#test'
+  match 'books/test', to: 'books#test', :via => [:get, :post]
   get 'books/download/:id', to: 'books#download'
 
   # get 'books/previous/:curr_pre/:pre_pos/:id',to: 'books#previous'
