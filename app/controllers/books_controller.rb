@@ -21,7 +21,7 @@ class BooksController < ApplicationController
   def test
 
     puts "......start"
-    sleep 1
+    sleep 3
     puts ".....end"
     # @books = Book.all
     # binding.pry
