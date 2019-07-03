@@ -27,7 +27,7 @@ class ChatRoomsController < ApplicationController
 
     _ip = request.remote_ip.to_s
     ActionCable.server.broadcast 'chat',
-                                 message: "#{payload.to_s}",
+                                 message: "#{payload.to_json}",
                                  user: "udesk推送(#{_ip})#{Time.now.to_s}",
                                  color: 'red'
 
