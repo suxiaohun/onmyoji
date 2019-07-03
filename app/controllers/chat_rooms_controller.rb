@@ -22,11 +22,13 @@ class ChatRoomsController < ApplicationController
   def test
     payload = params
     payload.delete("chat_room")
+    payload.delete("controller")
+    payload.delete("action")
 
-    _ip = request.remote_ip
+    _ip = request.remote_ip.to_s
     ActionCable.server.broadcast 'chat',
-                                 message: "#{Time.now.to_s}: #{payload.to_s}",
-                                 user: 'udesk推送',
+                                 message: "#{payload.to_s}",
+                                 user: "udesk推送(#{_ip})#{Time.now.to_s}",
                                  color: 'red'
 
     render :json => {:msg=>'ok'}
