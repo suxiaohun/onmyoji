@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
-  root 'common#su'
+  root 'common#index'
+  match 'test', to: 'chat_rooms#test', :via => [:get, :post]
 
+  get 'colors', to: 'common#colors'
   get 'xiuxian', to: 'common#xiuxian'
+  get 'su', to: 'common#su'
   get 'books', to: 'books#index'
 
   get 'rooms', to: 'chat_rooms#rooms'

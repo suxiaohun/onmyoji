@@ -19,6 +19,18 @@ class ChatRoomsController < ApplicationController
   end
 
 
+  def test
+    payload = request.body.read
+
+
+    _ip = request.remote_ip
+    ActionCable.server.broadcast 'chat',
+                                 message: "#{Time.now.to_s}: #{payload.to_s}",
+                                 user: 'udesk推送',
+                                 color: 'red'
+
+    render :json => {:msg=>'ok'}
+  end
 
   def join
     # _ip = request.env['HTTP_X_FORWARDED_FOR'] || request.remote_ip

@@ -2,6 +2,10 @@ class CommonController < ApplicationController
 
   before_action :require_auth, :only => [:xiuxian]
 
+  def index
+
+  end
+
   def su
     today = Date.today
     start_day = Date.parse('2019-01-07')
@@ -25,6 +29,10 @@ class CommonController < ApplicationController
   end
 
 
+
+  def colors
+
+  end
 
 
 
