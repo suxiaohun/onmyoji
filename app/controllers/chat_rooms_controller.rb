@@ -25,7 +25,7 @@ class ChatRoomsController < ApplicationController
     payload.delete("controller")
     payload.delete("action")
 
-    result = JSON.pretty_generate(JSON.parse(payload.to_json))
+    result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n","<br>")
     _ip = request.remote_ip.to_s
     ActionCable.server.broadcast 'chat',
                                  message: "#{result}",
