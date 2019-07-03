@@ -44,6 +44,7 @@ class ChatRoomsController < ApplicationController
                                  user: '系统',
                                  color: 'blue'
 
+    render :json => {:msg=>'ok'}
   end
 
   def leave
