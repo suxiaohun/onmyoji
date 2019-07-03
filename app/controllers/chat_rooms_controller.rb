@@ -25,9 +25,10 @@ class ChatRoomsController < ApplicationController
     payload.delete("controller")
     payload.delete("action")
 
+    result = JSON.pretty_generate(JSON.parse(payload.to_json))
     _ip = request.remote_ip.to_s
     ActionCable.server.broadcast 'chat',
-                                 message: "#{payload.to_json}",
+                                 message: "#{result}",
                                  user: "udesk推送(#{_ip})#{Time.now.to_s}",
                                  color: 'red'
 
