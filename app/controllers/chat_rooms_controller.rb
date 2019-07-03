@@ -20,8 +20,8 @@ class ChatRoomsController < ApplicationController
 
 
   def test
-    payload = request.body.read
-
+    payload = params
+    payload.delete("chat_room")
 
     _ip = request.remote_ip
     ActionCable.server.broadcast 'chat',
