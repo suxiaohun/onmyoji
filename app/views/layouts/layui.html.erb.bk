@@ -7,10 +7,9 @@
   <%= csp_meta_tag %>
   <%= action_cable_meta_tag %>
 
-  <%#= stylesheet_link_tag 'layui/layui', media: 'all' %>
-  <%#= stylesheet_link_tag 'layui/book', media: 'all' %>
-  <%#= stylesheet_link_tag 'layui', media: 'all' %>
-
+  <%= stylesheet_link_tag 'layui/layui', media: 'all' %>
+  <%= stylesheet_link_tag 'layui/book', media: 'all' %>
+  <%= javascript_include_tag 'layui/layui' %>
 </head>
 
 <body>

@@ -16,6 +16,9 @@
 //= require_directory ./notify
 //= require cable
 //= require channels/chat
-//= require tinymce
+//= require sojson/require
+//= require sojson/sojson.core
+//= require_directory ./layui
+//= require sojson/sojson
 //= require_self
 

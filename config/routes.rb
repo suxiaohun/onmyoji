@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'common#index'
   match 'test', to: 'chat_rooms#test', :via => [:get, :post]
+  match 'json_format', to: 'common#json_format', :via => [:get]
+  match 'unicode', to: 'common#unicode', :via => [:get]
 
   get 'colors', to: 'common#colors'
   get 'xiuxian', to: 'common#xiuxian'
