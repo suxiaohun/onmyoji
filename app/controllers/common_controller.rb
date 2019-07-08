@@ -31,7 +31,7 @@ class CommonController < ApplicationController
 
   def json_format
 
-    render layout: 'application'
+    render layout: 'sojson'
   end
 
   def colors
