@@ -1,7 +1,7 @@
 var html = "<div id=\"comments-wrap\">\n" +
     "    <div class=\"share-comments\">\n" +
     "\n" +
-    "      <div id=\"disqus_thread\"><%= j @comment.content %></div>\n" +
+    "      <pre><%= j @comment.content %></pre>\n" +
     "\n" +
     "    </div>\n" +
     "\n" + " <span style=\"color:#ab8248;position:relative;left: 500px;\"> #<%= j @comment.created_at.to_strf %><span style=\"color:blue\">（<%= j @comment.created_by %>）</span></span>" +
