@@ -8,7 +8,7 @@ class ChatRoomsController < ApplicationController
 
 
   def test2
-    render json: {}
+    render nothing: true
   end
 
   def rooms
