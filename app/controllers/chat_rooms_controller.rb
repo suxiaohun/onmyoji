@@ -7,6 +7,10 @@ class ChatRoomsController < ApplicationController
 
 
 
+  def test2
+    render json: {}
+  end
+
   def rooms
     # respond_to(&:html)
   end
