@@ -18,10 +18,14 @@ module Onmyoji
     # the framework and any gems in your application.
 
     # 解决cors问题
-    config.action_dispatch.default_headers = {
-        'Access-Control-Allow-Origin' => 'http://linapp.udeskcat.com',
-        'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
-    }
+    # Rails 5
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :options]
+      end
+    end
 
     config.generators do |g|
       g.assets false
