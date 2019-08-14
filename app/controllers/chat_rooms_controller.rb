@@ -6,15 +6,13 @@ class ChatRoomsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
 
-
   def test2
-    render nothing: true
+    head 200, content_type: 'text/html'
   end
 
   def rooms
     # respond_to(&:html)
   end
-
 
 
   # GET /chat_rooms
@@ -29,14 +27,14 @@ class ChatRoomsController < ApplicationController
     payload.delete("controller")
     payload.delete("action")
 
-    result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n","<br>")
+    result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
     _ip = request.remote_ip.to_s
     ActionCable.server.broadcast 'chat',
                                  message: "#{result}",
                                  user: "udesk推送(#{_ip})#{Time.now.to_s}",
                                  color: 'red'
 
-    render :json => {:msg=>'ok'}
+    render :json => {:msg => 'ok'}
   end
 
   def join
@@ -51,7 +49,7 @@ class ChatRoomsController < ApplicationController
                                  user: '系统',
                                  color: 'blue'
 
-    render :json => {:msg=>'ok'}
+    render :json => {:msg => 'ok'}
   end
 
   def leave
@@ -66,7 +64,6 @@ class ChatRoomsController < ApplicationController
   # GET /chat_rooms/1
   def show
   end
-
 
 
   def canvas
@@ -138,7 +135,6 @@ class ChatRoomsController < ApplicationController
   def chat_room_params
     params.require(:chat_room).permit(:name, :remark)
   end
-
 
 
   def require_auth
