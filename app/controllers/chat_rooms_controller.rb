@@ -7,7 +7,8 @@ class ChatRoomsController < ApplicationController
 
 
   def test2
-    head 200, content_type: 'text/html'
+
+    render :json => {:code=>200,:msg => 'ok2'}
   end
 
   def rooms
@@ -22,19 +23,19 @@ class ChatRoomsController < ApplicationController
 
 
   def test
-    payload = params
-    payload.delete("chat_room")
-    payload.delete("controller")
-    payload.delete("action")
+    # payload = params
+    # payload.delete("chat_room")
+    # payload.delete("controller")
+    # payload.delete("action")
+    #
+    # result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
+    # _ip = request.remote_ip.to_s
+    # ActionCable.server.broadcast 'chat',
+    #                              message: "#{result}",
+    #                              user: "udesk推送(#{_ip})#{Time.now.to_s}",
+    #                              color: 'red'
 
-    result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
-    _ip = request.remote_ip.to_s
-    ActionCable.server.broadcast 'chat',
-                                 message: "#{result}",
-                                 user: "udesk推送(#{_ip})#{Time.now.to_s}",
-                                 color: 'red'
-
-    render :json => {:msg => 'ok'}
+    render :json => {:code=>1000,:msg => 'ok1'}
   end
 
   def join

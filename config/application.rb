@@ -19,7 +19,6 @@ module Onmyoji
 
     # 解决cors问题
     # Rails 5
-
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'

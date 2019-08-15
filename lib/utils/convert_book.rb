@@ -15,7 +15,8 @@ class ConvertBook
 #
 # 文件encoding并不影响文件的输入和输出，io.gets会原封不动的将文本内容取出，即使是错误的编码
 # 可以使用valid_encoding?判断内容是否是正确的编码（符合系统环境的默认编码（utf8））
-# 如果是错误编码，可以将内容强制转码（str.force_encoding('GB18030')），之后使用utf8解析
+# 如果是错误编码，可以将内容强制转码（str.f
+# orce_encoding('GB18030')），之后使用utf8解析
 #
 #
 #
