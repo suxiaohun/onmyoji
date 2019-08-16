@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get 'rooms', to: 'chat_rooms#rooms'
   match '/auth', to: 'chat_rooms#auth', :via => [:get, :post]
+  match 'common/auth', to: 'common#auth', :via => [:get, :post]
 
   get 'books/comments', to: 'books#comments'
 

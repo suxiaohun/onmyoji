@@ -24,7 +24,7 @@
 
 
 <div style="padding-top: 100px;">
-  <%= form_tag('/auth', method: :post) do %>
+  <%= form_tag('/common/auth', method: :post) do %>
     <%= text_field_tag 'name', nil, required: true, :placeholder => 'please type a nickname', :class => 'text_tag' %>
     <hr>
     <br>

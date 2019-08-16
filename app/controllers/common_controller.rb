@@ -64,7 +64,7 @@ class CommonController < ApplicationController
     if cookies[:nick_name]
       true
     else
-      redirect_to '/auth'
+      redirect_to '/common/auth'
     end
   end
 
