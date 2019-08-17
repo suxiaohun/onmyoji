@@ -22,21 +22,6 @@
     box-sizing: border-box;
   }
 
-  #chatRoom {
-    width: 29%;
-    height: 100%;
-    float: left;
-    display: inline-block;
-    /*margin: 0 auto;*/
-    text-align: center;
-    font-family: verdana, arial, helvetica, sans-serif;
-    font-size: 13px;
-    line-height: 18px;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
-    box-sizing: border-box;
-  }
-
 
   .std {
     display: inline-block;
@@ -91,8 +76,9 @@
         <div class="row">
           修道者：
           <div v-if="born">
-            <input id="dyName" type="text" v-bind:style="nameCss" value="<%= flash[:nick_name] || cookies[:nick_name] %>" v-model="name">
+            <input id="dyName" type="text" v-bind:style="nameCss" value="<%= cookies[:nick_name] %>" v-model="name">
             <button class="btn btn-default" v-on:click="_setName">命名</button>
+            <button class="btn btn-default" v-on:click="_su" style="display: none;"></button>
           </div>
           <span v-else>{{ name }}</span>
           <h1>修為: {{ numFilter.txt( point.round().toString() ) }} </h1>
@@ -283,8 +269,16 @@
   </div>
 </div>
 
+<%= javascript_include_tag "bigNumber/bignumber.min.js" %>
+<%= javascript_include_tag "LZstring/lz-string.min.js" %>
 
+<%= javascript_include_tag "xiuxian/level.js" %>
+<%= javascript_include_tag "xiuxian/stand.js" %>
+<%= javascript_include_tag "xiuxian/skill.js" %>
+<%= javascript_include_tag "xiuxian/item.js" %>
+<%= javascript_include_tag "xiuxian/nameMaker.js" %>
+<%= javascript_include_tag "vue/vue.js" %>
 
-
-
+<%= javascript_include_tag "vue/click.js" %>
+<%= javascript_include_tag "vue/timer.js" %>
 
