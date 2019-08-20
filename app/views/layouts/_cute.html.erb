@@ -1,0 +1,74 @@
+<style type="text/css">
+
+  .wrap {
+    width: 120px;
+    height: 200px;
+    margin: 20px;
+    position: fixed;
+    top: 25px;
+    right: 250px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 22;
+  }
+
+  .cube {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-80deg);
+    animation: rotate linear 20s infinite;
+  }
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+
+  .cube div {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    opacity: 0.8;
+    transition: all .4s;
+  }
+
+  .cube .out_front {
+    transform: rotateY(0deg) translateZ(60px);
+  }
+
+  .cube .out_back {
+    transform: translateZ(-60px) rotateY(180deg);
+  }
+
+  .cube .out_left {
+    transform: rotateY(-90deg) translateZ(60px);
+  }
+
+  .cube .out_right {
+    transform: rotateY(90deg) translateZ(60px);
+  }
+
+  .cube .out_top {
+    transform: rotateX(90deg) translateZ(60px);
+  }
+
+  .cube .out_bottom {
+    transform: rotateX(-90deg) translateZ(60px);
+  }
+</style>
+<div class="wrap">
+  <div class="cube">
+    <div class="out_front"><%= image_tag 'catoo/cube01.bmp',class: 'pic' %></div>
+    <div class="out_back"><%= image_tag 'catoo/cube02.bmp',class: 'pic' %></div>
+    <div class="out_left"><%= image_tag 'catoo/cube03.bmp',class: 'pic' %></div>
+    <div class="out_right"><%= image_tag 'catoo/cube04.bmp',class: 'pic' %></div>
+    <div class="out_top"><%= image_tag 'catoo/cube05.bmp',class: 'pic' %>"></div>
+    <div class="out_bottom"><%= image_tag 'catoo/cube06.bmp',class: 'pic' %></div>
+  </div>
+</div>
