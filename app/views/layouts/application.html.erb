@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>千羽阁</title>
-    <%= favicon_link_tag 'favicon.ico' %>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= action_cable_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application'%>
-  </head>
+<head>
+  <title>千羽阁</title>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= action_cable_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-  <body>
-  <div class="container">
-    <%= yield %>
-
-  </div>
-  </body>
+<body>
+<div class="container">
+  <%= yield %>
+  <%= render 'layouts/cute' %>
+</div>
+</body>
 </html>
