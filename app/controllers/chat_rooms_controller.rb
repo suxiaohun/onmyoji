@@ -7,8 +7,9 @@ class ChatRoomsController < ApplicationController
 
 
   def test2
+     head 200, content_type: 'text/html'
 
-    render :json => {:code=>200,:msg => 'ok2'}
+   # render :json => {:code=>200,:msg => 'ok2'}
   end
 
   def rooms
