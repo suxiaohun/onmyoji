@@ -1,0 +1,23 @@
+<style type="text/css">
+  /*input{*/
+  /*  min-width: 300px;*/
+  /*  line-height: 30px;*/
+  /*}*/
+
+</style>
+
+<div style="position: relative;top: 100px;">
+  <%= form_tag('/generate_md5',method: 'post',remote:true)  do %>
+
+  call_id:<%= text_field_tag 'call_id','705c0612-a2b6-42e5-94a6-51cbb939f26d' %><br>
+    secret:<%= text_field_tag 'secret','d85dc68dfab014ff8cca12dbc356e308' %><br>
+  timestamp:<%= text_field_tag 'timestamp',Time.now.strftime('%Y%m%d%H%M%S') %><br>
+
+  <%= submit_tag 'generate' %>
+
+
+<% end %>
+
+<hr>
+<div id="sign" style="position: relative;top: 50px;color: green;font-weight: bolder;font-size: 40px;"></div>
+</div>

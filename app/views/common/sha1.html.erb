@@ -1,0 +1,23 @@
+<style type="text/css">
+  /*input{*/
+  /*  min-width: 300px;*/
+  /*  line-height: 30px;*/
+  /*}*/
+
+</style>
+
+<div style="position: relative;top: 100px;">
+  <%= form_tag('/generate_sha1',method: 'post',remote:true)  do %>
+
+  admin_email:<%= text_field_tag 'admin_email','admin@linapp.tiyanudesk.com' %><br>
+  auth_token:<%= text_field_tag 'auth_token','116183eb-bf1d-40f0-8aa5-feae972e7dc0' %><br>
+  timestamp:<%= text_field_tag 'timestamp',Time.now.strftime('%Y%m%d%H%M%S') %><br>
+
+  <%= submit_tag 'generate' %>
+
+
+<% end %>
+
+<hr>
+<div id="sign" style="position: relative;top: 50px;color: green;font-weight: bolder;font-size: 40px;"></div>
+</div>

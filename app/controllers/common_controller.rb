@@ -38,6 +38,25 @@ class CommonController < ApplicationController
 
   end
 
+  def md5
+
+    render layout: 'common'
+  end
+
+  def sha1
+
+    render layout: 'common'
+  end
+
+  def generate_md5
+    # call_id=705c0612-a2b6-42e5-94a6-51cbb939f26d&timestamp=20190904142726&d85dc68dfab014ff8cca12dbc356e308
+    sign_str = "call_id=#{params[:call_id].to_s}&timestamp=#{params[:timestamp].to_s}&#{params[:secret].to_s}"
+    @sign =  Digest::MD5.hexdigest(sign_str)
+  end
+  def generate_sha1
+    sign_str = "#{params[:admin_email].to_s}&#{params[:auth_token].to_s}&#{params[:timestamp].to_s}"
+    @sign = Digest::SHA1.hexdigest(sign_str)
+  end
 
 
 =begin

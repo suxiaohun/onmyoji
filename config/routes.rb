@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   root 'common#index'
+  match 'md5', to: 'common#md5', :via => [:get, :post]
+  match 'sha1', to: 'common#sha1', :via => [:get, :post]
+  match 'generate_md5', to: 'common#generate_md5', :via => [:get, :post]
+  match 'generate_sha1', to: 'common#generate_sha1', :via => [:get, :post]
   match 'test2', to: 'chat_rooms#test2', :via => [:get, :post]
   match 'test', to: 'chat_rooms#test', :via => [:get, :post]
   match 'json_format', to: 'common#json_format', :via => [:get]
