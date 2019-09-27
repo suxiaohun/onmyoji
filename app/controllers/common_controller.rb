@@ -7,6 +7,9 @@ class CommonController < ApplicationController
 
     if params[:category] == 'call'
       result = JSON.pretty_generate(params[:payload])
+      Rails.logger.info "================================="
+      Rails.logger.info result
+      Rails.logger.info "================================="
       ActionCable.server.broadcast 'chat',
                                    message: result || 'nothing',
                                    user: "cc_paas(推送)：#{Time.now.to_strf}",
