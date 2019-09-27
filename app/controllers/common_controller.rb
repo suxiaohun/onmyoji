@@ -8,7 +8,9 @@ class CommonController < ApplicationController
 
     Rails.logger.info "================#{result.to_s}"
 
-    result = JSON.pretty_generate(JSON.parse(result)).gsub("\n", "<br>") if result.present?
+    result = JSON.parse(result) rescue false
+
+    result = JSON.pretty_generate(result).gsub("\n", "<br>") if result
 
     ActionCable.server.broadcast 'chat',
                                  message: "#{result || 'nothing'}",
