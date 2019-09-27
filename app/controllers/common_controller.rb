@@ -1,21 +1,26 @@
 class CommonController < ApplicationController
 
   before_action :require_auth, :only => [:xiuxian]
-
+  skip_before_action :verify_authenticity_token, :only => [:paas_callback]
 
   def paas_callback
-    result = request.body.rewind
 
-    Rails.logger.info "================#{result.to_s}"
+    if params[:category] == 'call'
+      result = JSON.pretty_generate(params[:payload]).gsub("\n", "<br>")
+      ActionCable.server.broadcast 'chat',
+                                   message: "#{result || 'nothing'}",
+                                   user: "cc_paas(推送)：#{Time.now.to_strf}",
+                                   color: 'red'
+    end
 
-    result = JSON.parse(result) rescue false
 
-    result = JSON.pretty_generate(result).gsub("\n", "<br>") if result
+    # result = request.body.rewind
 
-    ActionCable.server.broadcast 'chat',
-                                 message: "#{result || 'nothing'}",
-                                 user: "cc_paas(推送)：#{Time.now.to_strf}",
-                                 color: 'red'
+    # Rails.logger.info "================#{result.to_s}"
+
+    # result = JSON.parse(result) rescue false
+    #
+    # result = JSON.pretty_generate(result).gsub("\n", "<br>") if result
 
     render :json => {:code => 1000, :msg => 'cc paas ok'}
   end
