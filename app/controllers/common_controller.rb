@@ -8,7 +8,7 @@ class CommonController < ApplicationController
     if params[:category] == 'call'
       result = JSON.pretty_generate(params[:payload]).gsub("\n", "<br>")
       ActionCable.server.broadcast 'chat',
-                                   message: "#{result || 'nothing'}",
+                                   message: result || 'nothing',
                                    user: "cc_paas(推送)：#{Time.now.to_strf}",
                                    color: 'red'
     end
