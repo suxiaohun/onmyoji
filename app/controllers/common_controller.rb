@@ -6,6 +6,8 @@ class CommonController < ApplicationController
   def paas_callback
     result = request.body.rewind
 
+    Rails.logger.info "================#{result.to_s}"
+
     result = JSON.pretty_generate(JSON.parse(result)).gsub("\n", "<br>") if result.present?
 
     ActionCable.server.broadcast 'chat',
