@@ -1,6 +1,7 @@
 require 'elasticsearch/model'
 class Book < ApplicationRecord
-  # include Elasticsearch::Model
+  include Elasticsearch::Model
+  include EsBook
   # include Elasticsearch::Model::Callbacks
 
 

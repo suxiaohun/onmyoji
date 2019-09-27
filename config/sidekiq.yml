@@ -1,0 +1,5 @@
+# config/sidekiq.yml
+---
+:concurrency: 20
+:queues:
+  - default

@@ -2,8 +2,43 @@ class CommonController < ApplicationController
 
   before_action :require_auth, :only => [:xiuxian]
 
-  def index
 
+  def paas_callback
+    result = request.body.rewind
+
+    result = JSON.pretty_generate(JSON.parse(result)).gsub("\n", "<br>") if result.present?
+
+    ActionCable.server.broadcast 'chat',
+                                 message: "#{result || 'nothing'}",
+                                 user: "cc_paas(推送)：#{Time.now.to_strf}",
+                                 color: 'red'
+
+    render :json => {:code => 1000, :msg => 'cc paas ok'}
+  end
+
+  def es
+
+  end
+
+  def nga
+    url = "http://bbs.nga.cn/thread.php"
+    params = {}
+    params[:fid] = 7
+    params[:page] = 1
+    params[:lite] = 'js'
+
+    result = RestClient.get(url, params)
+    binding.pry
+    #   http://bbs.nga.cn/thread.php?fid=7&page=1&lite=js
+
+  end
+
+  def blank
+    render :layout => 'common'
+  end
+
+  def index
+    # CreateAgentNoticeJob.perform_later
   end
 
   def su
@@ -21,7 +56,6 @@ class CommonController < ApplicationController
   def xiuxian
     render :layout => 'xiuxian'
   end
-
 
 
   def novels
@@ -51,8 +85,9 @@ class CommonController < ApplicationController
   def generate_md5
     # call_id=705c0612-a2b6-42e5-94a6-51cbb939f26d&timestamp=20190904142726&d85dc68dfab014ff8cca12dbc356e308
     sign_str = "call_id=#{params[:call_id].to_s}&timestamp=#{params[:timestamp].to_s}&#{params[:secret].to_s}"
-    @sign =  Digest::MD5.hexdigest(sign_str)
+    @sign = Digest::MD5.hexdigest(sign_str)
   end
+
   def generate_sha1
     sign_str = "#{params[:admin_email].to_s}&#{params[:auth_token].to_s}&#{params[:timestamp].to_s}"
     @sign = Digest::SHA1.hexdigest(sign_str)
