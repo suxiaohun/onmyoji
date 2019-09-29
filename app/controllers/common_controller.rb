@@ -12,8 +12,8 @@ class CommonController < ApplicationController
       payload = request.parameters[:payload]
       result = JSON.pretty_generate(payload).gsub("\n", "<br>")
 
-      user = payload[:workflow]+"=>"+payload[:type]+"（#{Time.now.to_strf}）"
-      
+      user = payload[:workflow] + " => " + payload[:type].ljust(20) + "（#{payload[:call_id]}）" + "（#{Time.now.to_strf}）"
+
       ActionCable.server.broadcast 'chat',
                                    message: result || 'nothing',
                                    # user: "cc_paas(推送)：#{Time.now.to_strf}",
