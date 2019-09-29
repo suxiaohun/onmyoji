@@ -9,12 +9,7 @@ class CommonController < ApplicationController
     # 获取原始参数，不用ActionController::Parameters封装
     # 或者过滤之后再进行处理
     if params[:category] == 'call'
-      result = JSON.pretty_generate(request.parameters[:payload])
-      Rails.logger.info "==============1==================="
-      Rails.logger.info params[:payload]
-      Rails.logger.info "==============2==================="
-      Rails.logger.info result
-      Rails.logger.info "==============3==================="
+      result = JSON.pretty_generate(request.parameters[:payload]).gsub("\n", "<br>")
       ActionCable.server.broadcast 'chat',
                                    message: result || 'nothing',
                                    user: "cc_paas(推送)：#{Time.now.to_strf}",

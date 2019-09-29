@@ -61,7 +61,6 @@ function subscript() {
                     // $('#LogContainer').append(_msg);
 
                     $('#LogContainer').append("<span style='display: block;'>"+data.user+"</span>");
-                    alert(data.message)
                     var msg = "<span class='chat_span' style='color: "+data.color+"'>"+data.message+"</span>";
 
                     $('#LogContainer').append(msg);
