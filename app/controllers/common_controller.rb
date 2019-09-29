@@ -10,12 +10,18 @@ class CommonController < ApplicationController
     # 或者过滤之后再进行处理
     if params[:category] == 'call'
       payload = request.parameters[:payload]
-      result = JSON.pretty_generate(payload).gsub("\n", "<br>")
+      result1 = JSON.pretty_generate(payload)
+
+      Rails.logger.info "========================1======================="
+      Rails.logger.info result1
+      Rails.logger.info "========================2======================="
+
+      result2 = result1.gsub("\n", "<br>")
 
       user = payload[:workflow] + " => " + payload[:type].ljust(16) + "（#{payload[:call_id]}）" + "（#{Time.now.to_strf}）"
 
       ActionCable.server.broadcast 'chat',
-                                   message: result || 'nothing',
+                                   message: result2 || 'nothing',
                                    # user: "cc_paas(推送)：#{Time.now.to_strf}",
                                    user: user,
                                    color: 'red'
