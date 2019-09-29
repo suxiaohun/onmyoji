@@ -62,7 +62,7 @@ function subscript() {
                     // var _msg = "<pre style='color:" + data.color + "'><b>" + data.user + ": </b>" + data.message + "</pre>";
                     // $('#LogContainer').append(_msg);
 
-                    $('#LogContainer').append("<label class='drop' style='display: block;' for='_s"+message_count+"'>"+data.user+"</label>");
+                    $('#LogContainer').append("<label class='drop' style='display: block;' for='_s"+message_count+"'>"+data.user.replace(/\s/g,"&nbsp;")+"</label>");
                     $('#LogContainer').append("<input id='_s"+message_count+"' type='checkbox' style='display: none'>");
                     var msg = "<span class='chat_span' style='color: "+data.color+"'>"+data.message+"</span>";
 
