@@ -1,3 +1,4 @@
+var message_count = 0;
 function subscript() {
     var obj = $("#chat_btn");
     var v1 = obj.attr("chat");
@@ -57,10 +58,12 @@ function subscript() {
                 },
 
                 received: function (data) {
+                    message_count+=1;
                     // var _msg = "<pre style='color:" + data.color + "'><b>" + data.user + ": </b>" + data.message + "</pre>";
                     // $('#LogContainer').append(_msg);
 
-                    $('#LogContainer').append("<span style='display: block;'>"+data.user+"</span>");
+                    $('#LogContainer').append("<label class='drop' style='display: block;' for='_s"+message_count+"'>"+data.user+"</label>");
+                    $('#LogContainer').append("<input id='_s"+message_count+"' type='checkbox' style='display: none'>");
                     var msg = "<span class='chat_span' style='color: "+data.color+"'>"+data.message+"</span>";
 
                     $('#LogContainer').append(msg);
