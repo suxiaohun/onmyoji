@@ -9,10 +9,15 @@ class CommonController < ApplicationController
     # 获取原始参数，不用ActionController::Parameters封装
     # 或者过滤之后再进行处理
     if params[:category] == 'call'
-      result = JSON.pretty_generate(request.parameters[:payload]).gsub("\n", "<br>")
+      payload = request.parameters[:payload]
+      result = JSON.pretty_generate(payload).gsub("\n", "<br>")
+
+      user = payload[:workflow]+"=>"+payload[:type]+"（#{Time.now.to_strf}）"
+      
       ActionCable.server.broadcast 'chat',
                                    message: result || 'nothing',
-                                   user: "cc_paas(推送)：#{Time.now.to_strf}",
+                                   # user: "cc_paas(推送)：#{Time.now.to_strf}",
+                                   user: user,
                                    color: 'red'
     end
 
