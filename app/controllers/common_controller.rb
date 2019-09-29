@@ -13,6 +13,7 @@ class CommonController < ApplicationController
       result1 = JSON.pretty_generate(payload)
 
       Rails.logger.info "========================1======================="
+      Rails.logger.info payload.pretty_inspect
       Rails.logger.info result1
       Rails.logger.info "========================2======================="
 
