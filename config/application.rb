@@ -18,6 +18,9 @@ module Onmyoji
     # the framework and any gems in your application.
     config.active_job.queue_adapter = :sidekiq
 
+    config.autoload_paths += Dir["#{Rails.root}/lib/**/"]
+    config.eager_load_paths += Dir["#{Rails.root}/lib/**/"]
+
     # 解决cors问题
     # Rails 5
     config.middleware.insert_before 0, Rack::Cors do
