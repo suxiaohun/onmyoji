@@ -5,8 +5,11 @@ class CommonController < ApplicationController
 
   def paas_callback
 
+    # request.parameters
+    # 获取原始参数，不用ActionController::Parameters封装
+    # 或者过滤之后再进行处理
     if params[:category] == 'call'
-      result = JSON.pretty_generate(params[:payload])
+      result = JSON.pretty_generate(request.parameters[:payload])
       Rails.logger.info "==============1==================="
       Rails.logger.info params[:payload]
       Rails.logger.info "==============2==================="
