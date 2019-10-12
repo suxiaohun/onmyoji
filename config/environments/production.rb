@@ -68,6 +68,18 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address => "smtp.exmail.qq.com",
+      :port => 465,
+      :domain => "exmail.qq.com",
+      :user_name => "xuyiwen@udesk.cn",
+      :from => 'xuyiwen@udesk.cn',
+      :password => "udesk123",
+      :authentication => "login",
+      :ssl => true
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

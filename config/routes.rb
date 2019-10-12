@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'common#index'
+  match 'oss_check_file_callback', to: 'common#oss_check_file_callback', :via => [:get, :post]
   match 'paas_callback/:app_id/:timestamp/:sign', to: 'common#paas_callback', :via => [:get, :post]
   match 'mxl', to: 'common#mxl', :via => [:get, :post]
   match 'md5', to: 'common#md5', :via => [:get, :post]
