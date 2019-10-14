@@ -1,7 +1,7 @@
 class CommonController < ApplicationController
 
   before_action :require_auth, :only => [:xiuxian]
-  skip_before_action :verify_authenticity_token, :only => [:paas_callback,:oss_check_file_callback]
+  skip_before_action :verify_authenticity_token, :only => [:paas_callback, :oss_check_file_callback]
 
   def oss_check_file_callback
     email = []
@@ -9,10 +9,10 @@ class CommonController < ApplicationController
 
     content = []
     content << "发现违规文件："
-    content << "bucket：#{params[:bucket_name]}"
-    content << "路径：#{params[:object_key]}"
+    content << "bucket：#{params[:bucket_name] || 'unknown'}"
+    content << "路径：#{params[:object_key] || 'unknown'}"
 
-    subject = "oss违规文件告警: " + params[:subject]
+    subject = "oss违规文件告警: " + params[:subject] || 'unknown'
     SonarMailer.send_email(email, content, subject).deliver_now
     render json: {:msg => 'ooooooook'}
   end
