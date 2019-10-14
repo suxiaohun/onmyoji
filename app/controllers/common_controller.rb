@@ -12,7 +12,7 @@ class CommonController < ApplicationController
     content << "bucket：#{params[:bucket_name] || 'unknown'}"
     content << "路径：#{params[:object_key] || 'unknown'}"
 
-    subject = "oss违规文件告警: " + params[:subject] || 'unknown'
+    subject = "oss违规文件告警: " + (params[:subject] || 'unknown')
     SonarMailer.send_email(email, content, subject).deliver_now
     render json: {:msg => 'ooooooook'}
   end
