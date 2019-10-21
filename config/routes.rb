@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   match 'json_format', to: 'common#json_format', :via => [:get]
   match 'unicode', to: 'common#unicode', :via => [:get]
 
+  get 'skills', to: 'common#skills'
+  get 'items', to: 'common#items'
+  get 'groups', to: 'common#groups'
   get 'colors', to: 'common#colors'
   get 'xiuxian', to: 'common#xiuxian'
   get 'su', to: 'common#su'

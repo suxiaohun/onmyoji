@@ -1,7 +1,30 @@
 class CommonController < ApplicationController
-
+  include XiuxianName
   before_action :require_auth, :only => [:xiuxian]
   skip_before_action :verify_authenticity_token, :only => [:paas_callback, :oss_check_file_callback]
+
+
+  def skills
+    @skills = []
+    100.times do
+      @skills << rand_skill
+    end
+  end
+
+  def items
+    @items = []
+    100.times do
+      @items << rand_item
+    end
+  end
+
+  def groups
+    @groups = []
+    100.times do
+      @groups << rand_group
+    end
+  end
+
 
   def oss_check_file_callback
     email = []
