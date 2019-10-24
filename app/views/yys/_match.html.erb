@@ -1,0 +1,18 @@
+<table class="stable">
+  <thead>
+  <tr>
+    <th>式神</th>
+    <th>拥有数量</th>
+    <th>阴阳师</th>
+    <th>他/她需求的碎片</th>
+  </tr>
+  </thead>
+  <% exist_pieces.each_with_index do |ep, i| %>
+    <tr>
+      <td><%= ep.shi_shen.name %></td>
+      <td><%= ep.count %></td>
+      <td style="color: blue;font-size: x-large;"><%= ep.sama %></td>
+      <td><%= ep.need_shi_shen_names %></td>
+    </tr>
+  <% end %>
+</table>

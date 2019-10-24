@@ -1,0 +1,49 @@
+<% if @count >= 2  %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">需求碎片</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+          抱歉，目前最多允许同时需求两种碎片。
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+<% else %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">需求碎片</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with url: '/yys/pieces', method: :post, remote: true do %>
+
+        <div class="modal-body">
+
+          <%= hidden_field_tag :mode, 'NEED' %>
+          拥有碎片：
+          <%= select_tag :sid, options_for_select(shi_shen_need_droplist) %>
+          <br>
+          拥有数量：
+          <%= number_field_tag :count, 10 %>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">确认提交</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+

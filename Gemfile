@@ -5,10 +5,14 @@ ruby '2.6.3'
 
 gem 'rest-client', '~> 2.1'
 
+gem 'bunny'
 gem 'sidekiq', '6.0.0'
 gem 'tinymce-rails','5.0.4'
 
 gem 'jquery-rails'
+
+gem 'bootstrap', '~> 4.3.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use mysql as the database for Active Record

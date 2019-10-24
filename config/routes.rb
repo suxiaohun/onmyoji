@@ -13,6 +13,18 @@ Rails.application.routes.draw do
   match 'json_format', to: 'common#json_format', :via => [:get]
   match 'unicode', to: 'common#unicode', :via => [:get]
 
+
+  resources :pieces
+
+  get 'yys/add_need_pieces', to: 'yys#add_need_pieces'
+  get 'yys/add_own_pieces', to: 'yys#add_own_pieces'
+
+  post 'yys/match', to: 'yys#match'
+  post 'yys/pieces', to: 'yys#pieces'
+  get 'yys', to: 'yys#yys'
+  get 'my_pieces', to: 'yys#my_pieces'
+  match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
+
   get 'skills', to: 'common#skills'
   get 'items', to: 'common#items'
   get 'groups', to: 'common#groups'

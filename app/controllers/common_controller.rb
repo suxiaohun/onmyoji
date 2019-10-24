@@ -4,6 +4,9 @@ class CommonController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:paas_callback, :oss_check_file_callback]
 
 
+
+
+
   def skills
     @skills = []
     100.times do

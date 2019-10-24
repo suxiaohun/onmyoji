@@ -1,0 +1,80 @@
+<style type="text/css">
+
+  th, td {
+    border: none;
+  }
+
+  .stable th, .stable td {
+    border: 1px solid grey;
+    padding: 15px 15px;
+  }
+
+  .stable {
+    border-collapse: collapse;
+  }
+
+  select {
+    height: 26px;
+    width: 112px;
+    text-indent: 4px;
+  }
+
+</style>
+
+<div id="match_div" style="z-index: 999;min-width: 605px;min-height: 600px;position: absolute;right: 310px;top: 213px;">
+
+</div>
+<div>
+  <h1>我需求的碎片</h1>
+  <table class="ntable">
+    <tr>
+      <td>
+        <table class="stable">
+          <thead>
+          <tr>
+            <th>碎片名称</th>
+            <th>数量</th>
+            <th>
+              <%= link_to '添加记录', yys_add_need_pieces_path, rel: 'modal' %>
+            </th>
+          </tr>
+          </thead>
+          <tbody id="need_body">
+          <%= render partial: 'pieces/need_pieces', :locals => {:need_pieces => @need_pieces} %>
+          </tbody>
+        </table>
+      </td>
+      <td style="padding-left: 40px;">
+        <%= form_with url: yys_match_path, method: :post, remote: true do %>
+          <button type="submit" class="btn btn-primary">开始匹配</button>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+
+</div>
+
+
+<hr>
+
+<div>
+  <h1>我用来交换的碎片</h1>
+  <table class="stable">
+    <thead>
+    <tr>
+      <th>碎片名称</th>
+      <th>数量</th>
+      <th>
+        <%= link_to '添加记录', yys_add_own_pieces_path, rel: 'modal' %>
+      </th>
+    </tr>
+    </thead>
+    <tbody id="own_body">
+    <%= render partial: 'pieces/own_pieces', :locals => {:own_pieces => @own_pieces} %>
+
+    </tbody>
+  </table>
+</div>
+
+

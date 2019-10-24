@@ -1,0 +1,45 @@
+<style type="text/css">
+  td {
+    border: 1px solid grey;
+    padding: 15px 15px;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>
+<h1>您想换什么碎片？</h1>
+
+<h1>SP</h1>
+
+
+<table>
+  <tr>
+    <% @sps.each_with_index do |sp, i| %>
+      <% if i % 4 == 0 %>
+        </tr>
+        <tr>
+          <td><%= image_tag image_path sp.path %><%= sp.name %></td>
+      <% else %>
+        <td><%= image_tag image_path sp.path %><%= sp.name %></td>
+      <% end %>
+    <% end %>
+    </table>
+
+<br>
+<br>
+<hr>
+
+<h1>SSR</h1>
+<table>
+  <tr>
+    <% @ssrs.each_with_index do |sp, i| %>
+      <% if i % 4 == 0 %>
+        </tr>
+        <tr>
+          <td><%= image_tag image_path sp.path %><%= sp.name %></td>
+      <% else %>
+        <td><%= image_tag image_path sp.path %><%= sp.name %></td>
+      <% end %>
+    <% end %>
+    </table>

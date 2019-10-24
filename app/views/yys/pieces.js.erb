@@ -1,0 +1,7 @@
+$('#linkModal').modal('hide')
+//$('#myModal2').modal('hide')
+$('#need_body').html("<%= j render(:partial => 'pieces/need_pieces', :locals => {:need_pieces => @need_pieces}) %>");
+$('#own_body').html("<%= j render(:partial => 'pieces/own_pieces', :locals => {:own_pieces => @own_pieces}) %>");
+
+//alert($('#need_body'))
+//$.closeDialog();

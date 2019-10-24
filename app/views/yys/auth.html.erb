@@ -1,0 +1,50 @@
+<style type="text/css">
+
+  .text_tag {
+    /*display: block;*/
+    width: 50%;
+    height: 54px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+
+</style>
+
+
+
+<div style="padding-top: 200px;text-align: center;">
+  <%= form_tag('/yys/auth', method: :post) do %>
+    <%= text_field_tag 'name', nil, required: true, :placeholder => '请输入您的游戏角色昵称', :class => 'text_tag' %>
+    <br>
+    <br>
+    <div style="text-align: center">
+      <%= submit_tag '提交', :class => 'btn btn-primary' %>
+    </div>
+
+  <% end %>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
