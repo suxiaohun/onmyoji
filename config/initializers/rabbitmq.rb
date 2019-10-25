@@ -8,7 +8,8 @@ class RabbitMQ
     # 全局创建一个单例@conn，这样一个应用只会和RabbmitMQ服务器建立一条TCP连接
     # 这里的ENV['MQ_PD_CNN']，配置在环境变量里面，例如: amqp://user_name:password@rabbitmq_server_ip
     def connection
-      @conn ||= Bunny.new(ENV['MQ_PD_CNN']).start
+      rabbitmq_url = "amqp://Udesk:Udesk2019@39.106.208.100/billing_paas"
+      @conn ||= Bunny.new(rabbitmq_url).start
     end
 
     # 一个TCP connnection上面可以创建多个信道channel
