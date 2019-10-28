@@ -18,6 +18,7 @@ function openModal(href) {
         $(".modal-footer", modalDialog).html("");
     }
     $(".modal-header h3", modalDialog).text(modalTitle);
+    modalDialog.html('');//清空原有内容，否则一闪而过体验不好
     modalDialog.modal('show');
     // return
     if (href.indexOf('#') == 0) {
@@ -29,16 +30,5 @@ function openModal(href) {
 }
 
 function buildModal() {
-    return $('<div class="modal" id="linkModal" tabindex="-1" role="dialog" data-backdrop="static">' +
-        '<div class="modal-dialog">' +
-        '<div class="modal-content">' +
-        '<div class="modal-header">' +
-        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">' +
-        '&times;</button><h3></h3></div>' +
-        '<div class="modal-body">123</div>' +
-        '<div class="modal-footer">' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>');
+    return $('<div class="modal" id="linkModal" tabindex="-1" role="dialog" data-backdrop="static"></div>');
 }
