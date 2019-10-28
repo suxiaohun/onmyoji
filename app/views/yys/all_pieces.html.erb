@@ -1,0 +1,27 @@
+<table>
+  <% unless @need_pieces.each do |sp| %>
+    <tr>
+      <td><%= image_tag image_path sp.shi_shen.path %><%= sp.shi_shen.name %></td>
+      <td><%= sp.count %></td>
+      <td><%= link_to '删除', sp, method: :delete, data: {}, remote: true %></td>
+    </tr>
+  <% end.present? %>
+    <tr>
+      <td>无记录</td>
+    </tr>
+  <% end %>
+</table>
+
+<table>
+  <% unless @own_pieces.each do |sp| %>
+    <tr>
+      <td><%= image_tag image_path sp.shi_shen.path %><%= sp.shi_shen.name %></td>
+      <td><%= sp.count %></td>
+      <td><%= link_to '删除', sp, method: :delete, data: {}, remote: true %></td>
+    </tr>
+  <% end.present? %>
+    <tr>
+      <td>无记录</td>
+    </tr>
+  <% end %>
+</table>
