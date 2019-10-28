@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :pieces
 
+  get 'yys/all_pieces', to: 'yys#all_pieces'
   get 'yys/add_need_pieces', to: 'yys#add_need_pieces'
   get 'yys/add_own_pieces', to: 'yys#add_own_pieces'
 

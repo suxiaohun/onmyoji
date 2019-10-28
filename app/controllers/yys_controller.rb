@@ -9,6 +9,11 @@ class YysController < ApplicationController
     @sps = ShiShen.where(mode: 'SP')
   end
 
+  def all_pieces
+    @need_pieces = Piece.where(mode: 'NEED').order(sid: :desc)
+    @own_pieces = Piece.where(mode: 'OWN').order(sid: :desc)
+  end
+
   def my_pieces
     @need_pieces = Piece.where(sama: cookies[:nick_name], mode: 'NEED')
     @own_pieces = Piece.where(sama: cookies[:nick_name], mode: 'OWN')
