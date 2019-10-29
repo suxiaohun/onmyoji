@@ -1,0 +1,10 @@
+<% unless pss.each do |ps| %>
+  <tr>
+    <td><%= ps.sama %></td>
+    <td><%= link_to '删除', "/clean_cookie/#{ps.sama}", method: :delete, data: {}, remote: true %></td>
+  </tr>
+<% end.present? %>
+  <tr>
+    <td>无记录</td>
+  </tr>
+<% end %>

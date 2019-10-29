@@ -9,6 +9,16 @@ class YysController < ApplicationController
     @sps = ShiShen.where(mode: 'SP')
   end
 
+
+  def all_cookies
+    @pss = Piece.select(:sama).distinct(:sama)
+  end
+
+  def clean_cookie
+    Piece.where(sama: params[:sama]).delete_all
+    @pss = Piece.select(:sama).distinct(:sama)
+  end
+
   def all_pieces
     @need_pieces = Piece.where(mode: 'NEED').order(sid: :desc)
     @row_span = Piece.where(mode: 'OWN').group(:sid).count

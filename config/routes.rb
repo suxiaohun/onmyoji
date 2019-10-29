@@ -14,8 +14,11 @@ Rails.application.routes.draw do
   match 'unicode', to: 'common#unicode', :via => [:get]
 
 
+
+  delete 'clean_cookie/:sama',to: "yys#clean_cookie"
   resources :pieces
 
+  get 'all_cookies', to: 'yys#all_cookies'
   get 'all_pieces', to: 'yys#all_pieces'
   get 'yys/add_need_pieces', to: 'yys#add_need_pieces'
   get 'yys/add_own_pieces', to: 'yys#add_own_pieces'
