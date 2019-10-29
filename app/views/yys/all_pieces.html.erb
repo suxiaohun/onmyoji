@@ -16,7 +16,7 @@
   </tr>
   </thead>
   <% count = {} %>
-  <% unless @need_pieces.each_with_index do |sp| %>
+  <% unless @own_pieces.each_with_index do |sp| %>
 
     <% if count[sp.sid] %>
       <tr>

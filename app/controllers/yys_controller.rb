@@ -11,11 +11,7 @@ class YysController < ApplicationController
 
   def all_pieces
     @need_pieces = Piece.where(mode: 'NEED').order(sid: :desc)
-
-    @row_span = Piece.where(mode: 'NEED').group(:sid).count
-
-
-
+    @row_span = Piece.where(mode: 'OWN').group(:sid).count
     @own_pieces = Piece.where(mode: 'OWN').order(sid: :desc)
   end
 
