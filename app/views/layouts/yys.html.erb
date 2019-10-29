@@ -17,10 +17,14 @@
     』</span>
     <br>
     <br>
+    <%= link_to '查看库存碎片', all_pieces_path %>
+    <br>
+    <br>
 
     <% unless action_name == 'my_pieces' %>
 
       <%= link_to '管理我的碎片', my_pieces_path %>
+      <br>
       <br>
     <% end %>
 

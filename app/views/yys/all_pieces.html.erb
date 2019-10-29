@@ -1,10 +1,38 @@
-<table>
-  <% unless @need_pieces.each do |sp| %>
-    <tr>
-      <td><%= image_tag image_path sp.shi_shen.path %><%= sp.shi_shen.name %></td>
-      <td><%= sp.count %></td>
-      <td><%= link_to '删除', sp, method: :delete, data: {}, remote: true %></td>
-    </tr>
+<style type="text/css">
+  th, td {
+    border: 1px solid gray;
+    padding: 10px 10px;
+  }
+</style>
+<div id="match_div" style="z-index: 999;min-width: 605px;min-height: 600px;position: absolute;right: 25px;top: 213px;">
+
+</div>
+<table style="display: inline-block">
+  <thead>
+  <tr>
+    <th>拥有碎片</th>
+    <th>拥有数量</th>
+    <th>所属阴阳师</th>
+  </tr>
+  </thead>
+  <% count = {} %>
+  <% unless @need_pieces.each_with_index do |sp| %>
+
+    <% if count[sp.sid] %>
+      <tr>
+        <td><%= sp.count %></td>
+        <td><%= sp.sama %></td>
+      </tr>
+
+    <% else
+         count[sp.sid] = 0
+    %>
+      <tr>
+        <td rowspan="<%= @row_span[sp.sid] %>"><%= image_tag image_path sp.shi_shen.path %><%= sp.shi_shen.name %></td>
+        <td><%= sp.count %></td>
+        <td><%= sp.sama %></td>
+      </tr>
+    <% end %>
   <% end.present? %>
     <tr>
       <td>无记录</td>
@@ -12,16 +40,8 @@
   <% end %>
 </table>
 
-<table>
-  <% unless @own_pieces.each do |sp| %>
-    <tr>
-      <td><%= image_tag image_path sp.shi_shen.path %><%= sp.shi_shen.name %></td>
-      <td><%= sp.count %></td>
-      <td><%= link_to '删除', sp, method: :delete, data: {}, remote: true %></td>
-    </tr>
-  <% end.present? %>
-    <tr>
-      <td>无记录</td>
-    </tr>
+<div style="position:absolute;display: inline-block;margin-left: 30px;margin-top: 50px;">
+  <%= form_with url: yys_match_path, method: :post, remote: true do %>
+    <button type="submit" class="btn btn-primary">开始匹配</button>
   <% end %>
-</table>
+</div>
