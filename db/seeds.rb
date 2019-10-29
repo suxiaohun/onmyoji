@@ -175,6 +175,7 @@ shi_shens << {name: '卖药郎', mode: 'SSR', sid: '305'}
 shi_shens << {name: '御馔津', mode: 'SSR', sid: '304'}
 shi_shens << {name: '玉藻前', mode: 'SSR', sid: '300'}
 shi_shens << {name: '山风', mode: 'SSR', sid: '296'}
+shi_shens << {name: '奴良陆生', mode: 'SSR', sid: '294'}
 shi_shens << {name: '雪童子', mode: 'SSR', sid: '292'}
 shi_shens << {name: '彼岸花', mode: 'SSR', sid: '288'}
 shi_shens << {name: '荒', mode: 'SSR', sid: '283'}
