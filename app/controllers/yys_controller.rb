@@ -71,6 +71,17 @@ class YysController < ApplicationController
       end
       ep.need_shi_shen_names = data
     end
+
+    if need_piece_sids.count == 0
+      @msg = '您还未配置您需求的碎片，请点击【管理我的碎片】配置后，再匹配。'
+    elsif @exist_pieces.count == 0
+      @msg = '很抱歉，未匹配到您需求的碎片记录。'
+    else
+      @msg = '系统内部错误，请联系【苏筱筱】'
+    end
+
+
+
   end
 
 
