@@ -43,7 +43,7 @@
   <%= form_tag('/yys/summon', method: :post,remote: true) do %>
 
     神秘的符咒数量：
-    <%= number_field_tag 'number', 200, required: true,:max=>2000, :placeholder => '请输入神秘符咒数量', :class => 'text_tag',required: true %>
+    <%= number_field_tag 'number', 200, required: true,:max=>@max_count, :placeholder => '请输入神秘符咒数量', :class => 'text_tag',required: true %>
     <br>
     <br>
     <%= check_box_tag 'mode' %><span class="checkbox_text">全图鉴</span>

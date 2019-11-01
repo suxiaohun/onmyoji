@@ -20,8 +20,11 @@ class YysController < ApplicationController
   # 注：召唤期内使用神秘的符咒进行召唤时，SP/SSR式神出现概率提升至原来的2.5倍！每位阴阳师大人享受3次SP/SSR概率UP的机会。
 
   def call
+    config = HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../../../config/property.yml', __FILE__)))).deep_symbolize_keys
+
+    @max_count = config[:max_pick_count]
     @result = []
-    @bloodlines = Bloodline.where(mode: 'AFRICA').order(count: :desc).limit 10
+    @bloodlines = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
   end
 
   def summon
@@ -136,7 +139,7 @@ class YysController < ApplicationController
     # 最大抽出SSR/SP次数作为非洲血统排行榜，最多5条
 
     # todo 欧皇排行榜
-    @bloodlines = Bloodline.where(mode: 'AFRICA').order(count: :desc).limit 10
+    @bloodlines = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
   end
 
 
@@ -222,7 +225,7 @@ class YysController < ApplicationController
       cookies[:nick_name] = {value: "#{region_name}-#{params[:name]}", expires: 30.days}
       flash[:nick_name] = params[:name]
 
-      if params[:redirect_controller] && params[:redirect_action]
+      if params[:redirect_controller].present? && params[:redirect_action].present?
         redirect_to controller: params[:redirect_controller], action: params[:redirect_action]
       else
         redirect_to '/my_pieces'
