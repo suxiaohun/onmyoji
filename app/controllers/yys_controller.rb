@@ -94,10 +94,21 @@ class YysController < ApplicationController
           if spec_seed < spec_rate
             puts "-----#{num + 1}---#{spec_shi_shen}------------"
             @result[num + 1] = "<span style='color:red;font-weight:bold;'>#{spec_shi_shen}（指定式神概率up：#{spec_rate}%）</span>"
+            # 如果是SSR，要重置非酋计数器
+            if spec_up == 'SSR'
+              africa_vote(africa_count, @msg)
+              africa_count = 0
+            end
             spec_up = false
           else
             # 从其他卡池中随机挑选一个
-            @result[num + 1] = sss[rand sss.size].name
+            rand_ss = sss[rand sss.size]
+            @result[num + 1] = rand_ss.name
+            # 如果是SSR，要重置非酋计数器
+            if rand_ss.mode == 'SSR'
+              africa_vote(africa_count, @msg)
+              africa_count = 0
+            end
           end
           next
         end
