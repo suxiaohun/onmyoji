@@ -366,7 +366,7 @@ class YysController < ApplicationController
     # 获取最后10条
     records = Bloodline.where(mode: 'AFRICA').order(count: :desc).limit 10
     _count = records.last.try(:count) || 0
-    unless africa_count > _count
+    if africa_count > _count
       Bloodline.where(mode: 'AFRICA').where("count < #{_count}").delete_all
       ar = Bloodline.new
       ar.name = cookies[:nick_name]
