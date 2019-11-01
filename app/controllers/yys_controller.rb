@@ -367,7 +367,7 @@ class YysController < ApplicationController
 
   def africa_vote(africa_count, arr)
     # 获取最后10条
-    records = Bloodline.where(mode: 'AFRICA').order(count: :desc).limit 10
+    records = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
     _count = records.last.try(:count) || 0
     if africa_count > _count
       Bloodline.where(mode: 'AFRICA').where("count < #{_count}").delete_all
