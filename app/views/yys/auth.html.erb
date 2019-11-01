@@ -33,6 +33,8 @@
 <div style="padding-top: 200px;text-align: center;">
   <%= form_tag('/yys/auth', method: :post) do %>
     选择游戏区服：
+    <%= hidden_field_tag :redirect_controller,params[:redirect_controller] %>
+    <%= hidden_field_tag :redirect_action,params[:redirect_action] %>
     <%= select_tag :region, options_for_select(region_drop_list) %><br>
     <%= text_field_tag 'name', nil, required: true, :placeholder => '请输入您的游戏角色昵称', :class => 'text_tag',required: true %>
     <br>

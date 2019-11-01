@@ -1,6 +1,6 @@
 class YysController < ApplicationController
   # protect_from_forgery
-  before_action :require_auth, :except => [:auth]
+  before_action :require_auth, :except => [:auth, :all_cookies]
 
   # layout false
 
@@ -203,7 +203,12 @@ class YysController < ApplicationController
       region_name = Region.where(key: params[:region]).first.try(:name) || 'UNKNOWN'
       cookies[:nick_name] = {value: "#{region_name}-#{params[:name]}", expires: 30.days}
       flash[:nick_name] = params[:name]
-      redirect_to '/my_pieces'
+
+      if params[:redirect_controller] && params[:redirect_action]
+        redirect_to controller: params[:redirect_controller], action: params[:redirect_action]
+      else
+        redirect_to '/my_pieces'
+      end
     else
       cookies.delete :nick_name
     end
@@ -367,7 +372,7 @@ class YysController < ApplicationController
         redirect_to '/yys/auth'
       end
     else
-      redirect_to '/yys/auth'
+      redirect_to "/yys/auth?redirect_controller=#{params[:controller]}&redirect_action=#{params[:action]}"
     end
   end
 
