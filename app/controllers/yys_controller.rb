@@ -401,6 +401,7 @@ class YysController < ApplicationController
       if exist_region
         true
       else
+        cookies.delete :nick_name
         redirect_to '/yys/auth'
       end
     else
