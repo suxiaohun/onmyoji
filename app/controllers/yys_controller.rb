@@ -21,6 +21,7 @@ class YysController < ApplicationController
 
   def call
     @result = []
+    @bloodlines = Bloodline.where(mode: 'AFRICA').order(count: :desc).limit 10
   end
 
   def summon
@@ -130,6 +131,12 @@ class YysController < ApplicationController
 
     puts "==========================#{africa_count}=============="
     africa_vote(africa_count, @msg)
+
+    # 加入排行榜
+    # 最大抽出SSR/SP次数作为非洲血统排行榜，最多5条
+
+    # todo 欧皇排行榜
+    @bloodlines = Bloodline.where(mode: 'AFRICA').order(count: :desc).limit 10
   end
 
 
@@ -356,6 +363,17 @@ class YysController < ApplicationController
   end
 
   def africa_vote(africa_count, arr)
+    # 获取最后10条
+    records = Bloodline.where(mode: 'AFRICA').order(count: :desc).limit 10
+    _count = records.last.try(:count) || 0
+    unless africa_count > _count
+      Bloodline.where(mode: 'AFRICA').where("count < #{_count}").delete_all
+      ar = Bloodline.new
+      ar.name = cookies[:nick_name]
+      ar.count = africa_count
+      ar.save
+    end
+
     if africa_count > 99
       arr[100] ||= '您已经达成了【初级·非酋】成就！'
     end

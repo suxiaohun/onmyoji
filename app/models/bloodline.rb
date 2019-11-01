@@ -1,0 +1,2 @@
+class Bloodline < ApplicationRecord
+end

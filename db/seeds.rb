@@ -192,6 +192,7 @@ shi_shens << {name: '酒吞童子', mode: 'SSR', sid: '219'}
 shi_shens << {name: '大天狗', mode: 'SSR', sid: '217'}
 
 # SP
+shi_shens << {name: '鬼王酒吞童子', mode: 'SP', sid: '341'}
 shi_shens << {name: '烬天玉藻前', mode: 'SP', sid: '339'}
 shi_shens << {name: '骁浪荒川之主', mode: 'SP', sid: '334'}
 shi_shens << {name: '御怨般若', mode: 'SP', sid: '331'}
