@@ -10,7 +10,8 @@ module RabbitData
 
       data[:details] = {}
       data[:details][:call_id] = '53a667cd-5b1c-4199-4766-123456789'
-      data[:details][:channel_id] = '53a667cd-5b1c-4199-4766-123456789'
+
+      # data[:details][:channel_id] = '53a667cd-5b1c-4199-4766-123456789'
       data[:details][:agent_id] = 111
       data[:details][:agent_name] = 'xiaosu'
       data[:details][:call_direction] = 'outCallback'

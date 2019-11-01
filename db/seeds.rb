@@ -160,22 +160,22 @@ ShiShen.delete_all
 # SSR
 shi_shens = []
 shi_shens << {name: '泷夜叉姬', mode: 'SSR', sid: '338'}
-shi_shens << {name: '黑崎一护', mode: 'SSR', sid: '337'}
+shi_shens << {name: '黑崎一护', mode: 'SSR', sid: '337', kind: 'linkage'}
 shi_shens << {name: '大岳丸', mode: 'SSR', sid: '333'}
 shi_shens << {name: '不知火', mode: 'SSR', sid: '330'}
 shi_shens << {name: '八岐大蛇', mode: 'SSR', sid: '325'}
-shi_shens << {name: '桔梗', mode: 'SSR', sid: '319'}
+shi_shens << {name: '桔梗', mode: 'SSR', sid: '319', kind: 'linkage'}
 shi_shens << {name: '白藏主', mode: 'SSR', sid: '316'}
-shi_shens << {name: '杀生丸', mode: 'SSR', sid: '314'}
-shi_shens << {name: '犬夜叉', mode: 'SSR', sid: '313'}
+shi_shens << {name: '杀生丸', mode: 'SSR', sid: '314', kind: 'linkage'}
+shi_shens << {name: '犬夜叉', mode: 'SSR', sid: '313', kind: 'linkage'}
 shi_shens << {name: '鬼切', mode: 'SSR', sid: '312'}
 shi_shens << {name: '面灵气', mode: 'SSR', sid: '311'}
-shi_shens << {name: '鬼灯', mode: 'SSR', sid: '308'}
-shi_shens << {name: '卖药郎', mode: 'SSR', sid: '305'}
+shi_shens << {name: '鬼灯', mode: 'SSR', sid: '308', kind: 'linkage'}
+shi_shens << {name: '卖药郎', mode: 'SSR', sid: '305', kind: 'linkage'}
 shi_shens << {name: '御馔津', mode: 'SSR', sid: '304'}
 shi_shens << {name: '玉藻前', mode: 'SSR', sid: '300'}
 shi_shens << {name: '山风', mode: 'SSR', sid: '296'}
-shi_shens << {name: '奴良陆生', mode: 'SSR', sid: '294'}
+shi_shens << {name: '奴良陆生', mode: 'SSR', sid: '294', kind: 'linkage'}
 shi_shens << {name: '雪童子', mode: 'SSR', sid: '292'}
 shi_shens << {name: '彼岸花', mode: 'SSR', sid: '288'}
 shi_shens << {name: '荒', mode: 'SSR', sid: '283'}
@@ -207,9 +207,20 @@ shi_shens.each do |ss|
   ShiShen.create!(ss)
 end
 
+puts '.........................'
+puts '.........................'
 
-# test data
-# Piece.create({sid: '339', count: 30})
+Region.delete_all
+# IOS
+# ANDROID
+# ALL
+regions = []
+regions << {name: '鸣麓逐浪', mode: 'ALL', key: 'mingluzhulang'}
+regions << {name: '追月逐兔', mode: 'ALL', key: 'zhuiyuezhutu'}
+regions.each do |region|
+  puts "...创建大区：#{region[:name]}"
+  Region.create!(region)
+end
 
 
 end_time = Time.now

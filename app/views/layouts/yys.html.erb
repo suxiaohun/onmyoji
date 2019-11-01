@@ -28,7 +28,11 @@
       <br>
     <% end %>
 
+    <% unless action_name == 'call' %>
+      <%= link_to '抽卡模拟器', yys_call_path %>
+      <br>
     <br>
+    <% end %>
     昵称填写错误？<%= link_to '点此重新绑定', yys_auth_path %>
 
 

@@ -1,5 +1,12 @@
 <style type="text/css">
 
+  select {
+    height: 36px;
+    width: 112px;
+    text-indent: 4px;
+    margin-bottom: 15px;
+  }
+
   .text_tag {
     /*display: block;*/
     width: 50%;
@@ -25,7 +32,9 @@
 
 <div style="padding-top: 200px;text-align: center;">
   <%= form_tag('/yys/auth', method: :post) do %>
-    <%= text_field_tag 'name', nil, required: true, :placeholder => '请输入您的游戏角色昵称', :class => 'text_tag' %>
+    选择游戏区服：
+    <%= select_tag :region, options_for_select(region_drop_list) %><br>
+    <%= text_field_tag 'name', nil, required: true, :placeholder => '请输入您的游戏角色昵称', :class => 'text_tag',required: true %>
     <br>
     <br>
     <div style="text-align: center">

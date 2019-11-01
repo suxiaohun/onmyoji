@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
 
 
 
+  def get_region_key(nick_name)
+    region_name = nick_name.split('-')[0]
+    Region.find_by(name: region_name).try(:key)
+  end
 end

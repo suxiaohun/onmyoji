@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   delete 'clean_cookie/:sama',to: "yys#clean_cookie"
   resources :pieces
 
+  get 'yys/call', to: 'yys#call'
+  post 'yys/summon', to: 'yys#summon'
   get 'all_cookies', to: 'yys#all_cookies'
   get 'all_pieces', to: 'yys#all_pieces'
   get 'yys/add_need_pieces', to: 'yys#add_need_pieces'

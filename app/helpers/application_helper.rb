@@ -11,4 +11,9 @@ module ApplicationHelper
     ShiShen.where.not(sid: exist_sids).order(sid: :desc).pluck(:name, :sid)
   end
 
+  # 大区下拉选
+  def region_drop_list
+    Region.order(:id).pluck(:name, :key)
+  end
+
 end
