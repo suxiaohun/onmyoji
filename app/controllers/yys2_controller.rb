@@ -148,7 +148,7 @@ class Yys2Controller < ApplicationController
 
      @result.each do |k,v|
       if v[:cartoon]
-        _v_path = ActionController::Base.helpers.video_path(v[:sid])
+        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4")
         puts "==================//========#{_v_path}=============="
         v[:video_path] = _v_path
        end
