@@ -67,7 +67,7 @@
     <table>
       <tr>
         <td>
-          <%= image_tag image_path 'card.jpeg' %><%= number_field_tag 'number', 200, required: true,:max=>@max_count, :class => 'text_tag',required: true %>
+          <%= image_tag image_path 'card.jpg' %><%= number_field_tag 'number', 200, required: true,:max=>@max_count, :class => 'text_tag',required: true %>
           <%= image_tag image_path('tip.jpg'),size: "32",title:"输入你要抽取的数量，最大"+@max_count.to_s+"抽" %>
         </td>
       </tr>
