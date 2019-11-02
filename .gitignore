@@ -22,7 +22,8 @@
 
 /public/assets
 /public/books
-/public/movies
+app/assets/videos/*
+!app/assets/videos/.keep
 
 
 .byebug_history

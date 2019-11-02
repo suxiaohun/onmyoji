@@ -25,7 +25,7 @@ set :deploy_to, "/home/crystal/onmyoji"
 append :linked_files, "config/database.yml", "config/master.key"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system",'app/assets/videos'
 
 # tmp/pids/unicorn.pid
 set :unicorn_pid, -> { File.join(current_path, "tmp", "pids", "unicorn.pid") }

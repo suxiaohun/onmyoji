@@ -1,0 +1,61 @@
+$('#result').html("<%= j render(:partial => 'yys2/summon', :locals => {:summon => @result}) %>");
+$('#bloodline').html("<%= j render(:partial => 'yys2/bloodline', :locals => {:bloodlines => @bloodlines}) %>");
+var result = <%= @result.to_json.html_safe %>;
+
+//console.log(result);
+//var result = JSON.parse("<% @result %>");
+// $("#video_div").append(ss);
+var arr = Object.keys(result)
+var cartoon_arr = [];
+
+Object.keys(result).forEach(function (key, index) {
+//    console.log(index)
+    if (result[key]["cartoon"] == true) {
+        cartoon_arr.push(result[key])
+    }
+})
+
+console.log(cartoon_arr.length)
+
+if (cartoon_arr.length > 0) {
+    $("#yys2").prepend("<div id='video_div' style='width: 100%;height: 100%;position: absolute;z-index: 900;background: black;'></div>");
+    var path = cartoon_arr.shift()["video_path"];
+    console.log(path);
+    $("#video_div").append("<video onended=\"play_video(this);\" height=\"100%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
+}
+
+
+//console.log(arr)
+//console.log(arr.length)
+//Object.keys(result).forEach(function(key,index){
+//    console.log(index)
+//    if(result[key]["cartoon"]== true){
+//        cartoon_arr.push(result[key])
+//        console.log(11)
+//        if(index == arr.length-1){
+//            $("#video_div").append("<video onended=\"this.remove();$('#video_div').remove();\" height=\"100%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\""+result[key]["video_path"]+"\"></video>")
+//        }else{
+//            $("#video_div").append("<video onended=\"this.remove()\" height=\"100%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\""+result[key]["video_path"]+"\"></video>")
+//        }
+//    }else{
+//        if(index == arr.length-1){
+//            $("#video_div").remove();
+//        }
+//        console.log(key,result[key]);
+//        console.log(22);
+//    }
+//});
+
+function play_video(ve) {
+    $(ve).remove();
+    if (cartoon_arr.length > 0) {
+        var path = cartoon_arr.shift()["video_path"];
+        console.log(path);
+        $("#video_div").append("<video onended=\"play_video(this);\" height=\"100%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
+    }else{
+        $("#video_div").remove();
+    }
+}
+//console.log(22)
+//$("#video_div").remove();
+// $("#video_div").append("<video onended=\"this.remove()\" height=\"100%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"<%= video_path '330.mp4' %>\"></video")

@@ -5,6 +5,7 @@ class CreateShiShens < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :mode # ssr / sp
       t.string :kind, default: 'origin' # 原生（origin）/联动（linkage），联动式神不参与抽卡游戏
+      t.boolean :cartoon,default:false # 是否有召唤动画的key
       t.string :path
 
       t.timestamps
