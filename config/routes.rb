@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :pieces
 
   get 'yys2', to: 'yys2#index'
+  get 'yys3', to: 'yys2#index2'
+  post 'yys2/summon2', to: 'yys2#summon2'
   post 'yys2/summon', to: 'yys2#summon'
   match 'yys2/auth', to: 'yys2#auth', :via => [:get, :post]
 

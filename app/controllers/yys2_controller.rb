@@ -11,6 +11,158 @@ class Yys2Controller < ApplicationController
     @max_count = config[:max_pick_count] || 1000
   end
 
+  # 抽卡主页-文字版
+  def index2
+    config = HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../../../config/property.yml', __FILE__)))).deep_symbolize_keys
+    @max_count = config[:max_pick_count] || 1000
+  end
+
+  def summon2
+    number = params[:number].to_i # 票数
+    mode = params[:mode] || false # 是否全图鉴
+    up = params[:up] # 是否开启三次up
+
+    spec_up = params[:spec_up]
+
+    if spec_up == 'SP'
+      # 鬼王酒吞童子
+      spec_shi_shen = ShiShen.find_by_sid 341
+      spec_shi_shen.color = 'rgb(232,112,30)'
+      sss = ShiShen.where(kind: 'origin').where.not(sid: 341)
+      if mode
+        spec_rate = 10
+      else
+        spec_rate = 3
+      end
+    elsif spec_up == 'SSR'
+      # 泷夜叉姬
+      spec_shi_shen = ShiShen.find_by_sid 338
+      spec_shi_shen.color = 'rgb(248,45,58)'
+      sss = ShiShen.where(kind: 'origin').where.not(sid: 338)
+      if mode
+        spec_rate = 15
+      else
+        spec_rate = 4
+      end
+    else
+      spec_up = false
+    end
+
+    if up
+      up_count = 3
+    else
+      up_count = 0
+    end
+
+    puts "==================up_count: #{up_count}==="
+
+    ssrs = ShiShen.where(mode: 'SSR', kind: 'origin')
+    sps = ShiShen.where(mode: 'SP', kind: 'origin')
+
+    ShiShen.pluck(:sid)
+
+    @result = {}
+    @msg = {}
+    africa_count = params[:africa_count] || 0
+
+    number.times do |num|
+      # 根据票数提升spec_rate
+      if spec_up
+        # 全图700抽保底，如果第700抽时依然没有抽取到指定式神，则直接抽出指定式神
+        if mode && num == 699
+          @result[num + 1] ={}
+          @result[num + 1][:sid] = spec_shi_shen.sid
+          @result[num + 1][:name] = "<span style='color:#111de0;font-weight:bold;'>#{spec_shi_shen.name}（700抽保底）</span>"
+          @result[num + 1][:cartoon] = spec_shi_shen.cartoon
+          spec_up = false
+          next
+        end
+        spec_rate = get_spec_rate(num, spec_up, mode)
+        puts "------------up_rate--#{spec_rate}----"
+      end
+
+      seed1 = rand * 100
+      if up_count > 0
+        pick_rate = 1.25 * (1 + 2.5)
+      else
+        pick_rate = 1.25
+      end
+      if seed1 < pick_rate
+        up_count -= 1 if up_count > 0
+        # 指定概率提升，仅生效一次
+        if spec_up
+          spec_seed = rand(100)
+          if spec_seed < spec_rate
+            puts "-----#{num + 1}---#{spec_shi_shen.name}------------"
+            @result[num + 1] ={}
+            @result[num + 1][:sid] = spec_shi_shen.sid
+            @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定式神概率up：#{spec_rate}%）</span>"
+            @result[num + 1][:cartoon] = spec_shi_shen.cartoon
+            # 如果是SSR，要重置非酋计数器
+            if spec_up == 'SSR'
+              africa_vote(africa_count, @msg)
+              africa_count = 0
+            end
+            spec_up = false
+          else
+            # 从其他卡池中随机挑选一个
+            rand_ss = sss[rand sss.size]
+            @result[num + 1] ={}
+            @result[num + 1][:sid] = rand_ss.sid
+            @result[num + 1][:name] = rand_ss.name
+            @result[num + 1][:cartoon] = rand_ss.cartoon
+            # 如果是SSR，要重置非酋计数器
+            if rand_ss.mode == 'SSR'
+              africa_vote(africa_count, @msg)
+              africa_count = 0
+            end
+          end
+          next
+        end
+
+        seed2 = rand(125)
+        if seed2 < 100 # ssr
+          puts "==========================#{africa_count}=============="
+          africa_vote(africa_count, @msg)
+          africa_count = 0
+          ss = ssrs[rand ssrs.size]
+          @result[num + 1] ={}
+          @result[num + 1][:sid] = ss.sid
+          @result[num + 1][:name] = ss.name
+          @result[num + 1][:cartoon] = ss.cartoon
+        else # sp
+          africa_count += 1
+          ss = sps[rand sps.size]
+          @result[num + 1] ={}
+          @result[num + 1][:sid] = ss.sid
+          @result[num + 1][:name] = ss.name
+          @result[num + 1][:cartoon] = ss.cartoon
+        end
+      else
+        africa_count += 1
+      end
+    end
+
+    puts "==========================#{africa_count}=============="
+    africa_vote(africa_count, @msg)
+
+    # 加入排行榜
+    # 最大抽出SSR/SP次数作为非洲血统排行榜，最多5条
+
+    # todo 欧皇排行榜
+    @bloodlines = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
+
+    @result.each do |k,v|
+      if v[:cartoon]
+        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4")
+        puts "==================//========#{_v_path}=============="
+        v[:video_path] = _v_path
+      end
+    end
+    puts @result
+  end
+
+
   def summon
     number = params[:number].to_i # 票数
     mode = params[:mode] || false # 是否全图鉴

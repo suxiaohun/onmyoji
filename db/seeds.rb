@@ -161,7 +161,7 @@ ShiShen.delete_all
 shi_shens = []
 shi_shens << {name: '泷夜叉姬', mode: 'SSR', sid: '338', cartoon: true}
 shi_shens << {name: '黑崎一护', mode: 'SSR', sid: '337', kind: 'linkage'}
-shi_shens << {name: '大岳丸', mode: 'SSR', sid: '333'}
+shi_shens << {name: '大岳丸', mode: 'SSR', sid: '333', cartoon: true}
 shi_shens << {name: '不知火', mode: 'SSR', sid: '330', cartoon: true}
 shi_shens << {name: '八岐大蛇', mode: 'SSR', sid: '325', cartoon: true}
 shi_shens << {name: '桔梗', mode: 'SSR', sid: '319', kind: 'linkage'}
@@ -176,16 +176,16 @@ shi_shens << {name: '御馔津', mode: 'SSR', sid: '304', cartoon: true}
 shi_shens << {name: '玉藻前', mode: 'SSR', sid: '300', cartoon: true}
 shi_shens << {name: '山风', mode: 'SSR', sid: '296', cartoon: true}
 shi_shens << {name: '奴良陆生', mode: 'SSR', sid: '294', kind: 'linkage'}
-shi_shens << {name: '雪童子', mode: 'SSR', sid: '292'}
+shi_shens << {name: '雪童子', mode: 'SSR', sid: '292', cartoon: true}
 shi_shens << {name: '彼岸花', mode: 'SSR', sid: '288', cartoon: true}
-shi_shens << {name: '荒', mode: 'SSR', sid: '283'}
+shi_shens << {name: '荒', mode: 'SSR', sid: '283', cartoon: true}
 shi_shens << {name: '辉夜姬', mode: 'SSR', sid: '280', cartoon: true}
 shi_shens << {name: '花鸟卷', mode: 'SSR', sid: '279', cartoon: true}
 shi_shens << {name: '一目连', mode: 'SSR', sid: '272', cartoon: true}
 shi_shens << {name: '妖刀姬', mode: 'SSR', sid: '269', cartoon: true}
 shi_shens << {name: '青行灯', mode: 'SSR', sid: '266', cartoon: true}
 shi_shens << {name: '茨木童子', mode: 'SSR', sid: '265', cartoon: true}
-shi_shens << {name: '小鹿男', mode: 'SSR', sid: '259'}
+shi_shens << {name: '小鹿男', mode: 'SSR', sid: '259', cartoon: true}
 shi_shens << {name: '阎魔', mode: 'SSR', sid: '255', cartoon: true}
 shi_shens << {name: '荒川之主', mode: 'SSR', sid: '248', cartoon: true}
 shi_shens << {name: '酒吞童子', mode: 'SSR', sid: '219', cartoon: true}
@@ -194,7 +194,7 @@ shi_shens << {name: '大天狗', mode: 'SSR', sid: '217', cartoon: true}
 # SP
 shi_shens << {name: '鬼王酒吞童子', mode: 'SP', sid: '341', cartoon: true}
 shi_shens << {name: '烬天玉藻前', mode: 'SP', sid: '339', cartoon: true}
-shi_shens << {name: '骁浪荒川之主', mode: 'SP', sid: '334'}
+shi_shens << {name: '骁浪荒川之主', mode: 'SP', sid: '334', cartoon: true}
 shi_shens << {name: '御怨般若', mode: 'SP', sid: '331', cartoon: true}
 shi_shens << {name: '赤影妖刀姬', mode: 'SP', sid: '328', cartoon: true}
 shi_shens << {name: '苍风一目连', mode: 'SP', sid: '327', cartoon: true}
