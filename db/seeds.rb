@@ -159,7 +159,7 @@ puts '    start init base data...'
 ShiShen.delete_all
 # SSR
 shi_shens = []
-shi_shens << {name: '泷夜叉姬', mode: 'SSR', sid: '338'}
+shi_shens << {name: '泷夜叉姬', mode: 'SSR', sid: '338', cartoon: true}
 shi_shens << {name: '黑崎一护', mode: 'SSR', sid: '337', kind: 'linkage'}
 shi_shens << {name: '大岳丸', mode: 'SSR', sid: '333'}
 shi_shens << {name: '不知火', mode: 'SSR', sid: '330', cartoon: true}
@@ -192,13 +192,13 @@ shi_shens << {name: '酒吞童子', mode: 'SSR', sid: '219', cartoon: true}
 shi_shens << {name: '大天狗', mode: 'SSR', sid: '217', cartoon: true}
 
 # SP
-shi_shens << {name: '鬼王酒吞童子', mode: 'SP', sid: '341'}
-shi_shens << {name: '烬天玉藻前', mode: 'SP', sid: '339'}
+shi_shens << {name: '鬼王酒吞童子', mode: 'SP', sid: '341', cartoon: true}
+shi_shens << {name: '烬天玉藻前', mode: 'SP', sid: '339', cartoon: true}
 shi_shens << {name: '骁浪荒川之主', mode: 'SP', sid: '334'}
-shi_shens << {name: '御怨般若', mode: 'SP', sid: '331'}
+shi_shens << {name: '御怨般若', mode: 'SP', sid: '331', cartoon: true}
 shi_shens << {name: '赤影妖刀姬', mode: 'SP', sid: '328', cartoon: true}
 shi_shens << {name: '苍风一目连', mode: 'SP', sid: '327', cartoon: true}
-shi_shens << {name: '稻荷神御馔津', mode: 'SP', sid: '326,cartoon:true'}
+shi_shens << {name: '稻荷神御馔津', mode: 'SP', sid: '326', cartoon: true}
 shi_shens << {name: '炼狱茨木童子', mode: 'SP', sid: '322', cartoon: true}
 shi_shens << {name: '少羽大天狗', mode: 'SP', sid: '315', cartoon: true}
 
