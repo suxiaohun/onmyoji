@@ -138,7 +138,7 @@ GEM
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
     kgio (2.11.2)
-    libv8 (7.3.492.27.1)
+    libv8 (3.16.14.19)
     listen (3.2.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -156,8 +156,6 @@ GEM
     mimemagic (0.3.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    mini_racer (0.2.6)
-      libv8 (>= 6.9.411)
     minitest (5.12.2)
     msgpack (1.3.1)
     multi_json (1.14.1)
@@ -214,6 +212,7 @@ GEM
     redis (4.1.3)
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
+    ref (2.0.0)
     regexp_parser (1.6.0)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -264,6 +263,9 @@ GEM
     sshkit (1.20.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -300,10 +302,10 @@ DEPENDENCIES
   elasticsearch
   elasticsearch-model
   elasticsearch-rails
+  execjs
   jquery-rails
   kaminari
   listen
-  mini_racer
   mysql2 (>= 0.4.4, < 0.6.0)
   pry
   puma (~> 3.11)
@@ -317,6 +319,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq (= 6.0.0)
   spreadsheet
+  therubyracer
   tinymce-rails (= 5.0.4)
   uglifier (>= 1.3.0)
   unicorn (~> 5.4.1)
