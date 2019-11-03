@@ -461,17 +461,17 @@ class Yys2Controller < ApplicationController
     elsif num >= 500
       15
     elsif num >= 450
-      12
+      14
     elsif num >= 400
-      11
+      13
     elsif num >= 350
-      10
+      12
     elsif num >= 300
-      9
+      11
     elsif num >= 250
-      8
+      10
     elsif num >= 200
-      7
+      8
     elsif num >= 150
       6
     elsif num >= 100

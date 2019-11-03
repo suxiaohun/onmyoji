@@ -226,6 +226,18 @@ regions << {name: '云之遏', mode: 'IOS', key: 'yunzhijie'}
 regions << {name: '莲之净', mode: 'IOS', key: 'lianzhijing'}
 regions << {name: '桂之馥', mode: 'IOS', key: 'guizhimi'}
 
+# 中国区-Android
+regions << {name: '菊之逸', mode: 'ANDROID', key: 'juzhiyi'}
+regions << {name: '雀之灵', mode: 'ANDROID', key: 'quezhiling'}
+regions << {name: '暮之霞', mode: 'ANDROID', key: 'muzhixia'}
+regions << {name: '冬之雪', mode: 'ANDROID', key: 'dongzhixue'}
+regions << {name: '秋之枫', mode: 'ANDROID', key: 'qiuzhifeng'}
+regions << {name: '雨之霁', mode: 'ANDROID', key: 'yuzhiji'}
+regions << {name: '桃之华', mode: 'ANDROID', key: 'taozhihua'}
+regions << {name: '风之清', mode: 'ANDROID', key: 'fengzhiqing'}
+regions << {name: '梅之寒', mode: 'ANDROID', key: 'meizhihan'}
+regions << {name: '樱之华', mode: 'ANDROID', key: 'yingzhihua'}
+
 # 网易-双平台
 regions << {name: '携手同心', mode: 'NET', key: 'xieshoutongxin'}
 regions << {name: '结伴同游', mode: 'NET', key: 'jiebantongyou'}
