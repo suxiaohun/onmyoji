@@ -120,8 +120,8 @@ namespace :xiaosu do
   # end
 
 
-  after 'deploy:publishing', 'xiaosu:link_books'
-  # after 'deploy:publishing', 'xiaosu:rake_db_seed'
+  # after 'deploy:publishing', 'xiaosu:link_books'
+  after 'deploy:publishing', 'xiaosu:rake_db_seed'
   after 'deploy:publishing', 'xiaosu:restart'
 
 end
