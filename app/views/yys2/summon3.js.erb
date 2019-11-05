@@ -32,20 +32,20 @@ if (show_cartoon == true) {
 //$("#video_div").remove();
 
 //if (cartoon_arr.length > 0) {
-$("#yys2").prepend("<div id='video_div' style='width: 100%;height: " + client_height + ";position: absolute;z-index: 900;background: yellowgreen;'></div>");
+//$("#yys2").prepend("<div id='video_div' style='width: 100%;height: " + client_height + ";position: absolute;z-index: 900;background: yellowgreen;'></div>");
 //    var path = cartoon_arr.shift()["video_path"];
 //    console.log(path);
 //    $("#video_div").append("<video onended=\"play_video(this);\" height=\"95%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
 //}
 
 
-//function play_video(ve) {
-//    $(ve).remove();
-//    if (cartoon_arr.length > 0) {
-//        var path = cartoon_arr.shift()["video_path"];
-//        console.log(path);
-//        $("#video_div").append("<video onended=\"play_video(this);\" height=\"95%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
-//    }else{
-//        $("#video_div").remove();
-//    }
-//}
+function play_video(ve) {
+    $(ve).remove();
+    if (cartoon_arr.length > 0) {
+        var path = cartoon_arr.shift()["video_path"];
+        console.log(path);
+        $("#video_div").append("<video onended=\"play_video(this);\" height=\"100%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
+    }else{
+        $("#video_div").remove();
+    }
+}
