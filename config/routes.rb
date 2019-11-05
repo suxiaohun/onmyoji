@@ -18,8 +18,12 @@ Rails.application.routes.draw do
   delete 'clean_cookie/:sama',to: "yys#clean_cookie"
   resources :pieces
 
-  get 'yys2', to: 'yys2#index'
-  get 'yys3', to: 'yys2#index2'
+  get 'yys', to: 'yys2#index3'
+  get 'yys2', to: 'yys2#index3'
+  get 'yys3', to: 'yys2#index3'
+  post 'yys2/summon3', to: 'yys2#summon3'
+
+
   post 'yys2/summon2', to: 'yys2#summon2'
   post 'yys2/summon', to: 'yys2#summon'
   match 'yys2/auth', to: 'yys2#auth', :via => [:get, :post]
@@ -27,7 +31,7 @@ Rails.application.routes.draw do
 
   match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
 
-  get 'yys/call', to: 'yys#call'
+  get 'yys/call', to: 'yys#index3'
   post 'yys/summon', to: 'yys#summon'
   get 'all_cookies', to: 'yys#all_cookies'
   get 'all_pieces', to: 'yys#all_pieces'

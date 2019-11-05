@@ -2,6 +2,7 @@
 <html lang="">
 <head>
   <title>千羽阁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -22,8 +23,9 @@
 
 </div>
 <% if cookies[:nick_name] %>
-  <div style="width: 350px;height: 30px;right: 20px;position: absolute;padding: 10px 10px;">你好，『<span style="color: blue;"><%= cookies[:nick_name] %>
-    』</span>
+  <div>你好，『<span style="color: blue;"><%= cookies[:nick_name] %>
+    』</span><span style="font-size: 14px;color: green">*建议使用浏览器操作，移动端暂时未做适配</span>
+    <hr>
   </div>
 <% end %>
 

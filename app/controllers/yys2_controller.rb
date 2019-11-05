@@ -27,6 +27,12 @@ class Yys2Controller < ApplicationController
 
     spec_up = params[:spec_up]
 
+    if params[:cartoon]
+      @show_cartoon = true
+    else
+      @show_cartoon = false
+    end
+
     if spec_up == 'SP'
       # 鬼王酒吞童子
       spec_shi_shen = ShiShen.find_by_sid 341
@@ -151,8 +157,27 @@ class Yys2Controller < ApplicationController
 
     # 加入排行榜
     # 最大抽出SSR/SP次数作为非洲血统排行榜，最多5条
-
-    # todo 欧皇排行榜
+    #
+    # todo 欧皇排行榜（分数加权）
+    # 指标1：前50抽获得ssr/sp
+    #  1.1：50抽=>1分（+1）
+    #       。。。
+    #       40抽=>10分（+2）
+    #       。。。
+    #       30抽=>30分（+3）
+    #       。。。
+    #       20抽=>60分（+5）
+    #       。。。
+    #       10抽=>110分（+8）
+    #       。。。
+    #       2抽=>190分
+    #       1抽=>200分
+    #
+    # 指标2：前50抽完成三次up
+    #  2.1：
+    #
+    #
+    #
     @bloodlines = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
 
     @result.each do |k,v|
