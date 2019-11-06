@@ -20,6 +20,7 @@ class Yys2Controller < ApplicationController
   # 以10抽为单位，给出提示
   def summon3
     number = params[:number].to_i # 票数
+    number = 1000 if number > 3000
     mode = params[:mode] || false # 是否全图鉴
     up = params[:up] # 是否开启三次up
 
@@ -73,6 +74,10 @@ class Yys2Controller < ApplicationController
     africa_count = params[:africa_count] || 0
 
     number.times do |num|
+      if num == 199
+        europe_common_6(@result)
+        europe_common_8(@result)
+      end
       # 根据票数提升spec_rate
       if spec_up
         # 全图700抽保底，如果第700抽时依然没有抽取到指定式神，则直接抽出指定式神
@@ -621,11 +626,11 @@ class Yys2Controller < ApplicationController
   # 最小票数获得ssr/sp
   def europe_common_1(num)
     if num == 1
-      score = 500000
-    elsif num == 2
       score = 200000
-    elsif num == 3
+    elsif num == 2
       score = 100000
+    elsif num == 3
+      score = 50000
     elsif num < 20
       score = 13000 + (20 - num) * 500
     elsif num < 30
@@ -641,10 +646,9 @@ class Yys2Controller < ApplicationController
     else
       score = 0
     end
-
+    return unless score > 0
     record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'COMMON', seq: 1, name: cookies[:nick_name])
-    puts record.to_json
-    if record.count == 0 || (record.count > num)
+    if record.count == 0 || (record.count >= num)
       puts "================europe---common1========="
       record.count = num
       record.remark = "通用：第#{num}抽抽到ssr/sp"
@@ -778,34 +782,40 @@ class Yys2Controller < ApplicationController
   end
 
   # 前200抽获取的同名ssr/sp数量
-  def europe_common_6(num)
-    if num == 3
-      score = 500000
-    elsif num == 4
-      score = 200000
-    elsif num == 5
-      score = 100000
-    elsif num < 20
-      score = 13000 + (20 - num) * 500
-    elsif num < 30
-      score = 11000 + (30 - num) * 200
-    elsif num < 50
-      score = 6100 + (50 - num) * 100
-    elsif num < 100
-      score = 1001 + (100 - num) * 20
-    elsif num < 200
-      score = 1 + (200 - num) * 10
-    elsif num == 200
-      score = 1
+  def europe_common_6(result)
+    count = result.size
+    return unless count > 0
+
+    values = result.values.map { |x| x[:sid] }
+    h = Hash.new(0)
+    values.each { |v| h[v] += 1 }
+
+    max_count = h.values.max
+
+    if max_count == 1
+      return
+    elsif max_count == 2
+      score = 5000
+    elsif max_count == 3
+      score = 13000
+    elsif max_count == 4
+      score = 40000
+    elsif max_count == 5
+      score = 80000
+    elsif max_count == 6
+      score = 160000
+    elsif max_count == 7
+      score = 400000
     else
-      score = 0
+      score = 500000 + 10000 * (max_count - 7)
     end
-
-    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
-
-    record.count = num
-    record.score = score
-    record.save
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'COMMON', seq: 6, name: cookies[:nick_name])
+    if record.count < max_count
+      record.remark = "通用：200抽内获得#{max_count}个同名ssr/sp"
+      record.count = max_count
+      record.score = score
+      record.save!
+    end
   end
 
   # 最小票数抽取到活动式神，并完成非洲大阴阳师成就
@@ -840,65 +850,60 @@ class Yys2Controller < ApplicationController
   end
 
   # 前200抽获得的ssr/sp数量
-  def europe_common_8(num)
-    if num == 3
-      score = 500000
-    elsif num == 4
-      score = 200000
-    elsif num == 5
+  def europe_common_8(result)
+    count = result.size
+    return unless count > 0
+    if count == 1
+      score = 10
+    elsif count == 2
+      score = 100
+    elsif count == 3
+      score = 500
+    elsif count == 4
+      score = 1500
+    elsif count == 5
+      score = 3000
+    elsif count == 6
+      score = 5000
+    elsif count == 7
+      score = 8000
+    elsif count == 8
+      score = 12800
+    elsif count == 9
+      score = 19000
+    elsif count == 10
+      score = 30000
+    elsif count == 11
+      score = 50000
+    elsif count == 12
       score = 100000
-    elsif num < 20
-      score = 13000 + (20 - num) * 500
-    elsif num < 30
-      score = 11000 + (30 - num) * 200
-    elsif num < 50
-      score = 6100 + (50 - num) * 100
-    elsif num < 100
-      score = 1001 + (100 - num) * 20
-    elsif num < 200
-      score = 1 + (200 - num) * 10
-    elsif num == 200
-      score = 1
     else
-      score = 0
+      score = 100000 + ((count -12) * 50000 * 1.01 ** (count -12)).round
     end
-
-    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
-
-    record.count = num
-    record.score = score
-    record.save
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'COMMON', seq: 8, name: cookies[:nick_name])
+    record.remark = "通用：200抽内获得#{count}个ssr/sp"
+    if record.count < count
+      record.score = score
+      record.count = count
+      record.save!
+    end
   end
 
   # 最小票数获得一个式神的ssr/sp阶；双重判定，结对数量
-  def europe_common_9(num)
-    if num == 3
-      score = 500000
-    elsif num == 4
-      score = 200000
-    elsif num == 5
-      score = 100000
-    elsif num < 20
-      score = 13000 + (20 - num) * 500
-    elsif num < 30
-      score = 11000 + (30 - num) * 200
-    elsif num < 50
-      score = 6100 + (50 - num) * 100
-    elsif num < 100
-      score = 1001 + (100 - num) * 20
-    elsif num < 200
-      score = 1 + (200 - num) * 10
-    elsif num == 200
-      score = 1
-    else
-      score = 0
-    end
-
-    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
-
-    record.count = num
-    record.score = score
-    record.save
+  def europe_common_9(num, result)
+    values = result.values
+    sp_arr = ["315", "322", "326", "327", "328", "331", "334", "339", "341"]
+    sp_hash = [
+        {"315" => "217"},
+        {"322" => "265"},
+        {"326" => "304"},
+        {"327" => "272"},
+        {"328" => "269"},
+        # {"331"=>""},# 般若，暂时忽略
+        {"334" => "248"},
+        {"339" => "300"},
+        {"341" => "219"}
+    ]
   end
 
   # 特殊欧皇奖励:第一票召唤出活动式神；称号：每日一抽
