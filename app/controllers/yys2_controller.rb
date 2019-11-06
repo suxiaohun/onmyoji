@@ -3,8 +3,6 @@ class Yys2Controller < ApplicationController
   before_action :require_auth, :except => [:auth, :all_cookies]
 
 
-
-
   # 抽卡主页
   def index
     config = HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../../../config/property.yml', __FILE__)))).deep_symbolize_keys
@@ -79,7 +77,7 @@ class Yys2Controller < ApplicationController
       if spec_up
         # 全图700抽保底，如果第700抽时依然没有抽取到指定式神，则直接抽出指定式神
         if mode && num == 699
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = spec_shi_shen.sid
           @result[num + 1][:name] = "<span style='color:#111de0;font-weight:bold;'>#{spec_shi_shen.name}（700抽保底）</span>"
           @result[num + 1][:cartoon] = spec_shi_shen.cartoon
@@ -102,8 +100,9 @@ class Yys2Controller < ApplicationController
         if spec_up
           spec_seed = rand(100)
           if spec_seed < spec_rate
+            europe_spec_1(spec_shi_shen) if num == 0
             puts "-----#{num + 1}---#{spec_shi_shen.name}------------"
-            @result[num + 1] ={}
+            @result[num + 1] = {}
             @result[num + 1][:sid] = spec_shi_shen.sid
             @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定式神概率up：#{spec_rate}%）</span>"
             @result[num + 1][:cartoon] = spec_shi_shen.cartoon
@@ -116,7 +115,7 @@ class Yys2Controller < ApplicationController
           else
             # 从其他卡池中随机挑选一个
             rand_ss = sss[rand sss.size]
-            @result[num + 1] ={}
+            @result[num + 1] = {}
             @result[num + 1][:sid] = rand_ss.sid
             @result[num + 1][:name] = rand_ss.name
             @result[num + 1][:cartoon] = rand_ss.cartoon
@@ -135,18 +134,20 @@ class Yys2Controller < ApplicationController
           africa_vote(africa_count, @msg)
           africa_count = 0
           ss = ssrs[rand ssrs.size]
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
           @result[num + 1][:cartoon] = ss.cartoon
         else # sp
           africa_count += 1
           ss = sps[rand sps.size]
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
           @result[num + 1][:cartoon] = ss.cartoon
         end
+        europe_uniq_1(@result[num + 1]) if num == 0
+        europe_common_1(num + 1)
       else
         africa_count += 1
       end
@@ -178,9 +179,10 @@ class Yys2Controller < ApplicationController
     #
     #
     #
-    @bloodlines = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
+    @africa_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(remark) remark from bloodlines where mode='AFRICA' group by name order by total_score desc limit 10"
+    @europe_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='EUROPE' group by name order by total_score desc limit 10"
 
-    @result.each do |k,v|
+    @result.each do |k, v|
       if v[:cartoon]
         _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4")
         puts "==================//========#{_v_path}=============="
@@ -250,7 +252,7 @@ class Yys2Controller < ApplicationController
       if spec_up
         # 全图700抽保底，如果第700抽时依然没有抽取到指定式神，则直接抽出指定式神
         if mode && num == 699
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = spec_shi_shen.sid
           @result[num + 1][:name] = "<span style='color:#111de0;font-weight:bold;'>#{spec_shi_shen.name}（700抽保底）</span>"
           @result[num + 1][:cartoon] = spec_shi_shen.cartoon
@@ -274,7 +276,7 @@ class Yys2Controller < ApplicationController
           spec_seed = rand(100)
           if spec_seed < spec_rate
             puts "-----#{num + 1}---#{spec_shi_shen.name}------------"
-            @result[num + 1] ={}
+            @result[num + 1] = {}
             @result[num + 1][:sid] = spec_shi_shen.sid
             @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定式神概率up：#{spec_rate}%）</span>"
             @result[num + 1][:cartoon] = spec_shi_shen.cartoon
@@ -287,7 +289,7 @@ class Yys2Controller < ApplicationController
           else
             # 从其他卡池中随机挑选一个
             rand_ss = sss[rand sss.size]
-            @result[num + 1] ={}
+            @result[num + 1] = {}
             @result[num + 1][:sid] = rand_ss.sid
             @result[num + 1][:name] = rand_ss.name
             @result[num + 1][:cartoon] = rand_ss.cartoon
@@ -306,14 +308,14 @@ class Yys2Controller < ApplicationController
           africa_vote(africa_count, @msg)
           africa_count = 0
           ss = ssrs[rand ssrs.size]
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
           @result[num + 1][:cartoon] = ss.cartoon
         else # sp
           africa_count += 1
           ss = sps[rand sps.size]
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
           @result[num + 1][:cartoon] = ss.cartoon
@@ -332,7 +334,7 @@ class Yys2Controller < ApplicationController
     # todo 欧皇排行榜
     @bloodlines = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
 
-    @result.each do |k,v|
+    @result.each do |k, v|
       if v[:cartoon]
         _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4")
         puts "==================//========#{_v_path}=============="
@@ -396,7 +398,7 @@ class Yys2Controller < ApplicationController
       if spec_up
         # 全图700抽保底，如果第700抽时依然没有抽取到指定式神，则直接抽出指定式神
         if mode && num == 699
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = spec_shi_shen.sid
           @result[num + 1][:name] = "<span style='color:#111de0;font-weight:bold;'>#{spec_shi_shen.name}（700抽保底）</span>"
           @result[num + 1][:cartoon] = spec_shi_shen.cartoon
@@ -420,7 +422,7 @@ class Yys2Controller < ApplicationController
           spec_seed = rand(100)
           if spec_seed < spec_rate
             puts "-----#{num + 1}---#{spec_shi_shen.name}------------"
-            @result[num + 1] ={}
+            @result[num + 1] = {}
             @result[num + 1][:sid] = spec_shi_shen.sid
             @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定式神概率up：#{spec_rate}%）</span>"
             @result[num + 1][:cartoon] = spec_shi_shen.cartoon
@@ -433,7 +435,7 @@ class Yys2Controller < ApplicationController
           else
             # 从其他卡池中随机挑选一个
             rand_ss = sss[rand sss.size]
-            @result[num + 1] ={}
+            @result[num + 1] = {}
             @result[num + 1][:sid] = rand_ss.sid
             @result[num + 1][:name] = rand_ss.name
             @result[num + 1][:cartoon] = rand_ss.cartoon
@@ -452,14 +454,14 @@ class Yys2Controller < ApplicationController
           africa_vote(africa_count, @msg)
           africa_count = 0
           ss = ssrs[rand ssrs.size]
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
           @result[num + 1][:cartoon] = ss.cartoon
         else # sp
           africa_count += 1
           ss = sps[rand sps.size]
-          @result[num + 1] ={}
+          @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
           @result[num + 1][:cartoon] = ss.cartoon
@@ -478,15 +480,15 @@ class Yys2Controller < ApplicationController
     # todo 欧皇排行榜
     @bloodlines = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
 
-     @result.each do |k,v|
+    @result.each do |k, v|
       if v[:cartoon]
         _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4")
         puts "==================//========#{_v_path}=============="
         v[:video_path] = _v_path
-       end
-     end
+      end
+    end
     puts @result
-   end
+  end
 
 
   def all_cookies
@@ -582,6 +584,404 @@ class Yys2Controller < ApplicationController
   end
 
   private
+
+  # 最大票数没有获得ssr/sp
+  def africa_common_1(num)
+    if num < 50
+      score = 0
+    elsif num == 50
+      score = 100
+    elsif num < 100
+      score = 100 + (num - 50) * 10
+    elsif num < 150
+      score = 600 + (num - 100) * 20
+    elsif num < 200
+      score = 1600 + (num - 150) * 30
+    elsif num < 250
+      score = 3100 + (num - 200) * 50
+    elsif num < 300
+      score = 5600 + (num - 250) * 100
+    elsif num < 400
+      score = 15600 + (num - 300) * 200
+    elsif num < 500
+      score = 35600 + (num - 400) * 300
+    else
+      score = 65600 + (num - 500) * 500 * (1.001 ** (num - 500)).round
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'AFRICA', category: 'COMMON', seq: 1, name: cookies[:nick_name])
+    if num > record.count
+      record.count = num
+      record.remark = "通用：#{num}抽没有ssr/sp"
+      record.score = score
+      record.save
+    end
+  end
+
+  # 最小票数获得ssr/sp
+  def europe_common_1(num)
+    if num == 1
+      score = 500000
+    elsif num == 2
+      score = 200000
+    elsif num == 3
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'COMMON', seq: 1, name: cookies[:nick_name])
+    puts record.to_json
+    if record.count == 0 || (record.count > num)
+      puts "================europe---common1========="
+      record.count = num
+      record.remark = "通用：第#{num}抽抽到ssr/sp"
+      record.score = score
+      record.save
+    end
+  end
+
+  # 最小票数完成三次up
+  def europe_common_2(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC2', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 最小票数召唤出ssr（全图）
+  def europe_common_3(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC3', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 最小票数召唤出ssr（非全图）
+  def europe_common_4(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC4', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 每10抽获取ssr/sp数量
+  def europe_common_5(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 前200抽获取的同名ssr/sp数量
+  def europe_common_6(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 最小票数抽取到活动式神，并完成非洲大阴阳师成就
+  def europe_common_7(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 前200抽获得的ssr/sp数量
+  def europe_common_8(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 最小票数获得一个式神的ssr/sp阶；双重判定，结对数量
+  def europe_common_9(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 特殊欧皇奖励:第一票召唤出活动式神；称号：每日一抽
+  def europe_spec_1(ss)
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'SPECIAL', seq: 1, name: cookies[:nick_name], uniq_flag: ss[:sid])
+    record.title = '每日一抽'
+    record.remark = "特殊：每日一抽召唤出活动式神-#{ss.name}（#{Date.today}）"
+    record.score = 100000
+    record.save
+  end
+
+  # 特殊欧皇奖励:十连召唤出10个ssr/sp；称号：欧皇·真、欧皇·虚、欧皇·幻
+  def europe_spec_spec_ten1(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 特殊欧皇奖励:十连召唤出活动式神，并完成三次up；称号：天选之人【描述：对欧皇来说，没有什么不可能】
+  def europe_spec_spec_ten2(num)
+    if num == 3
+      score = 500000
+    elsif num == 4
+      score = 200000
+    elsif num == 5
+      score = 100000
+    elsif num < 20
+      score = 13000 + (20 - num) * 500
+    elsif num < 30
+      score = 11000 + (30 - num) * 200
+    elsif num < 50
+      score = 6100 + (50 - num) * 100
+    elsif num < 100
+      score = 1001 + (100 - num) * 20
+    elsif num < 200
+      score = 1 + (200 - num) * 10
+    elsif num == 200
+      score = 1
+    else
+      score = 0
+    end
+
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', spec: 'SPEC5', name: cookies[:name])
+
+    record.count = num
+    record.score = score
+    record.save
+  end
+
+  # 唯一欧皇奖励：第一个使用第一票召唤出对应式神；称号：一骑绝尘
+  def europe_uniq_1(ss)
+    record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'UNIQUE', seq: 1, uniq_flag: ss[:sid])
+    record.name = cookies[:nick_name] if record.name.blank?
+    record.title = '一骑绝尘'
+    record.remark = "唯一：第一个使用第一票召唤出式神-#{ss[:name]}（#{Date.today}）"
+    record.score = 50000
+    record.save!
+  end
+
 
   def all_sp_rate(num)
     if num >= 500
@@ -713,14 +1113,11 @@ class Yys2Controller < ApplicationController
 
   def africa_vote(africa_count, arr)
     # 获取最后10条
-    records = Bloodline.find_by_sql "select name,max(count) count from bloodlines group by name order by count desc limit 10"
+    records = Bloodline.find_by_sql "select name,max(count) count from bloodlines where mode='AFRICA' and category='COMMON' and seq=1 group by name order by count desc limit 10"
     _count = records.last.try(:count) || 0
     if africa_count > _count
-      Bloodline.where(mode: 'AFRICA').where("count < #{_count}").delete_all
-      ar = Bloodline.new
-      ar.name = cookies[:nick_name]
-      ar.count = africa_count
-      ar.save
+      Bloodline.where(mode: 'AFRICA', category: 'COMMON', seq: 1).where("count < #{_count}").delete_all
+      africa_common_1(africa_count)
     end
 
     if africa_count > 99

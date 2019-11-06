@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <td>海豹墙</td>
+    <td>幸运值</td>
+  </tr>
+  <% bloodlines.each do |bl| %>
+    <tr>
+      <td><%= bl.name %></td>
+      <td>&nbsp;&nbsp;<span title="<%= bl.remark %>"><%= bl.total_score %></span></td>
+      <td>
+        <% if bl.title.present? %>
+        <%= bl.title.split(',').uniq.to_s %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

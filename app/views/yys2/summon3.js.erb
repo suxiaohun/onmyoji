@@ -1,5 +1,6 @@
 $('#result').html("<%= j render(:partial => 'yys2/summon', :locals => {:summon => @result}) %>");
-$('#bloodline').html("<%= j render(:partial => 'yys2/bloodline', :locals => {:bloodlines => @bloodlines}) %>");
+$('#bloodline1').html("<%= j render(:partial => 'yys2/bloodline1', :locals => {:bloodlines => @africa_bloodlines}) %>");
+$('#bloodline2').html("<%= j render(:partial => 'yys2/bloodline2', :locals => {:bloodlines => @europe_bloodlines}) %>");
 var result = <%= @result.to_json.html_safe %>;
 
 var arr = Object.keys(result)
@@ -22,7 +23,7 @@ if (show_cartoon == true) {
         $("#yys2").prepend("<div id='video_div' style='width: 100%;height: " + client_height + ";position: absolute;z-index: 900;background: black;'></div>");
         var path = cartoon_arr.shift()["video_path"];
         console.log(path);
-        $("#video_div").append("<video onended=\"play_video(this);\" height=\"95%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
+        $("#video_div").append("<video onended=\"play_video(this);\" height=\"90%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
     }
 } else {
     console.log("文字版")
@@ -44,7 +45,7 @@ function play_video(ve) {
     if (cartoon_arr.length > 0) {
         var path = cartoon_arr.shift()["video_path"];
         console.log(path);
-        $("#video_div").append("<video onended=\"play_video(this);\" height=\"100%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
+        $("#video_div").append("<video onended=\"play_video(this);\" height=\"90%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
     }else{
         $("#video_div").remove();
     }
