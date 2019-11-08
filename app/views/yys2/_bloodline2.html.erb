@@ -11,7 +11,9 @@
       <td>&nbsp;&nbsp;<span title="<%= bl.remark %>"><%= bl.total_score %></span></td>
       <td>
         <% if bl.title.present? %>
-        <%= bl.title.split(',').uniq.to_s %>
+          <% bl.title.split(',').uniq.compact.each do |title| %>
+            <span class="badge badge-warning"><%= title %></span>
+          <% end %>
         <% end %>
       </td>
     </tr>
