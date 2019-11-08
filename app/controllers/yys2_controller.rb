@@ -143,9 +143,11 @@ class Yys2Controller < ApplicationController
         seed2 = rand(125)
         if seed2 < 100 # ssr
           puts "==========================#{africa_count}=============="
-          africa_vote(africa_count, @msg)
-          africa_count = 0
           ss = ssrs[rand ssrs.size]
+          africa_vote(africa_count, @msg)
+          # 如果是小鹿，需要判定高速公鹿成就
+          africa_spec_4(africa_count) if ss.sid == '259'
+          africa_count = 0
           @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
@@ -166,7 +168,7 @@ class Yys2Controller < ApplicationController
         europe_common_1(num + 1)
       else
         africa_count += 1
-        africa_spec_1(africa_count) if num == 499
+        africa_spec_1 if (num == 499 && africa_count == 499)
       end
     end
 
@@ -360,7 +362,7 @@ class Yys2Controller < ApplicationController
   end
 
   # 非洲·大酋长
-  def africa_spec_1(num)
+  def africa_spec_1
     record = Bloodline.find_or_create_by(mode: 'AFRICA', category: 'SPECIAL', seq: 1, name: cookies[:nick_name])
     record.title = '大酋长'
     record.remark = "特殊：前500抽内解锁非洲·大阴阳师成就"
@@ -392,6 +394,18 @@ class Yys2Controller < ApplicationController
         record.count = num
         record.save
       end
+    end
+  end
+
+  # 非洲·高速公鹿
+  def africa_spec_4(africa_count)
+    if africa_count == 499
+      record = Bloodline.find_or_create_by(mode: 'AFRICA', category: 'SPECIAL', seq: 4, name: cookies[:nick_name])
+      record.title = '高速公路'
+      record.remark = "特殊：只差一票达成非洲·大阴阳师，被小鹿男撞断。"
+      record.score = 500000
+      record.count = africa_count
+      record.save
     end
   end
 
