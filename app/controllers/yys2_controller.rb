@@ -307,7 +307,7 @@ class Yys2Controller < ApplicationController
       if params[:redirect_controller].present? && params[:redirect_action].present?
         redirect_to controller: params[:redirect_controller], action: params[:redirect_action]
       else
-        redirect_to '/my_pieces'
+        redirect_to '/yys2'
       end
     else
       cookies.delete :nick_name
@@ -376,19 +376,19 @@ class Yys2Controller < ApplicationController
       record = Bloodline.find_or_create_by(mode: 'AFRICA', category: 'SPECIAL', seq: 2, name: cookies[:nick_name])
       record.title = '登录就送'
       record.remark = "特殊：三次up结束时，只获得了小鹿男和青行灯"
-      record.score = 100000
+      record.score = 500000
       record.count = num
       record.save
     end
 
     # 第一个十连完成三次up，并且获得活动式神
-    # 特殊欧皇奖励:十连召唤出活动式神，并完成三次up；称号：天选之人【描述：对欧皇来说，没有什么不可能】
+    # 特殊欧皇奖励:十连召唤出活动式神，并完成三次up；称号：海豹·真【描述：对欧皇来说，没有什么不可能】
     if spec_ss && num < 10
       if current_sids.include? spec_ss.sid
         record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'SPECIAL', seq: 2, name: cookies[:nick_name])
         record.title = '海豹·真'
         record.remark = "特殊： 第一个十连召唤出活动式神，并完成三次up；"
-        record.score = 100000
+        record.score = 500000
         record.count = num
         record.save
       end

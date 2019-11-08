@@ -38,7 +38,9 @@
 </div>
 <% if cookies[:nick_name] %>
   <div>你好，『<span style="color: blue;"><%= cookies[:nick_name] %>
-    』</span><span style="font-size: 14px;color: green">*建议使用浏览器操作，移动端暂时未做适配</span>
+    』</span>
+<!--    <span style="font-size: 14px;color: green">*建议使用浏览器操作，移动端暂时未做适配</span>-->
+    昵称填写错误？<%= link_to '点此重新绑定', yys2_auth_path %>
     <hr>
   </div>
 <% end %>
