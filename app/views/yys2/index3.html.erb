@@ -1,6 +1,6 @@
 <style type="text/css">
 
-  td {
+  #main-table td {
     /*border: 1px solid black;*/
     text-align: left;
     text-indent: 20px;
@@ -101,7 +101,7 @@
 <div style="padding-top: 10px;text-align: center;">
   <%= form_tag('/yys2/summon3', method: :post, remote: true) do %>
 
-    <table>
+    <table id="main-table">
       <tr>
         <td>
           <%= image_tag image_path 'card.jpg' %><%= number_field_tag 'number', 200, required: true, :max => @max_count, :class => 'text_tag', required: true %>
