@@ -115,9 +115,8 @@ class Yys2Controller < ApplicationController
             # 如果是SSR，要重置非酋计数器
             if spec_up == 'SSR'
               africa_vote(africa_count, @msg)
+              africa_spec_1 if (num == 499 && africa_count == 499)
               africa_count = 0
-            else
-              africa_spec_1(africa_count) if num == 499
             end
             spec_up = false
           else
@@ -132,9 +131,8 @@ class Yys2Controller < ApplicationController
             # 如果是SSR，要重置非酋计数器
             if rand_ss.mode == 'SSR'
               africa_vote(africa_count, @msg)
+              africa_spec_1 if (num == 499 && africa_count == 499)
               africa_count = 0
-            else
-              africa_spec_1(africa_count) if num == 499
             end
           end
           next
