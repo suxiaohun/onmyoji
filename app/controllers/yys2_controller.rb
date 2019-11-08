@@ -85,7 +85,9 @@ class Yys2Controller < ApplicationController
           @result[num + 1] = {}
           @result[num + 1][:sid] = spec_shi_shen.sid
           @result[num + 1][:name] = "<span style='color:#111de0;font-weight:bold;'>#{spec_shi_shen.name}（700抽保底）</span>"
+          @result[num + 1][:name_sp] = spec_shi_shen.name_sp
           @result[num + 1][:cartoon] = spec_shi_shen.cartoon
+          @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
           spec_up = false
           next
         end
@@ -110,11 +112,15 @@ class Yys2Controller < ApplicationController
             @result[num + 1] = {}
             @result[num + 1][:sid] = spec_shi_shen.sid
             @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定式神概率up：#{spec_rate}%）</span>"
+            @result[num + 1][:name_sp] = spec_shi_shen.name_sp
             @result[num + 1][:cartoon] = spec_shi_shen.cartoon
+            @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
             # 如果是SSR，要重置非酋计数器
             if spec_up == 'SSR'
               africa_vote(africa_count, @msg)
               africa_count = 0
+            else
+              africa_spec_1(africa_count) if num == 499
             end
             spec_up = false
           else
@@ -123,11 +129,15 @@ class Yys2Controller < ApplicationController
             @result[num + 1] = {}
             @result[num + 1][:sid] = rand_ss.sid
             @result[num + 1][:name] = rand_ss.name
+            @result[num + 1][:name_sp] = rand_ss.name_sp
             @result[num + 1][:cartoon] = rand_ss.cartoon
+            @result[num + 1][:cartoon_sp] = rand_ss.cartoon_sp
             # 如果是SSR，要重置非酋计数器
             if rand_ss.mode == 'SSR'
               africa_vote(africa_count, @msg)
               africa_count = 0
+            else
+              africa_spec_1(africa_count) if num == 499
             end
           end
           next
@@ -142,19 +152,24 @@ class Yys2Controller < ApplicationController
           @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
+          @result[num + 1][:name_sp] = ss.name_sp
           @result[num + 1][:cartoon] = ss.cartoon
+          @result[num + 1][:cartoon_sp] = ss.cartoon_sp
         else # sp
           africa_count += 1
           ss = sps[rand sps.size]
           @result[num + 1] = {}
           @result[num + 1][:sid] = ss.sid
           @result[num + 1][:name] = ss.name
+          @result[num + 1][:name_sp] = ss.name_sp
           @result[num + 1][:cartoon] = ss.cartoon
+          @result[num + 1][:cartoon_sp] = ss.cartoon_sp
         end
         europe_uniq_1(@result[num + 1]) if num == 0
         europe_common_1(num + 1)
       else
         africa_count += 1
+        africa_spec_1(africa_count) if num == 499
       end
     end
 
@@ -184,12 +199,22 @@ class Yys2Controller < ApplicationController
     #
     #
     #
-    @africa_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(remark) remark from bloodlines where mode='AFRICA' group by name order by total_score desc limit 10"
+    @africa_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='AFRICA' group by name order by total_score desc limit 10"
     @europe_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='EUROPE' group by name order by total_score desc limit 10"
 
+    # 同时判定是否sp版本
     @result.each do |k, v|
       if v[:cartoon]
-        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4")
+        _seed_sp = rand(100)
+        if _seed_sp < 10
+          if v[:cartoon_sp]
+            v[:name] = "<span style='color:purple;font-weight:bolder;font-size:20px;'>" + v[:name] + '·' + v[:name_sp] + '</span>'
+            _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}-1.mp4")
+          end
+        end
+        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4") unless _v_path
+        # 暂时统一替换为sp动画
+        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}-1.mp4") if v[:cartoon_sp]
         puts "==================//========#{_v_path}=============="
         v[:video_path] = _v_path
       end
@@ -623,14 +648,34 @@ class Yys2Controller < ApplicationController
     end
   end
 
+
+  # 非洲·大阴阳师
+  def africa_common_2(num)
+    record = Bloodline.find_or_create_by(mode: 'AFRICA', category: 'COMMON', seq: 2, name: cookies[:nick_name])
+    record.remark = "通用：解锁非洲·大阴阳师成就"
+    record.score = 50000
+    record.count = num
+    record.save
+  end
+
+  # 非洲·大酋长
+  def africa_spec_1(num)
+    record = Bloodline.find_or_create_by(mode: 'AFRICA', category: 'SPECIAL', seq: 1, name: cookies[:nick_name])
+    record.title = '大酋长'
+    record.remark = "特殊：前500抽内解锁非洲·大阴阳师成就"
+    record.score = 100000
+    record.count = num
+    record.save
+  end
+
   # 最小票数获得ssr/sp
   def europe_common_1(num)
     if num == 1
-      score = 200000
+      score = 80000
     elsif num == 2
-      score = 100000
+      score = 40000
     elsif num == 3
-      score = 50000
+      score = 20000
     elsif num < 20
       score = 13000 + (20 - num) * 500
     elsif num < 30
@@ -1123,6 +1168,7 @@ class Yys2Controller < ApplicationController
     if africa_count > _count
       Bloodline.where(mode: 'AFRICA', category: 'COMMON', seq: 1).where("count < #{_count}").delete_all
       africa_common_1(africa_count)
+      africa_common_2(africa_count) if africa_count > 499
     end
 
     if africa_count > 99

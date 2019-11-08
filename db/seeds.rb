@@ -154,7 +154,21 @@ puts '    start init base data...'
 #   book.save!
 # end
 
-
+# 玉藻前·白堇<br>
+#     小鹿男·白堇<br>
+# <br>
+#     妖刀姬·真红<br>
+#
+#     山风·青竹<br>
+#     酒吞童子·青竹<br>
+# <br>
+#     雪童子·京紫<br>
+#     茨木童子·薄香<br>
+#     荒川之主·薄香<br>
+# <br>
+#     青行灯·绀色<br>
+# <br>
+#     荒·山吹<br>
 # init yys data
 ShiShen.delete_all
 # SSR
@@ -172,24 +186,24 @@ shi_shens << {name: '鬼切', mode: 'SSR', sid: '312', cartoon: true}
 shi_shens << {name: '面灵气', mode: 'SSR', sid: '311', cartoon: true}
 shi_shens << {name: '鬼灯', mode: 'SSR', sid: '308', kind: 'linkage'}
 shi_shens << {name: '卖药郎', mode: 'SSR', sid: '305', kind: 'linkage'}
-shi_shens << {name: '御馔津', mode: 'SSR', sid: '304', cartoon: true}
-shi_shens << {name: '玉藻前', mode: 'SSR', sid: '300', cartoon: true}
-shi_shens << {name: '山风', mode: 'SSR', sid: '296', cartoon: true}
+shi_shens << {name: '御馔津', name_sp: '青竹', mode: 'SSR', sid: '304', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '玉藻前', name_sp: '白堇', mode: 'SSR', sid: '300', cartoon: true}
+shi_shens << {name: '山风', name_sp: '青竹', mode: 'SSR', sid: '296', cartoon: true}
 shi_shens << {name: '奴良陆生', mode: 'SSR', sid: '294', kind: 'linkage'}
-shi_shens << {name: '雪童子', mode: 'SSR', sid: '292', cartoon: true}
-shi_shens << {name: '彼岸花', mode: 'SSR', sid: '288', cartoon: true}
-shi_shens << {name: '荒', mode: 'SSR', sid: '283', cartoon: true}
-shi_shens << {name: '辉夜姬', mode: 'SSR', sid: '280', cartoon: true}
-shi_shens << {name: '花鸟卷', mode: 'SSR', sid: '279', cartoon: true}
-shi_shens << {name: '一目连', mode: 'SSR', sid: '272', cartoon: true}
-shi_shens << {name: '妖刀姬', mode: 'SSR', sid: '269', cartoon: true}
-shi_shens << {name: '青行灯', mode: 'SSR', sid: '266', cartoon: true}
-shi_shens << {name: '茨木童子', mode: 'SSR', sid: '265', cartoon: true}
-shi_shens << {name: '小鹿男', mode: 'SSR', sid: '259', cartoon: true}
-shi_shens << {name: '阎魔', mode: 'SSR', sid: '255', cartoon: true}
-shi_shens << {name: '荒川之主', mode: 'SSR', sid: '248', cartoon: true}
-shi_shens << {name: '酒吞童子', mode: 'SSR', sid: '219', cartoon: true}
-shi_shens << {name: '大天狗', mode: 'SSR', sid: '217', cartoon: true}
+shi_shens << {name: '雪童子', name_sp: '京紫', mode: 'SSR', sid: '292', cartoon: true}
+shi_shens << {name: '彼岸花', name_sp: '白堇', mode: 'SSR', sid: '288', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '荒', name_sp: '山吹', mode: 'SSR', sid: '283', cartoon: true}
+shi_shens << {name: '辉夜姬', name_sp: '绀色', mode: 'SSR', sid: '280', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '花鸟卷', name_sp: '绀色', mode: 'SSR', sid: '279', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '一目连', name_sp: '京紫', mode: 'SSR', sid: '272', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '妖刀姬', name_sp: '真红', mode: 'SSR', sid: '269', cartoon: true}
+shi_shens << {name: '青行灯', name_sp: '浅葱', mode: 'SSR', sid: '266', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '茨木童子', name_sp: '薄香', mode: 'SSR', sid: '265', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '小鹿男', name_sp: '白堇', mode: 'SSR', sid: '259', cartoon: true}
+shi_shens << {name: '阎魔', name_sp: '京紫', mode: 'SSR', sid: '255', cartoon: true, cartoon_sp: true}
+shi_shens << {name: '荒川之主', name_sp: '薄香', mode: 'SSR', sid: '248', cartoon: true}
+shi_shens << {name: '酒吞童子', name_sp: '青竹', mode: 'SSR', sid: '219', cartoon: true}
+shi_shens << {name: '大天狗', name_sp: '青竹', mode: 'SSR', sid: '217', cartoon: true, cartoon_sp: true}
 
 # SP
 shi_shens << {name: '鬼王酒吞童子', mode: 'SP', sid: '341', cartoon: true}
@@ -306,6 +320,9 @@ total_time = end_time - start_time
 
 puts
 puts 'done.' + '      total_time: ' + total_time.round(2).to_s + 's'
+
+
+# 刷新排行数据脚本
 
 
 # wget -O 217.mp4 https://yys.v.netease.com/2018/1204/1e2df8c8ee52c9c1fa0d9d13dac9093aqt.mp4

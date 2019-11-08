@@ -26,6 +26,16 @@
 <div id="bloodline2" style="color: #ba5313;position: absolute;min-height: 200px;min-width: 100px;left: 550px;top: 350px;">
 
 </div>
+
+<div id="bloodline3" style="display: none;background: url(<%= image_path 'paper.png' %>);
+    background-size:100% 100%; ;
+    padding: 0 0;
+    -moz-background-size:100% 100%; /* 老版本的 Firefox */
+    background-repeat:no-repeat;
+    color: #ba5313;position: absolute;min-height: 500px;min-width: 300px;left: 1050px;top: 150px;">
+  <span style="position:relative;bottom: -399px;right: -309px;font-size: 10px;">我见证过无数帝国的兴起与衰落<br>也见证过无数物种的诞生与灭绝<br>千万年来，唯有欧皇的命运不曾更改<br>你的出现，验证了此事。</span>
+
+</div>
 <% if cookies[:nick_name] %>
   <div>你好，『<span style="color: blue;"><%= cookies[:nick_name] %>
     』</span><span style="font-size: 14px;color: green">*建议使用浏览器操作，移动端暂时未做适配</span>

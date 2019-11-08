@@ -56,13 +56,45 @@
   }
 
 </style>
+<div style="padding-left: 20px;width: 200px;height: 100px;">
+  <h2 style="color: blue;">抽卡模拟器</h2>
+  <button type="button" style="padding: 5px 5px;" data-toggle="modal" data-target="#versionModal">更新日志(v0.1.4)</button>
+</div>
 
-<h2 style="color: blue;">抽卡模拟器v0.1.3</h2>
-<h5 style="color: blue;padding: 5px 5px;">
-  v0.1.3：修正了第一抽的幸运值，已经获得的海豹会自动校正<br>
-  v0.1.2：加入了海豹墙，更换了非酋与欧皇的算法<br>
-  v0.1.1：合并了抽卡动画选项
-</h5>
+<div class="modal" id="versionModal" tabindex="-1" role="dialog" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">更新日志</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span style="color: blue;">
+          v0.1.4：添加了sp皮肤的判定，大人在召唤出对应式神时，有10%的概率获得该式神的sp版本，同时抽卡动画也会更新；<br>
+          <br>sp抽卡动画目前只支持：<br>
+          大天狗·青竹、阎魔·京紫、茨木童子·薄香、青行灯·绀色、一目连·京紫、花鸟卷·绀色、辉夜姬·绀色、彼岸花·白槿、 御馔津·青竹
+          <br>
+          <br>
+          另：为了测试，对应式神动画暂替换为sp动画（如果有sp的话）
+          <hr>
+        </span>
+        v0.1.3：修正了第一抽的幸运值，已经获得的海豹会自动校正
+        <hr>
+        v0.1.2：加入了海豹墙，更换了非酋与欧皇的算法
+        <hr>
+        v0.1.1：合并了抽卡动画选项
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <div style="padding-top: 10px;text-align: center;">
   <%= form_tag('/yys2/summon3', method: :post, remote: true) do %>
