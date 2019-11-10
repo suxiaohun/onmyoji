@@ -322,8 +322,16 @@ puts
 puts 'done.' + '      total_time: ' + total_time.round(2).to_s + 's'
 
 
-# 刷新排行数据脚本
+puts "...............清理无效的排行数据........start"
+# 清理无效的排行数据
+names_1 = IpNickName.pluck(:name).uniq
+names_2 = Bloodline.pluck(:name).uniq
 
+invalid_names = names_2 - names_1
+invalid_names.each do |name|
+  Bloodline.where(name: name).delete_all
+end
+puts "...............清理无效的排行数据......end..........."
 
 # wget -O 217.mp4 https://yys.v.netease.com/2018/1204/1e2df8c8ee52c9c1fa0d9d13dac9093aqt.mp4
 # wget -O 217-1.mp4 https://yys.v.netease.com/2018/1204/a8832f9744296697d781f0f976cc27b3qt.mp4
