@@ -31,12 +31,15 @@
 
 
 <div style="padding-top: 200px;text-align: center;">
+  <span class="badge badge-danger" style="padding: 10px 10px">友情提示：</span>
+  如果同一ip多次登录，会清除前面的数据。
+  <hr>
   <%= form_tag('/yys2/auth', method: :post) do %>
     选择游戏区服：
-    <%= hidden_field_tag :redirect_controller,params[:redirect_controller] %>
-    <%= hidden_field_tag :redirect_action,params[:redirect_action] %>
+    <%= hidden_field_tag :redirect_controller, params[:redirect_controller] %>
+    <%= hidden_field_tag :redirect_action, params[:redirect_action] %>
     <%= select_tag :region, options_for_select(region_drop_list) %><br>
-    <%= text_field_tag 'name', nil, required: true, :placeholder => '请输入您的游戏角色昵称', :class => 'text_tag',required: true %>
+    <%= text_field_tag 'name', nil, required: true, :placeholder => '请输入您的游戏角色昵称', :class => 'text_tag', required: true %>
     <br>
     <br>
     <div style="text-align: center">

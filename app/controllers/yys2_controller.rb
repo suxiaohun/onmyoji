@@ -213,7 +213,6 @@ class Yys2Controller < ApplicationController
         end
         _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4") unless _v_path
         # 暂时统一替换为sp动画
-        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}-1.mp4") if v[:cartoon_sp]
         puts "==================//========#{_v_path}=============="
         v[:video_path] = _v_path
       end
@@ -300,9 +299,14 @@ class Yys2Controller < ApplicationController
 
   def auth
     if request.post?
+
       region_name = Region.where(key: params[:region]).first.try(:name) || 'UNKNOWN'
       cookies[:nick_name] = {value: "#{region_name}-#{params[:name]}", expires: 30.days}
       flash[:nick_name] = params[:name]
+
+      # 将ip与nick_name绑定，如果已经存在，则忽略
+      ip = request.remote_ip.to_s
+      IpNickName.find_or_create_by(name: cookies[:nick_name], ip: ip)
 
       if params[:redirect_controller].present? && params[:redirect_action].present?
         redirect_to controller: params[:redirect_controller], action: params[:redirect_action]
