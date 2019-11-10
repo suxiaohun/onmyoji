@@ -942,6 +942,10 @@ class Yys2Controller < ApplicationController
   end
 
   def require_auth
+    # 删除旧的cookie
+    record = IpNickName.find_by_name cookies[:nick_name]
+    cookies.delete :nick_name unless record.present?
+    
     if cookies[:nick_name]
       region_name = cookies[:nick_name].split('-')[0]
       exist_region = Region.find_by(name: region_name)
