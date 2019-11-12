@@ -8,19 +8,12 @@
             init_instance_callback: function (editor) {
                 editor.on('keydown', function (e) {
                     if (e.keyCode == 13) {
-                        $("#SendData").click();
+                        send_message();
                         e.preventDefault();
                     }
                 });
             }
-        })
-
-        $("#DataToSend").keypress(function (evt) {
-            if (evt.keyCode == 13) {
-                $("#SendData").click();
-                evt.preventDefault();
-            }
-        })
+        });
     });
 
 </script>
