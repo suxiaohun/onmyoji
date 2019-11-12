@@ -1,3 +1,29 @@
+<script type="text/javascript">
+    $(function () {
+
+        tinymce.init({
+            selector: 'textarea#DataToSend',
+            menubar: false,
+            toolbar: 'undo redo | bold italic forecolor',
+            init_instance_callback: function (editor) {
+                editor.on('keydown', function (e) {
+                    if (e.keyCode == 13) {
+                        $("#SendData").click();
+                        e.preventDefault();
+                    }
+                });
+            }
+        })
+
+        $("#DataToSend").keypress(function (evt) {
+            if (evt.keyCode == 13) {
+                $("#SendData").click();
+                evt.preventDefault();
+            }
+        })
+    });
+
+</script>
 <style type="text/css">
 
   #main-table td {
@@ -55,11 +81,98 @@
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   }
 
+
+
+  .chat_span-left {
+    clear: both;
+    display: inline-block;
+    background: rgb(222, 224, 227);
+    border-radius: 5px;
+    padding: 6px 12px;
+  }
+
+  .chat_span-right {
+    clear: both;
+    display: inline-block;
+    background: rgb(222, 224, 227);
+    border-radius: 5px;
+    padding: 6px 12px;
+    float: right;
+  }
+
+  .log {
+    /*position: relative;*/
+    /*background: #f590c5;*/
+    /*width: 680px;*/
+    background: rgb(242,243,245);
+    min-height: 450px;
+    max-height: 450px;
+    overflow: auto;
+    margin: 0 auto;
+    border: 1px solid rgb(220,222,224);
+    padding: 20px 20px;
+  }
+
+  .send_container {
+    margin: 0 auto;
+    display: none;
+  }
+
+  .drop-left{
+    clear: both;
+    line-height: 30px;
+    margin-bottom: 0;
+  }
+
+  .drop-right{
+    clear: both;
+    line-height: 30px;
+    margin-bottom: 0;
+    text-align: right;
+  }
+
 </style>
+<div id="bloodline1" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 550px;">
+
+</div>
+
+<div id="bloodline2" style="color: #ba5313;position: absolute;min-height: 200px;min-width: 100px;left: 550px;top: 350px;">
+
+</div>
+
+<!--<div id="bloodline3" style="display: none;background: url(<%#= image_path 'paper.png' %>);-->
+<!--    background-size:100% 100%; ;-->
+<!--    padding: 0 0;-->
+<!--    -moz-background-size:100% 100%; /* 老版本的 Firefox */-->
+<!--    background-repeat:no-repeat;-->
+<!--    color: #ba5313;position: absolute;min-height: 500px;min-width: 300px;left: 1050px;top: 150px;">-->
+<!--  <span style="position:relative;bottom: -399px;right: -309px;font-size: 10px;">我见证过无数帝国的兴起与衰落<br>也见证过无数物种的诞生与灭绝<br>千万年来，唯有欧皇的命运不曾更改<br>你的出现，验证了此事。</span>-->
+
+<!--</div>-->
+<div style="position: absolute;min-height: 500px;min-width: 670px;max-width: 670px;left: 1050px;top: 150px;">
+  <button id="chat_btn" chat="0" sama="1" class="std" type="button" onclick="subscript_mitama()">加入聊天室</button>
+  <div style="width: 670px;margin: 0 auto;">
+
+    <div id='LogContainer' class="log">
+
+    </div>
+
+    <div id='SendDataContainer' class="send_container">
+
+      <textarea id="DataToSend" style="height: 100px;width: 670px;"></textarea>
+
+
+      <button id='SendData' type="button" onclick="send_message()">发送</button>
+
+
+    </div>
+  </div>
+</div>
+
 <div style="padding-left: 20px;width: 200px;height: 100px;">
   <h2 style="color: blue;">抽卡模拟器</h2>
 
-  <button type="button" style="padding: 5px 5px;" data-toggle="modal" data-target="#versionModal">更新日志(v0.1.7)</button>
+  <button type="button" style="padding: 5px 5px;" data-toggle="modal" data-target="#versionModal">更新日志(v0.1.8)</button>
 </div>
 
 <div class="modal" id="versionModal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -72,9 +185,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <span style="color: blue;">v0.1.7: 禁止同一ip重复登录，还原sp皮肤抽卡动画</span>
+        <span style="color: blue;">v0.1.8: 尝试加入聊天室功能，观察一段时间后移除</span>
         <hr>
         <span>
+          v0.1.7: 禁止同一ip重复登录，还原sp皮肤抽卡动画<br>
           v0.1.6: 修正了“大酋长”获取条件不准确的问题<br>
           v0.1.5: 优化了显示效果，调整了重新绑定昵称的按钮<br>
           v0.1.4：添加了sp皮肤的判定，大人在召唤出对应式神时，有10%的概率获得该式神的sp版本，同时抽卡动画也会更新；<br>
@@ -102,7 +216,7 @@
 
 
 <div style="padding-top: 10px;text-align: center;">
-  <%= form_tag('/yys2/summon3', method: :post, remote: true) do %>
+  <%= form_tag('/yys/summon', method: :post, remote: true) do %>
 
     <table id="main-table">
       <tr>

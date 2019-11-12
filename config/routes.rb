@@ -18,21 +18,15 @@ Rails.application.routes.draw do
   delete 'clean_cookie/:sama',to: "yys#clean_cookie"
   resources :pieces
 
-  get 'yys', to: 'yys2#index3'
-  get 'yys2', to: 'yys2#index3'
-  get 'yys3', to: 'yys2#index3'
-  post 'yys2/summon3', to: 'yys2#summon3'
+  get 'yys', to: 'yys#index'
 
-
-  post 'yys2/summon2', to: 'yys2#summon2'
-  post 'yys2/summon', to: 'yys2#summon'
-  match 'yys2/auth', to: 'yys2#auth', :via => [:get, :post]
+  get 'mitama',to: 'yys#mitama'
 
 
   match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
 
-  get 'yys/call', to: 'yys#index3'
   post 'yys/summon', to: 'yys#summon'
+
   get 'all_cookies', to: 'yys#all_cookies'
   get 'all_pieces', to: 'yys#all_pieces'
   get 'yys/add_need_pieces', to: 'yys#add_need_pieces'
@@ -40,8 +34,11 @@ Rails.application.routes.draw do
 
   post 'yys/match', to: 'yys#match'
   post 'yys/pieces', to: 'yys#pieces'
-  get 'yys', to: 'yys#yys'
   get 'my_pieces', to: 'yys#my_pieces'
+
+
+
+
 
   get 'skills', to: 'common#skills'
   get 'items', to: 'common#items'
