@@ -30,8 +30,8 @@ class YysController < ApplicationController
     end
 
     if spec_up == 'SP'
-      # 鬼王酒吞童子
-      spec_shi_shen = ShiShen.find_by_sid 341
+      # 天剑韧心鬼切
+      spec_shi_shen = ShiShen.find_by_sid 343
       spec_shi_shen.color = 'rgb(232,112,30)'
       sss = ShiShen.where(kind: 'origin').where.not(sid: 341)
       if mode
