@@ -125,19 +125,43 @@
   }
 
 </style>
-<div id="bloodline1" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 570px;">
+<div id="bloodline1" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 530px;">
 
 </div>
 
-<div id="bloodline2" style="color: #ba5313;position: absolute;min-height: 200px;min-width: 100px;left: 570px;top: 350px;">
+<div id="bloodline2" style="color: #ba5313;position: absolute;min-height: 200px;min-width: 100px;left: 530px;top: 350px;">
 
 </div>
 
+<!--<div id="bloodline3" style="display: none;background: url(<%#= image_path 'paper.png' %>);-->
+<!--    background-size:100% 100%; ;-->
+<!--    padding: 0 0;-->
+<!--    -moz-background-size:100% 100%; /* 老版本的 Firefox */-->
+<!--    background-repeat:no-repeat;-->
+<!--    color: #ba5313;position: absolute;min-height: 500px;min-width: 300px;left: 1050px;top: 150px;">-->
+<!--  <span style="position:relative;bottom: -399px;right: -309px;font-size: 10px;">我见证过无数帝国的兴起与衰落<br>也见证过无数物种的诞生与灭绝<br>千万年来，唯有欧皇的命运不曾更改<br>你的出现，验证了此事。</span>-->
+
+<!--</div>-->
+<div style="position: absolute;min-height: 500px;min-width: 670px;max-width: 670px;left: 920px;top: 50px;">
+  <button id="chat_btn" chat="0" sama="1" class="std" type="button" onclick="subscript_mitama()">加入聊天室</button>
+  <div style="width: 670px;margin: 0 auto;">
+
+    <div id='LogContainer' class="log">
+
+    </div>
+
+    <div id='SendDataContainer' class="send_container">
+
+      <textarea id="DataToSend" style="height: 100px;width: 670px;"></textarea>
+
+    </div>
+  </div>
+</div>
 
 <div style="padding-left: 20px;width: 200px;height: 100px;">
   <h2 style="color: blue;">抽卡模拟器</h2>
 
-  <button type="button" style="padding: 5px 5px;" data-toggle="modal" data-target="#versionModal">更新日志(v0.1.9)</button>
+  <button type="button" style="padding: 5px 5px;" data-toggle="modal" data-target="#versionModal">更新日志(v0.1.8)</button>
 </div>
 
 <div class="modal" id="versionModal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -150,10 +174,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <span style="color: blue;">v0.1.9: 移除无用功能，仅保留抽卡功能</span>
+        <span style="color: blue;">v0.1.8: 尝试加入聊天室功能，观察一段时间后移除</span>
         <hr>
         <span>
-          v0.1.8: 尝试加入聊天室功能，观察一段时间后移除<br>
           v0.1.7: 禁止同一ip重复登录，还原sp皮肤抽卡动画<br>
           v0.1.6: 修正了“大酋长”获取条件不准确的问题<br>
           v0.1.5: 优化了显示效果，调整了重新绑定昵称的按钮<br>
@@ -202,11 +225,11 @@
       </tr>
       <tr>
         <td colspan="2"><%= radio_button_tag 'spec_up', 'SSR', false %>
-          <span class="ssr_text">泷夜叉姬</span><span class="ssr_text" style="color: black;">(概率up)</span></td>
+          <span class="checkbox_text">SSR阶指定概率up<span class="ssr_text">泷夜叉姬</span></span></td>
       </tr>
       <tr>
         <td colspan="2"><%= radio_button_tag 'spec_up', 'SP', false %>
-          <span class="sp_text">鬼王酒吞童子</span><span class="sp_text"  style="color: black;">(概率up)</span></td>
+          <span class="checkbox_text">SP阶指定概率up<span class="sp_text">鬼王酒吞童子</span></span></td>
       </tr>
       <tr>
         <td colspan="2" style="color: green;">  <%= check_box_tag 'cartoon' %><span class="checkbox_text">展示抽卡动画</span>

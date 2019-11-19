@@ -202,7 +202,7 @@ shi_shens << {name: '茨木童子', name_sp: '薄香', mode: 'SSR', sid: '265', 
 shi_shens << {name: '小鹿男', name_sp: '白堇', mode: 'SSR', sid: '259', cartoon: true}
 shi_shens << {name: '阎魔', name_sp: '京紫', mode: 'SSR', sid: '255', cartoon: true, cartoon_sp: true}
 shi_shens << {name: '荒川之主', name_sp: '薄香', mode: 'SSR', sid: '248', cartoon: true}
-shi_shens << {name: '酒吞童子', name_sp: '青竹', mode: 'SSR', sid: '219', cartoon: true}
+shi_shens << {name: '酒吞童子', name_sp: '山吹', mode: 'SSR', sid: '219', cartoon: true}
 shi_shens << {name: '大天狗', name_sp: '青竹', mode: 'SSR', sid: '217', cartoon: true, cartoon_sp: true}
 
 # SP
