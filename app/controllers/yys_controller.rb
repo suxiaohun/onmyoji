@@ -177,29 +177,7 @@ class YysController < ApplicationController
     puts "==========================#{africa_count}=============="
     africa_vote(africa_count, @msg)
 
-    # 加入排行榜
-    # 最大抽出SSR/SP次数作为非洲血统排行榜，最多5条
-    #
-    # todo 欧皇排行榜（分数加权）
-    # 指标1：前50抽获得ssr/sp
-    #  1.1：50抽=>1分（+1）
-    #       。。。
-    #       40抽=>10分（+2）
-    #       。。。
-    #       30抽=>30分（+3）
-    #       。。。
-    #       20抽=>60分（+5）
-    #       。。。
-    #       10抽=>110分（+8）
-    #       。。。
-    #       2抽=>190分
-    #       1抽=>200分
-    #
-    # 指标2：前50抽完成三次up
-    #  2.1：
-    #
-    #
-    #
+
     @africa_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='AFRICA' group by name order by total_score desc limit 10"
     @europe_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='EUROPE' group by name order by total_score desc limit 10"
 
@@ -929,26 +907,23 @@ class YysController < ApplicationController
     end
 
     if africa_count > 99
-      arr[100] ||= '您已经达成了【初级·非酋】成就！'
+      arr[100] ||= '您解锁了【初级·非酋】成就！'
     end
     if africa_count > 199
-      arr[200] ||= '您已经达成了【中级·非酋】成就！'
+      arr[200] ||= '您解锁了【中级·非酋】成就！'
     end
     if africa_count > 299
-      arr[300] ||= '您已经达成了【高级·非酋】成就！'
+      arr[300] ||= '您解锁了【高级·非酋】成就！'
     end
     if africa_count > 399
-      arr[400] ||= '您已经达成了【非洲·阴阳师】成就！'
+      arr[400] ||= '您解锁了【非洲·阴阳师】成就！'
     end
     if africa_count > 499
-      arr[500] ||= '您已经达成了【非洲·大·阴阳师】成就！'
+      arr[500] ||= '您解锁了【非洲·大·阴阳师】成就！'
     end
   end
 
   def require_auth
-    # 删除旧的cookie
-    record = IpNickName.find_by_name cookies[:nick_name]
-    cookies.delete :nick_name unless record.present?
 
     if cookies[:nick_name]
       region_name = cookies[:nick_name].split('-')[0]
