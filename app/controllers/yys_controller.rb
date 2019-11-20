@@ -33,7 +33,7 @@ class YysController < ApplicationController
       # 天剑韧心鬼切
       spec_shi_shen = ShiShen.find_by_sid 343
       spec_shi_shen.color = 'rgb(232,112,30)'
-      sss = ShiShen.where(kind: 'origin').where.not(sid: 341)
+      sss = ShiShen.where(kind: 'origin').where.not(sid: 343)
       if mode
         spec_rate = 10
       else
@@ -112,7 +112,7 @@ class YysController < ApplicationController
             puts "-----#{num + 1}---#{spec_shi_shen.name}------------"
             @result[num + 1] = {}
             @result[num + 1][:sid] = spec_shi_shen.sid
-            @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定式神概率up：#{spec_rate}%）</span>"
+            @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定概率up：#{spec_rate}%）</span>"
             @result[num + 1][:name_sp] = spec_shi_shen.name_sp
             @result[num + 1][:cartoon] = spec_shi_shen.cartoon
             @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
