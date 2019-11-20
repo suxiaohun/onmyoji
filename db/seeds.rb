@@ -272,10 +272,10 @@ regions << {name: '春樱共赏', mode: 'NET', key: 'chunyinggongshang'}
 regions << {name: '谜之暗影', mode: 'NET', key: 'mizhianying'}
 
 # 联运-双平台
-regions << {name: 'B站-两心无间', mode: 'UNION', key: 'liangxinwujian'}
-regions << {name: 'B站-亲密无间', mode: 'UNION', key: 'qinmiwujian'}
-regions << {name: 'B站-情深谊长', mode: 'UNION', key: 'qingshenyichang'}
-regions << {name: 'B站-情意相投', mode: 'UNION', key: 'qingyixiangtou'}
+regions << {name: 'B站~两心无间', mode: 'UNION', key: 'liangxinwujian'}
+regions << {name: 'B站~亲密无间', mode: 'UNION', key: 'qinmiwujian'}
+regions << {name: 'B站~情深谊长', mode: 'UNION', key: 'qingshenyichang'}
+regions << {name: 'B站~情意相投', mode: 'UNION', key: 'qingyixiangtou'}
 
 # 国际区
 regions << {name: '海外加速区', mode: 'INT', key: 'haiwaijiasuqu'}

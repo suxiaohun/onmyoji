@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   match 'json_format', to: 'common#json_format', :via => [:get]
   match 'unicode', to: 'common#unicode', :via => [:get]
 
-
+  get 'blank', to: 'common#blank'
 
   delete 'clean_cookie/:sama',to: "yys#clean_cookie"
   resources :pieces
