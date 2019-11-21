@@ -71,8 +71,15 @@ namespace :xiaosu do
     invoke 'unicorn:legacy_restart'
   end
 
-  task :notice_refresh => :production do
-    AppVersion.create(version: Time.now.to_s)
+  desc 'notice_refresh'
+  task :notice_refresh do
+    on roles(:all) do
+      within release_path do
+        puts_front "发版通知..."
+        execute :rake, 'app_version:update', 'RAILS_ENV=production'
+        puts_end
+      end
+    end
   end
 
 
