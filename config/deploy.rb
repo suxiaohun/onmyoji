@@ -71,7 +71,7 @@ namespace :xiaosu do
     invoke 'unicorn:legacy_restart'
   end
 
-  task :notice_refresh do
+  task :notice_refresh => :environment do
     AppVersion.create(version: Time.now.to_s)
   end
 
