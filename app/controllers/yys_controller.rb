@@ -13,15 +13,20 @@ class YysController < ApplicationController
   end
 
 
-  # 添加抽卡动画选项
-  # 以10抽为单位，给出提示
+  # todo 如果票数大于等于500抽,需要进行统计,分别统计全图\非全图的概率,用redis存储,每小时持久化到db中
+  # todo 统计500抽不出货的场景
+  # todo 统计700抽才出货的场景
   def summon
     number = params[:number].to_i # 票数
-    number = 1000 if number > 3000
+    number = 3000 if number > 3000
     mode = params[:mode] || false # 是否全图鉴
     up = params[:up] # 是否开启三次up
 
     spec_up = params[:spec_up]
+
+    rate_flag = mode && up && spec_up && number > 499 # 全图活动计数标志
+    set_rate_total if rate_flag
+
 
     if params[:cartoon]
       @show_cartoon = true
@@ -36,8 +41,6 @@ class YysController < ApplicationController
       sss = ShiShen.where(kind: 'origin').where.not(sid: 343)
       if mode
         spec_rate = 10
-      else
-        spec_rate = 3
       end
     elsif spec_up == 'SSR'
       # 泷夜叉姬
@@ -58,8 +61,6 @@ class YysController < ApplicationController
     else
       up_count = 0
     end
-
-    puts "==================up_count: #{up_count}==="
 
     ssrs = ShiShen.where(mode: 'SSR', kind: 'origin')
     sps = ShiShen.where(mode: 'SP', kind: 'origin')
@@ -86,10 +87,10 @@ class YysController < ApplicationController
           @result[num + 1][:cartoon] = spec_shi_shen.cartoon
           @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
           spec_up = false
+          set_rate_700 if rate_flag
           next
         end
         spec_rate = get_spec_rate(num, spec_up, mode)
-        puts "------------up_rate--#{spec_rate}----"
       end
 
       seed1 = rand * 100
@@ -109,13 +110,13 @@ class YysController < ApplicationController
           spec_seed = rand(100)
           if spec_seed < spec_rate
             europe_spec_1(spec_shi_shen) if num == 0
-            puts "-----#{num + 1}---#{spec_shi_shen.name}------------"
             @result[num + 1] = {}
             @result[num + 1][:sid] = spec_shi_shen.sid
             @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定概率up：#{spec_rate}%）</span>"
             @result[num + 1][:name_sp] = spec_shi_shen.name_sp
             @result[num + 1][:cartoon] = spec_shi_shen.cartoon
             @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
+            set_rate_500 if rate_flag && num > 499
             # 如果是SSR，要重置非酋计数器
             if spec_up == 'SSR'
               africa_vote(africa_count, @msg)
@@ -144,7 +145,6 @@ class YysController < ApplicationController
 
         seed2 = rand(125)
         if seed2 < 100 # ssr
-          puts "==========================#{africa_count}=============="
           ss = ssrs[rand ssrs.size]
           africa_vote(africa_count, @msg)
           # 如果是小鹿，需要判定高速公鹿成就
@@ -174,7 +174,8 @@ class YysController < ApplicationController
       end
     end
 
-    puts "==========================#{africa_count}=============="
+    set_rate_500 if rate_flag && spec_up && number == 500
+
     africa_vote(africa_count, @msg)
 
 
@@ -195,10 +196,17 @@ class YysController < ApplicationController
         end
         _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4") unless _v_path
         # 暂时统一替换为sp动画
-        puts "==================//========#{_v_path}=============="
         v[:video_path] = _v_path
       end
     end
+
+    @rate = {}
+    @rate[:all_count] = RATE_REDIS.llen('all_count')
+    @rate[:all_500_spec_count] = RATE_REDIS.llen('all_500_spec_count')
+    @rate[:all_500_spec_rate] = ((@rate[:all_500_spec_count] * 1.00 / @rate[:all_count]) * 100).round(2) if @rate[:all_count] > 0
+    @rate[:all_700_spec_count] = RATE_REDIS.llen('all_700_spec_count')
+    @rate[:all_700_spec_rate] = ((@rate[:all_700_spec_count] * 1.00 / @rate[:all_count]) * 100).round(2) if @rate[:all_count] > 0
+
     puts @result
   end
 
@@ -301,6 +309,20 @@ class YysController < ApplicationController
   end
 
   private
+
+
+  def set_rate_total
+    RATE_REDIS.rpush('all_count', 1)
+  end
+
+  def set_rate_500
+    RATE_REDIS.rpush('all_500_spec_count', 1)
+  end
+
+  def set_rate_700
+    RATE_REDIS.rpush('all_500_spec_count', 1)
+    RATE_REDIS.rpush('all_700_spec_count', 1)
+  end
 
   # 最大票数没有获得ssr/sp
   def africa_common_1(num)
@@ -429,7 +451,6 @@ class YysController < ApplicationController
     return unless score > 0
     record = Bloodline.find_or_create_by(mode: 'EUROPE', category: 'COMMON', seq: 1, name: cookies[:nick_name])
     if record.count == 0 || (record.count >= num)
-      puts "================europe---common1========="
       record.count = num
       record.remark = "通用：第#{num}抽抽到ssr/sp"
       record.score = score

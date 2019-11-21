@@ -1,8 +1,10 @@
 $('#result').html("<%= j render(:partial => 'yys/summon', :locals => {:summon => @result}) %>");
 $('#bloodline1').html("<%= j render(:partial => 'yys/bloodline1', :locals => {:bloodlines => @africa_bloodlines}) %>");
 $('#bloodline2').html("<%= j render(:partial => 'yys/bloodline2', :locals => {:bloodlines => @europe_bloodlines}) %>");
-var result = <%= @result.to_json.html_safe %>;
+$('#rate_div').html("<%= j render(:partial => 'yys/rate', :locals => {:rate => @rate}) %>");
 
+
+var result = <%= @result.to_json.html_safe %>;
 var arr = Object.keys(result)
 var cartoon_arr = [];
 
@@ -46,7 +48,7 @@ function play_video(ve) {
         var path = cartoon_arr.shift()["video_path"];
         console.log(path);
         $("#video_div").append("<video onended=\"play_video(this);\" height=\"90%\" width=\"100%\" muted=\"muted\" autoplay=\"autoplay\" src=\"" + path + "\"></video>")
-    }else{
+    } else {
         $("#video_div").remove();
     }
 }

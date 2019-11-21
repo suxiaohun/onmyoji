@@ -75,7 +75,6 @@
   }
 
 
-
   .chat_span-left {
     clear: both;
     display: inline-block;
@@ -97,12 +96,12 @@
     /*position: relative;*/
     /*background: #f590c5;*/
     /*width: 680px;*/
-    background: rgb(242,243,245);
+    background: rgb(242, 243, 245);
     min-height: 450px;
     max-height: 450px;
     overflow: auto;
     margin: 0 auto;
-    border: 1px solid rgb(220,222,224);
+    border: 1px solid rgb(220, 222, 224);
     padding: 20px 20px;
   }
 
@@ -111,13 +110,13 @@
     display: none;
   }
 
-  .drop-left{
+  .drop-left {
     clear: both;
     line-height: 30px;
     margin-bottom: 0;
   }
 
-  .drop-right{
+  .drop-right {
     clear: both;
     line-height: 30px;
     margin-bottom: 0;
@@ -136,7 +135,7 @@
 
 <div style="padding-left: 20px;width: 300px;">
   <span style="color: blue;font-size: 20px;padding-right: 20px;">抽卡模拟器</span>
-  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.2.1)</button>
+  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.2.2)</button>
 </div>
 
 <div class="modal" id="versionModal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -149,23 +148,30 @@
         </button>
       </div>
       <div class="modal-body">
-        <span style="color: blue;">v0.2.1:修正了B站服无法绑定的问题</span>
+        <span style="color: blue;">v0.2.2:添加了活动统计,以便于与实际抽卡比对</span>
         <hr>
-        <span>
-          v0.2.0: 修正了未消耗概率up，提前召唤出sp鬼切的问题；调整了显示效果以适配手机端<br>
-          v0.1.9: 移除无用功能，添加了sp鬼切的召唤模拟<br>
-          v0.1.8: 尝试加入聊天室功能，观察一段时间后移除<br>
-          v0.1.7: 禁止同一ip重复登录，还原sp皮肤抽卡动画<br>
-          v0.1.6: 修正了“大酋长”获取条件不准确的问题<br>
-          v0.1.5: 优化了显示效果，调整了重新绑定昵称的按钮<br>
-          v0.1.4：添加了sp皮肤的判定，大人在召唤出对应式神时，有10%的概率获得该式神的sp版本，同时抽卡动画也会更新；<br>
-          <br>sp抽卡动画目前只支持：<br>
-          大天狗·青竹、阎魔·京紫、茨木童子·薄香、青行灯·浅葱、一目连·京紫、花鸟卷·绀色、辉夜姬·绀色、彼岸花·白堇、御馔津·青竹
-          <br>
-          <br>
-          另：为了测试，对应式神动画暂替换为sp动画（如果有sp的话）
-          <hr>
-        </span>
+        v0.2.1:修正了B站服无法绑定的问题
+        <hr>
+        v0.2.0: 修正了未消耗概率up，提前召唤出sp鬼切的问题；调整了显示效果以适配手机端
+        <hr>
+        v0.1.9: 移除无用功能，添加了sp鬼切的召唤模拟
+        <hr>
+        v0.1.8: 尝试加入聊天室功能，观察一段时间后移除
+        <hr>
+        v0.1.7: 禁止同一ip重复登录，还原sp皮肤抽卡动画
+        <hr>
+        v0.1.6: 修正了“大酋长”获取条件不准确的问题
+        <hr>
+        v0.1.5: 优化了显示效果，调整了重新绑定昵称的按钮
+        <hr>
+        v0.1.4：添加了sp皮肤的判定，大人在召唤出对应式神时，有10%的概率获得该式神的sp版本，同时抽卡动画也会更新；
+        <br>sp抽卡动画目前只支持：<br>
+        大天狗·青竹、阎魔·京紫、茨木童子·薄香、青行灯·浅葱、一目连·京紫、花鸟卷·绀色、辉夜姬·绀色、彼岸花·白堇、御馔津·青竹
+        <br>
+        <br>
+        另：为了测试，对应式神动画暂替换为sp动画（如果有sp的话）
+        <hr>
+
         v0.1.3：修正了第一抽的幸运值，已经获得的海豹会自动校正
         <hr>
         v0.1.2：加入了海豹墙，更换了非酋与欧皇的算法
@@ -201,13 +207,13 @@
           <%= image_tag image_path('tip.jpg'), size: "32", title: '召唤期内使用神秘的符咒进行召唤时，SP/SSR式神出现概率提升至原来的2.5倍！每位阴阳师大人享受3次SP/SSR概率UP的机会。', style: 'vertical-align:top;' %>
         </td>
       </tr>
-<!--      <tr>-->
-<!--        <td colspan="2"><%#= radio_button_tag 'spec_up', 'SSR', false %>-->
-<!--          <span class="ssr_text">泷夜叉姬</span><span class="ssr_text" style="color: black;">(概率up)</span></td>-->
-<!--      </tr>-->
+      <!--      <tr>-->
+      <!--        <td colspan="2"><%#= radio_button_tag 'spec_up', 'SSR', false %>-->
+      <!--          <span class="ssr_text">泷夜叉姬</span><span class="ssr_text" style="color: black;">(概率up)</span></td>-->
+      <!--      </tr>-->
       <tr>
         <td colspan="2"><%= radio_button_tag 'spec_up', 'SP', false %>
-          <span class="sp_text">天剑韧心鬼切</span><span class="sp_text"  style="color: black;">(概率up)</span></td>
+          <span class="sp_text">天剑韧心鬼切</span><span class="sp_text" style="color: black;">(概率up)</span></td>
       </tr>
       <tr>
         <td colspan="2" style="color: green;">  <%= check_box_tag 'cartoon' %><span class="checkbox_text">展示抽卡动画</span>
@@ -222,6 +228,10 @@
 </div>
 <hr>
 <div id="result" style="text-indent: 20px;">
+</div>
+<hr>
+<div id="rate_div">
+
 </div>
 
 
