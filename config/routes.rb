@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   match 'unicode', to: 'common#unicode', :via => [:get]
 
   get 'blank', to: 'common#blank'
+  get 'app_version', to: 'yys#app_version'
 
   delete 'clean_cookie/:sama',to: "yys#clean_cookie"
   resources :pieces

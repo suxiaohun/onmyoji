@@ -7,6 +7,12 @@ class YysController < ApplicationController
   end
 
 
+  def app_version
+    AppVersion.create(version:'1')
+    # ActionCable.server.broadcast 'yys',{ message: "大人,您好,我刚刚更新了新版本,请您刷新页面后使用哦.1111111"}
+    render json: {msg:'oooooooooo'}
+  end
+
   def index
     config = HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../../../config/property.yml', __FILE__)))).deep_symbolize_keys
     @max_count = config[:max_pick_count] || 1000

@@ -25,7 +25,7 @@ set :deploy_to, "/home/crystal/onmyoji"
 append :linked_files, "config/database.yml", "config/master.key"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system",'app/assets/videos'
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", 'app/assets/videos'
 
 # tmp/pids/unicorn.pid
 set :unicorn_pid, -> { File.join(current_path, "tmp", "pids", "unicorn.pid") }
@@ -69,6 +69,10 @@ namespace :xiaosu do
 
   task :restart do
     invoke 'unicorn:legacy_restart'
+  end
+
+  task :notice_refresh do
+    AppVersion.create(version: Time.now.to_s)
   end
 
 
@@ -123,6 +127,7 @@ namespace :xiaosu do
   # after 'deploy:publishing', 'xiaosu:link_books'
   after 'deploy:publishing', 'xiaosu:rake_db_seed'
   after 'deploy:publishing', 'xiaosu:restart'
+  after 'xiaosu:restart', 'xiaosu:notice_refresh'
 
 end
 

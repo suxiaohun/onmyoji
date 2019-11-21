@@ -1,3 +1,24 @@
+function subscript_yys() {
+    App.yys = App.cable.subscriptions.create('YysChannel', {
+        connected: function () {
+            // Called when the subscription is ready for use on the server
+            // single_notify("已连接到服务器!", {className: "success", autoHide: false, clickToHide: false});
+        },
+
+        disconnected: function () {
+            // Called when the subscription has been terminated by the server
+            // single_notify("已掉线!", {className: "error", autoHide: false, clickToHide: false});
+        },
+
+        received: function (data) {
+            // Called when there's incoming data on the websocket for this channel
+            // single_notify(data.message, {className: "error", autoHide: false, clickToHide: false});
+            console.log(data.message);
+            $.notify(data.message, {className: "success", autoHide: false, clickToHide: true, position: 'left'});
+        }
+    });
+}
+
 function subscript_mitama() {
     var obj = $("#chat_btn");
     var v1 = obj.attr("chat");
@@ -25,10 +46,10 @@ function subscript_mitama() {
             received: function (data) {
                 // Called when there's incoming data on the websocket for this channel
                 var user = data.user.replace(/\s/g, "&nbsp;");
-                if(user==$("#nick_name").html()){
+                if (user == $("#nick_name").html()) {
                     $('#LogContainer').append("<div class='drop-right'>" + user + "</div>");
                     var msg = "<span class='chat_span-right' style='color: " + data.color + "'>" + data.message + "</span>";
-                }else{
+                } else {
                     $('#LogContainer').append("<div class='drop-left'>" + user + "</div>");
                     var msg = "<span class='chat_span-left' style='color: " + data.color + "'>" + data.message + "</span>";
                 }
