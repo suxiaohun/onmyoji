@@ -19,6 +19,16 @@ function subscript_yys() {
     });
 }
 
+function unsubscribe_yys() {
+    App.yys.unsubscribe();
+    console.log('取消订阅')
+}
+
+function disconnect_yys() {
+    App.cable.disconnect();
+    console.log('断开链接')
+}
+
 function subscript_mitama() {
     var obj = $("#chat_btn");
     var v1 = obj.attr("chat");

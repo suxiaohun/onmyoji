@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'blank', to: 'common#blank'
   get 'app_version', to: 'yys#app_version'
+  get 'websocket_connections', to: 'yys#connections'
 
   delete 'clean_cookie/:sama',to: "yys#clean_cookie"
   resources :pieces

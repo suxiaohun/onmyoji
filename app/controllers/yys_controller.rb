@@ -7,6 +7,10 @@ class YysController < ApplicationController
   end
 
 
+  def connections
+    @connections = ActionCable.server.connections
+  end
+
   def app_version
     AppVersion.create(version:'1')
     # ActionCable.server.broadcast 'yys',{ message: "大人,您好,我刚刚更新了新版本,请您刷新页面后使用哦.1111111"}

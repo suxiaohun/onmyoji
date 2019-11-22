@@ -75,6 +75,7 @@ namespace :xiaosu do
   task :notice_refresh do
     on roles(:all) do
       within release_path do
+        sleep 10
         puts_front "发版通知..."
         execute :rake, 'app_version:update', 'RAILS_ENV=production'
         puts_end

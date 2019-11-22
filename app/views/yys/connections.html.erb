@@ -1,0 +1,16 @@
+<table>
+    <tr>
+      <th>name</th>
+      <th>ip</th>
+      <th>操作1</th>
+      <th>操作2</th>
+    </tr>
+  <% @connections.each do |connection| %>
+  <tr>
+    <td><%= connection.connection_identifier %></td>
+    <td>1</td>
+    <td><button type="button" onclick="unsubscribe_yys()">unsubscribe</button></td>
+    <td><button type="button" onclick="disconnect_yys()">disconnect</button></td>
+  </tr>
+  <% end %>
+</table>
