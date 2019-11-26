@@ -310,6 +310,7 @@ regions << {name: '晴空日和', mode: 'ALL', key: 'qingkongrihe'}
 regions << {name: '瀞灵廷', mode: 'ALL', key: 'jinglingting'}
 regions << {name: '少时之约', mode: 'ALL', key: 'shaoshizhiyue'}
 regions << {name: '鸣麓逐浪', mode: 'ALL', key: 'mingluzhulang'}
+regions << {name: '八岐魅影', mode: 'ALL', key: 'baqimeiying'}
 regions.each do |region|
   puts "...创建大区：#{region[:name]}"
   Region.create!(region)

@@ -63,18 +63,35 @@
 
 
 </style>
-<div id="bloodline1" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 570px;">
+
+<div id="tools" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 570px;min-width: 500px;">
+  <p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">
+      神秘图案-11月
+    </a>
+  </p>
+  <div class="collapse" id="collapse11">
+    <div>
+      下边中间到右边中间的斜线<br><br>
+      <%= image_tag image_path('yys/summon/11-1.png'), size: "135x285", style: 'display:inline' %>
+      <%= image_tag image_path('yys/summon/11-2.png'), size: "135x285", style: 'display:inline' %>
+    </div>
+  </div>
 
 </div>
 
-<div id="bloodline2" style="color: #ba5313;position: absolute;min-height: 200px;min-width: 100px;left: 570px;top: 350px;">
+<!--<div id="bloodline1" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 570px;">-->
 
-</div>
+<!--</div>-->
+
+<!--<div id="bloodline2" style="color: #ba5313;position: absolute;min-height: 200px;min-width: 100px;left: 570px;top: 350px;">-->
+
+<!--</div>-->
 
 
 <div style="padding-left: 20px;width: 300px;">
   <span style="color: blue;font-size: 20px;padding-right: 20px;">抽卡模拟器</span>
-  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.2.2)</button>
+  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.2.3)</button>
 </div>
 
 <div class="modal" id="versionModal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -87,7 +104,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <span style="color: blue;">v0.2.2:添加了活动统计,以便于与实际抽卡比对</span>
+        <span style="color: blue;">v0.2.3:<br>暂时移除了排行榜;<br>后续会陆续添加yys相关实用的工具;<br>修正了一些显示问题</span>
+        <hr>
+        v0.2.2:添加了活动统计,以便于与实际抽卡比对
         <hr>
         v0.2.1:修正了B站服无法绑定的问题
         <hr>
@@ -165,11 +184,10 @@
     </table>
   <% end %>
 </div>
-<hr>
-<div id="result" style="text-indent: 20px;">
+<div id="result" style="text-indent: 20px;max-width: 335px;">
 </div>
-<hr>
-<div id="rate_div">
+
+<div id="rate_div" style="max-width: 335px;">
 
 </div>
 
