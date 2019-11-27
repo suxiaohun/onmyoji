@@ -206,7 +206,7 @@ shi_shens << {name: '酒吞童子', name_sp: '山吹', mode: 'SSR', sid: '219', 
 shi_shens << {name: '大天狗', name_sp: '青竹', mode: 'SSR', sid: '217', cartoon: true, cartoon_sp: true}
 
 # SP
-shi_shens << {name: '天剑韧心鬼切', mode: 'SP', sid: '343', cartoon: false}
+shi_shens << {name: '天剑韧心鬼切', mode: 'SP', sid: '343', cartoon: true}
 shi_shens << {name: '鬼王酒吞童子', mode: 'SP', sid: '341', cartoon: true}
 shi_shens << {name: '烬天玉藻前', mode: 'SP', sid: '339', cartoon: true}
 shi_shens << {name: '骁浪荒川之主', mode: 'SP', sid: '334', cartoon: true}
