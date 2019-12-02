@@ -61,22 +61,64 @@
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   }
 
-
+.tips{
+  color: blue;
+}
 </style>
 
 <div id="tools" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 570px;min-width: 500px;">
+<!--  <p>-->
+<!--    <a class="btn btn-primary" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">-->
+<!--      神秘图案-11月-->
+<!--    </a>-->
+<!--  </p>-->
+<!--  <div class="collapse" id="collapse11">-->
+<!--    <div>-->
+<!--      下边中间到右边中间的斜线<br><br>-->
+      <%#= image_tag image_path('yys/summon/11-1.png'), size: "135x285", style: 'display:inline' %>
+      <%#= image_tag image_path('yys/summon/11-2.png'), size: "135x285", style: 'display:inline' %>
+<!--    </div>-->
+<!--  </div> -->
   <p>
     <a class="btn btn-primary" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">
-      神秘图案-11月
+      神秘图案-12月
     </a>
   </p>
   <div class="collapse" id="collapse11">
     <div>
-      下边中间到右边中间的斜线<br><br>
-      <%= image_tag image_path('yys/summon/11-1.png'), size: "135x285", style: 'display:inline' %>
-      <%= image_tag image_path('yys/summon/11-2.png'), size: "135x285", style: 'display:inline' %>
+      传说中的“鸟居”<br><br>
+      <%= image_tag image_path('yys/summon/12-1.png'), size: "500x235", style: 'display:inline' %>
     </div>
   </div>
+
+  <ul>
+    <li>羊毛汇总1(每周只能达成一次):
+      <ul>
+        <li>式神图鉴分享-<span class="tips">神秘的符咒*1</span></li>
+        <li>任意地域鬼王通关后分享-<span class="tips">勾玉*20</span></li>
+        <li>秘闻副本通关后分享-<span class="tips">勾玉*20</span></li>
+        <li>杂货店480勋章兑换-<span class="tips">御行达摩*1</span></li>
+        <li>杂货店120勋章兑换-<span class="tips">神秘的符咒*1</span></li>
+        <li>杂货店120勋章兑换-<span class="tips">体力*100</span></li>
+        <li>寮功勋商店240功勋兑换-<span class="tips">神秘的符咒*2</span></li>
+        <li>寮功勋商店200功勋兑换-<span class="tips">御行达摩碎片*(3~5)</span></li>
+        <li>协同斗技获胜一次-<span class="tips">勾玉*60(下周发放)</span></li>
+      </ul>
+    </li>
+    <li></li>
+    <li>
+      羊毛汇总2(每天只能达成一次):
+      <ul>
+        <li>500天奖励-<span class="tips">每日一抽*1</span></li>
+        <li>(1~3)个地域鬼王通关-<span class="tips">勾玉*(20~60)</span></li>
+        <li>好友协战50次-<span class="tips">勾玉*50</span></li>
+        <li>每日任务勇气值达到100-<span class="tips">勾玉*20</span></li>
+      </ul>
+
+    </li>
+
+  </ul>
+
 
 </div>
 

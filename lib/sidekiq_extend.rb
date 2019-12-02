@@ -1,4 +1,4 @@
-module UdeskSidekiqExtend
+module SidekiqExtend
   extend ActiveSupport::Concern
 
   included do

@@ -1,6 +1,6 @@
 # module ActiveJob
 #   class Base
-#     include UdeskSidekiqExtend
+#     include SidekiqExtend
 #   end
 # end
 

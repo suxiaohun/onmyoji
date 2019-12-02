@@ -1,7 +1,6 @@
 class SonarMailer < ApplicationMailer
 
-  default :from => "sonar<xuyiwen@udesk.cn>"
-  # default :from => "lcwg<wgy@example.com>"
+  default :from => "lcwg<wgy@example.com>"
 
   def send_email(email,content,subject='oss发现违规文件')
     @info = content

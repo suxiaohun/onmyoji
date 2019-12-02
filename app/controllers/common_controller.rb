@@ -31,7 +31,7 @@ class CommonController < ApplicationController
 
   def oss_check_file_callback
     email = []
-    email << 'huxiaoyang@udesk.cn'
+    email << 'test@qq.cn'
 
     content = []
     content << "发现违规文件："

@@ -31,10 +31,6 @@ class ChatRoomsController < ApplicationController
     #
     # result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
     # _ip = request.remote_ip.to_s
-    # ActionCable.server.broadcast 'chat',
-    #                              message: "#{result}",
-    #                              user: "udesk推送(#{_ip})#{Time.now.to_s}",
-    #                              color: 'red'
 
     render :json => {:code=>1000,:msg => 'ok1'}
   end

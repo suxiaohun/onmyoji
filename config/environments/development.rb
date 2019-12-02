@@ -41,9 +41,9 @@ Rails.application.configure do
       :address => "smtp.exmail.qq.com",
       :port => 465,
       :domain => "exmail.qq.com",
-      :user_name => "xuyiwen@udesk.cn",
-      :from => 'xuyiwen@udesk.cn',
-      :password => "udesk123",
+      :user_name => "test@test.com",
+      :from => 'test@test.com',
+      :password => "test123",
       :authentication => "login",
       :ssl => true
   }
