@@ -66,7 +66,56 @@
 }
 </style>
 
-<div id="tools" style="color: #0681ba;position: absolute;min-height: 200px;min-width: 100px;left: 570px;min-width: 500px;">
+<div id="tools" style="color: #0681ba;position: absolute;min-height: 200px;left: 570px;min-width: 500px;">
+  <table>
+
+
+    <tr>
+      <td>
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">
+            神秘图案-12月
+          </a>
+        </p>
+        <div class="collapse" id="collapse11">
+          <div>
+            传说中的“鸟居”<br><br>
+            <%= image_tag image_path('yys/summon/12-1.png'), size: "500x235", style: 'display:inline' %>
+          </div>
+        </div>
+        <ul>
+        <li>
+          日常:
+          <ul>
+            <li>500天签到奖励-<span class="tips"><%= image_tag image_path('yys/res-4.png'),size: "60x60" %>*1</span></li>
+            <li>(1~3)个地域鬼王通关-<span class="tips"><%= image_tag image_path('yys/res-2.png'),size: "60x60" %>*(20~60)</span></li>
+            <li>好友协战50次-<span class="tips"><%= image_tag image_path('yys/res-2.png'),size: "60x60" %>*50</span></li>
+            <li>每日任务勇气值达到100-<span class="tips"><%= image_tag image_path('yys/res-2.png'),size: "60x60" %>*20</span></li>
+          </ul>
+
+        </li>
+      </ul></td>
+      <td><ul style="display: inline-block;">
+        <li>周常:
+          <ul>
+            <li>式神图鉴分享-<span class="tips"><%= image_tag image_path('yys/res-4.png'),size: "60x60" %>*1</span></li>
+            <li>任意地域鬼王通关后分享-<span class="tips"><%= image_tag image_path('yys/res-2.png'),size: "60x60" %>*20</span></li>
+            <li>秘闻副本通关后分享-<span class="tips"><%= image_tag image_path('yys/res-2.png'),size: "60x60" %>*20</span></li>
+            <li>杂货店480勋章兑换-<span class="tips"><%= image_tag image_path('yys/res-5.png'),size: "60x60" %>*1</span></li>
+            <li>杂货店180勋章兑换-<span class="tips"><%= image_tag image_path('yys/res-4.png'),size: "60x60" %>*1</span></li>
+            <li>杂货店120勋章兑换-<span class="tips"><%= image_tag image_path('yys/res-1.png'),size: "60x60" %>*100</span></li>
+            <li>寮功勋商店120功勋兑换*2-<span class="tips"><%= image_tag image_path('yys/res-4.png'),size: "60x60" %>*2</span></li>
+            <li>寮功勋商店200功勋兑换-<span class="tips"><%= image_tag image_path('yys/res-6.png'),size: "60x60" %>*(3~5)</span></li>
+            <li>协同斗技获胜一次-<span class="tips"><%= image_tag image_path('yys/res-2.png'),size: "60x60" %>*60(下周发放)</span></li>
+            <li>真·八岐大蛇(60体力)*2-<span class="tips">六星随机御魂*n,<%= image_tag image_path('yys/res-3.png'),size: "60x60" %>*n</span></li>
+          </ul>
+        </li>
+
+
+
+      </ul></td>
+    </tr>
+  </table>
 <!--  <p>-->
 <!--    <a class="btn btn-primary" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">-->
 <!--      神秘图案-11月-->
@@ -79,47 +128,8 @@
       <%#= image_tag image_path('yys/summon/11-2.png'), size: "135x285", style: 'display:inline' %>
 <!--    </div>-->
 <!--  </div> -->
-  <p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">
-      神秘图案-12月
-    </a>
-  </p>
-  <div class="collapse" id="collapse11">
-    <div>
-      传说中的“鸟居”<br><br>
-      <%= image_tag image_path('yys/summon/12-1.png'), size: "500x235", style: 'display:inline' %>
-    </div>
-  </div>
 
-  <ul>
-    <li>周常:
-      <ul>
-        <li>式神图鉴分享-<span class="badge badge-primary">神秘的符咒*1</span></li>
-        <li>任意地域鬼王通关后分享-<span class="tips">勾玉*20</span></li>
-        <li>秘闻副本通关后分享-<span class="tips">勾玉*20</span></li>
-        <li>杂货店480勋章兑换-<span class="tips">御行达摩*1</span></li>
-        <li>杂货店180勋章兑换-<span class="tips">神秘的符咒*1</span></li>
-        <li>杂货店120勋章兑换-<span class="tips">体力*100</span></li>
-        <li>寮功勋商店120功勋兑换*2-<span class="tips">神秘的符咒*2</span></li>
-        <li>寮功勋商店200功勋兑换-<span class="tips">御行达摩碎片*(3~5)</span></li>
-        <li>协同斗技获胜一次-<span class="tips">勾玉*60(下周发放)</span></li>
-        <li>真·八岐大蛇(60体力)*2-<span class="tips">六星随机御魂*n,金币*n</span></li>
-      </ul>
-    </li>
 
-     <hr>
-    <li>
-      日常:
-      <ul>
-        <li>500天签到奖励-<span class="tips">每日一抽*1</span></li>
-        <li>(1~3)个地域鬼王通关-<span class="tips">勾玉*(20~60)</span></li>
-        <li>好友协战50次-<span class="tips">勾玉*50</span></li>
-        <li>每日任务勇气值达到100-<span class="tips">勾玉*20</span></li>
-      </ul>
-
-    </li>
-
-  </ul>
 
 
 </div>
