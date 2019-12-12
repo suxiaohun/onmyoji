@@ -3,7 +3,7 @@ class RgbColor
 
     def colors
       colors = []
-      File.open("#{Rails.root.to_s}/lib/utils/rgb_color.txt").each_line do |line|
+      File.open("#{Rails.root.to_s}/lib/utils/files/rgb_color.txt").each_line do |line|
         colors << line.split
       end
       colors

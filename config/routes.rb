@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
   root 'common#index'
+
+  get 'mobile_area',to:'common#mobile_area'
+  get 'get_mobile_area',to:'common#get_mobile_area'
+  post 'comment_save',to:'common#comment_save'
+
+
+
   match 'oss_check_file_callback', to: 'common#oss_check_file_callback', :via => [:get, :post]
   match 'paas_callback/:app_id/:timestamp/:sign', to: 'common#paas_callback', :via => [:get, :post]
   match 'mxl', to: 'common#mxl', :via => [:get, :post]
@@ -23,6 +30,7 @@ Rails.application.routes.draw do
   get 'yys', to: 'yys#index'
 
   get 'mitama',to: 'yys#mitama'
+
 
 
   match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
