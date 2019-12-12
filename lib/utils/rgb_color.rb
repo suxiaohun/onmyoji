@@ -23,6 +23,10 @@ class RgbColor
                   #EEE8AA
                   #F5DEB3
                   #EE82EE
+                  #00FA9A
+                  #FFD700
+                  #DAA520
+                  #ADFF2F
                )
       fav_colors[rand(fav_colors.length)]
     end
