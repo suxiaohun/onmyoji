@@ -2,10 +2,9 @@ Rails.application.routes.draw do
 
   root 'common#index'
 
-  get 'mobile_area',to:'tools#mobile_area'
-  get 'get_mobile_area',to:'tools#get_mobile_area'
-  post 'comment_save',to:'tools#comment_save'
-
+  get 'mobile_area', to: 'tools#mobile_area'
+  get 'get_mobile_area', to: 'tools#get_mobile_area'
+  post 'comment_save', to: 'tools#comment_save'
 
 
   match 'oss_check_file_callback', to: 'common#oss_check_file_callback', :via => [:get, :post]
@@ -24,13 +23,12 @@ Rails.application.routes.draw do
   get 'app_version', to: 'yys#app_version'
   get 'websocket_connections', to: 'yys#connections'
 
-  delete 'clean_cookie/:sama',to: "yys#clean_cookie"
+  delete 'clean_cookie/:sama', to: "yys#clean_cookie"
   resources :pieces
 
   get 'yys', to: 'yys#index'
 
-  get 'mitama',to: 'yys#mitama'
-
+  get 'mitama', to: 'yys#mitama'
 
 
   match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
@@ -45,9 +43,6 @@ Rails.application.routes.draw do
   post 'yys/match', to: 'yys#match'
   post 'yys/pieces', to: 'yys#pieces'
   get 'my_pieces', to: 'yys#my_pieces'
-
-
-
 
 
   get 'skills', to: 'common#skills'
@@ -74,7 +69,7 @@ Rails.application.routes.draw do
   match 'books/test', to: 'books#test', :via => [:get, :post]
   get 'books/download/:id', to: 'books#download'
 
-  # get 'books/previous/:curr_pre/:pre_pos/:id',to: 'books#previous'
+  get 'books/previous/:curr_pre/:pre_pos/:id', to: 'books#previous'
   get 'books/next/:next_pos/:id', to: 'books#next'
 
 

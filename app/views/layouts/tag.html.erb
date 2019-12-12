@@ -14,7 +14,7 @@
 <nav id="main-menu">
   <ul>
     <li>
-      <%= link_to 'Home', {action: 'category', :id => 'all'}, remote: true %>
+      <%= link_to 'Home', books_path %>
     </li>
     <% category_list.each do |x| %>
       <li>
