@@ -45,22 +45,23 @@
   }
 
   .mod-panel .search .input-text {
-    display: block;
-    width: 70%;
-    height: 20px;
+    display: inline-block;
+    width: 336px;
+    height: 42px;
     border: 1px solid #ccc;
-    padding: 10px 20% 10px 8px;
-    line-height: 20px;
+    padding: 10px 0 10px 8px;
+    line-height: 42px;
     outline: none;
   }
 
   .mod-panel .search .input-submit {
+    display: inline-block;
     position: absolute;
-    right: 0;
-    bottom: 0;
+    /*right: 0;*/
+    /*bottom: 0;*/
     z-index: 9;
     height: 42px;
-    width: 22.5%;
+    width: 108px;
     background: #4bae4f;
     border: medium none;
     line-height: 42px;
@@ -130,7 +131,7 @@
     <div class="search">
       <%= form_tag('/get_mobile_area', method: :get, remote: true) do %>
         <input class="input-text" type="number" id="mobile-number" name="mobile_number" required="required" minlength="7" maxlength="11" size="11" placeholder="请输入手机号码（段）">
-        <input class="input-submit" type="submit" value="查询">
+        <input class="input-submit" type="submit" value="查询" onclick="$('#mobile-area').html($('#spinner-mobile-area').html());">
       <% end %>
     </div>
     <div class="search" id="mobile-area" style="min-width: 100px;min-height: 30px;color: blue;font-size: 24px;line-height: 30px;"></div>
@@ -144,13 +145,14 @@
     <div id="comment-area" style="display: none;text-align: center">
       <%= form_tag("/comment_save", method: 'post', remote: true) do %>
         <%= text_area_tag 'comment[content]', '', :placeholder => '给楼主留言', :rows => 6, :cols => 45 %>
-        <%= submit_tag 'submit' %>
+        <%= submit_tag '提交' %>
       <% end %>
     </div>
-
-
   </div>
-
 </div>
 
-
+<div id="spinner-mobile-area" style="display: none;">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

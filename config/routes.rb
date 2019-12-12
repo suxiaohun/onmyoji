@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   root 'common#index'
 
-  get 'mobile_area',to:'common#mobile_area'
-  get 'get_mobile_area',to:'common#get_mobile_area'
-  post 'comment_save',to:'common#comment_save'
+  get 'mobile_area',to:'tools#mobile_area'
+  get 'get_mobile_area',to:'tools#get_mobile_area'
+  post 'comment_save',to:'tools#comment_save'
 
 
 
