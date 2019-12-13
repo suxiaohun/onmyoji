@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :next, :previous, :edit, :update, :destroy, :download]
+  before_action :set_book, only: [:show, :goto, :next, :previous, :edit, :update, :destroy, :download]
 
-  layout 'tag'
+  # layout 'tag'
 
   # GET /books
   def index
@@ -24,9 +24,8 @@ class BooksController < ApplicationController
     sleep 3
     puts ".....end"
     # @books = Book.all
-    # binding.pry
     result = {}
-    result[:data] = {:message=>'ok'}
+    result[:data] = {:message => 'ok'}
     render json: result
   end
 
@@ -38,7 +37,7 @@ class BooksController < ApplicationController
     File.open(@book.path) do |io|
       @data[:pre_pos] = io.pos
       @data[:curr_pos] = io.pos
-      @data[:lines] = io.first(BOOK_DEFAULT_LINES)
+      @data[:lines] = io.first(get_page_size)
       @data[:next_pos] = io.pos
     end
 
@@ -55,12 +54,63 @@ class BooksController < ApplicationController
   #   end
   # end
 
+  # 根据进度条跳转指定位置
+  def goto
+    process = params[:process].to_i
+
+    unless process >= 0 && process <= 100
+      process = 0
+    end
+
+    page_size = params[:page_size].to_i
+
+    unless page_size >= 5 && page_size <= 100
+      page_size = BOOK_DEFAULT_LINES
+    end
+    cookies[:page_size] = page_size
+
+    # 使用redis缓存book的总行数,用于跳转
+
+    unless BOOK_REDIS.get("#{@book.name}-#{process}")
+      _pos_hash = {}
+      _pos_hash[0] = 0
+
+      File.open(@book.path) do |io|
+        _temp_hash = {}
+        count = 0
+        io.each_line do
+          count += 1
+          _temp_hash[count] = io.pos
+        end
+
+        _op = count / 100
+        100.times do |i|
+          BOOK_REDIS.set("#{@book.name}-#{0}", 0) if i == 0
+          i += 1
+          BOOK_REDIS.set("#{@book.name}-#{i}", _temp_hash[_op * i])
+        end
+      end
+    end
+
+
+    _pos = BOOK_REDIS.get("#{@book.name}-#{process}")
+
+    @data = {}
+    @data[:id] = params[:id]
+    File.open(@book.path) do |io|
+      io.pos = _pos.to_i
+      @data[:lines] = io.first(get_page_size)
+      @data[:next_pos] = io.pos
+    end
+  end
+
   def next
     @data = {}
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
       io.pos = (params[:next_pos].to_i || 0)
-      @data[:lines] = io.first(BOOK_DEFAULT_LINES)
+      @data[:lines] = io.first(get_page_size)
+
       @data[:next_pos] = io.pos
     end
     # respond_to do |f|
@@ -125,9 +175,13 @@ class BooksController < ApplicationController
   end
 
 
-
   # Only allow a trusted parameter "white list" through.
   def book_params
     params.require(:book).permit(:name)
+  end
+
+  def get_page_size
+    page_size = cookies[:page_size] || BOOK_DEFAULT_LINES
+    page_size.to_i
   end
 end

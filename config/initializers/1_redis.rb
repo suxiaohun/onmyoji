@@ -6,3 +6,5 @@ REDIS_CONFIG[:db] = Rails.env.test? ? 3 : 0
 redis = Redis.new(REDIS_CONFIG)
 
 RATE_REDIS = Redis::Namespace.new(:rate, redis: redis)
+
+BOOK_REDIS = Redis::Namespace.new(:book, redis: redis)

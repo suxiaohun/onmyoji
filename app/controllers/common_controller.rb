@@ -4,9 +4,6 @@ class CommonController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:paas_callback, :oss_check_file_callback]
 
 
-
-
-
   def skills
     @skills = []
     100.times do
@@ -93,13 +90,12 @@ class CommonController < ApplicationController
     params[:lite] = 'js'
 
     result = RestClient.get(url, params)
-    binding.pry
     #   http://bbs.nga.cn/thread.php?fid=7&page=1&lite=js
 
   end
 
   def blank
-    render :layout => 'common'
+    render :layout => false
   end
 
   def index
@@ -186,8 +182,6 @@ class CommonController < ApplicationController
       redirect_to '/common/auth'
     end
   end
-
-
 
 
 end
