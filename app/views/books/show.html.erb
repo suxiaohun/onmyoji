@@ -1,10 +1,3 @@
-<h2><%= @book.display_name %>
-  <span style="color:#ab8248"> #<%= @book.tag %># </span>
-</h2>
-<hr>
-
-
-<hr>
 <!--<div style="text-align: center;">-->
 <%#= link_to 'download', {:action => 'download', :id => @book.id}, :class => 'post-card-download' %>
 <!--</div>-->
@@ -16,15 +9,17 @@
 
 <% end %>
 
-
-<main id="site-main">
-  <section id="post-main">
-    <article id="article-content">
-      <h1 class="post-title"><%= @book.display_name %></h1>
-      <input type="range" min="0" max="100" value="0" style="line-height:50px;align-self: center;" onchange="change_process()" id="range"/>
-      <span id="show" style="line-height: 50px;display: inline-block;">0%</span>
-      <%= select_tag "credit_card", options_for_select([[10, 10], [20, 20], [50, 50]], cookies[:page_size]), onchange: "change_process()" %>
-
+<main>
+  <section>
+    <article style="text-align: center;">
+      <h1> <%= @book.display_name %><span style="color:#ab8248"> #<%= @book.tag %># </span></h1>
+      <p>
+        <input type="range" min="0" max="100" value="0" style="line-height:50px;align-self: center;" onchange="change_process()" id="range"/>
+        <span id="show" style="line-height: 50px;display: inline-block;">0%</span>
+        <%= select_tag "credit_card", options_for_select([[10, 10], [20, 20], [50, 50]], cookies[:page_size]), onchange: "change_process()" %>
+      </p>
+    </article>
+    <article>
       <section class="post-content markdown-body" id="book-section">
         <%= render partial: 'content', locals: {data: @data} %>
       </section>
