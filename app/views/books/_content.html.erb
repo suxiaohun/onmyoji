@@ -15,6 +15,7 @@
       <%= link_to 'Next Page', {:action => 'next', :next_pos => data[:next_pos], :id => data[:id]}, remote: true %>
     </div>
 
+    <%= hidden_field_tag :curr_pos, data[:curr_pos] %>
   </div>
 </div>
 <ul>

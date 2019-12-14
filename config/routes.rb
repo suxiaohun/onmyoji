@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   get 'books/previous/:curr_pre/:pre_pos/:id', to: 'books#previous'
   get 'books/next/:next_pos/:id', to: 'books#next'
   get 'books/goto', to: 'books#goto'
+  get 'books/page_size', to: 'books#page_size'
 
 
   resources :books

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :goto, :next, :previous, :edit, :update, :destroy, :download]
+  before_action :set_book, only: [:show, :page_size, :goto, :next, :previous, :edit, :update, :destroy, :download]
 
   # layout 'tag'
 
@@ -55,13 +55,8 @@ class BooksController < ApplicationController
   # end
 
   # 根据进度条跳转指定位置
-  def goto
-    process = params[:process].to_i
 
-    unless process >= 0 && process <= 100
-      process = 0
-    end
-
+  def page_size
     page_size = params[:page_size].to_i
 
     unless page_size >= 5 && page_size <= 100
@@ -69,36 +64,32 @@ class BooksController < ApplicationController
     end
     cookies[:page_size] = page_size
 
-    # 使用redis缓存book的总行数,用于跳转
+    current_pos = params[:current_pos].to_i
 
-    unless BOOK_REDIS.get("#{@book.name}-#{process}")
-      _pos_hash = {}
-      _pos_hash[0] = 0
-
-      File.open(@book.path) do |io|
-        _temp_hash = {}
-        count = 0
-        io.each_line do
-          count += 1
-          _temp_hash[count] = io.pos
-        end
-
-        _op = count / 100
-        100.times do |i|
-          BOOK_REDIS.set("#{@book.name}-#{0}", 0) if i == 0
-          i += 1
-          BOOK_REDIS.set("#{@book.name}-#{i}", _temp_hash[_op * i])
-        end
-      end
+    @data = {}
+    @data[:id] = params[:id]
+    File.open(@book.path) do |io|
+      io.pos = current_pos.to_i
+      @data[:curr_pos] = current_pos
+      @data[:lines] = io.first(get_page_size)
+      @data[:next_pos] = io.pos
     end
 
+  end
 
-    _pos = BOOK_REDIS.get("#{@book.name}-#{process}")
+  def goto
+    process = params[:process].to_i
+
+    unless process >= 0 && process <= 100
+      process = 0
+    end
+    _pos = get_book_redis_key("#{@book.name}-#{process}")
 
     @data = {}
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
       io.pos = _pos.to_i
+      @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
       @data[:next_pos] = io.pos
     end
@@ -109,10 +100,16 @@ class BooksController < ApplicationController
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
       io.pos = (params[:next_pos].to_i || 0)
+      @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
-
       @data[:next_pos] = io.pos
     end
+
+    total_pos = get_book_redis_key("#{@book.name}-total").to_i
+    @data[:rate] = (@data[:curr_pos] * 100.0 / total_pos).round(2)
+
+    puts ".....#{@data[:rate]}"
+
     # respond_to do |f|
     #   f.html
     #   f.js
@@ -183,5 +180,32 @@ class BooksController < ApplicationController
   def get_page_size
     page_size = cookies[:page_size] || BOOK_DEFAULT_LINES
     page_size.to_i
+  end
+
+  # 使用redis缓存book的行数\位置信息
+  def get_book_redis_key(key)
+    unless BOOK_REDIS.get(key)
+      _pos_hash = {}
+      _pos_hash[0] = 0
+
+      File.open(@book.path) do |io|
+        _temp_hash = {}
+        count = 0
+        io.each_line do
+          count += 1
+          _temp_hash[count] = io.pos
+        end
+        # 文件pos指针,用来计算进度条
+        BOOK_REDIS.set("#{@book.name}-total", _temp_hash[count])
+
+        _op = count / 100
+        100.times do |i|
+          BOOK_REDIS.set("#{@book.name}-#{0}", 0) if i == 0
+          i += 1
+          BOOK_REDIS.set("#{@book.name}-#{i}", _temp_hash[_op * i])
+        end
+      end
+    end
+    BOOK_REDIS.get(key)
   end
 end
