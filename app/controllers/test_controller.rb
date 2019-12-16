@@ -36,7 +36,7 @@ class TestController < ApplicationController
 
 
   def call_event_push
-    payload = request.parameters[:payload]
+    payload = params.dup
     result1 = JSON.pretty_generate(payload)
 
     Rails.logger.info "========================1======================="
