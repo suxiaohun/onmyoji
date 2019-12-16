@@ -1,4 +1,7 @@
 class TestController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+
   def push
     # 设置cookie，以防止channel订阅失败
     cookies[:nick_name] ||= 'anonymous'
