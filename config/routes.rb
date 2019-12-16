@@ -2,10 +2,13 @@ Rails.application.routes.draw do
 
   root 'common#index'
 
+  get 'push',to: 'test#push'
+  get 'push_target',to: 'test#push_target'
+  get 'call_event_push',to: 'test#call_event_push'
+  
   get 'mobile_area', to: 'tools#mobile_area'
   get 'get_mobile_area', to: 'tools#get_mobile_area'
   post 'comment_save', to: 'tools#comment_save'
-
 
   match 'oss_check_file_callback', to: 'common#oss_check_file_callback', :via => [:get, :post]
   match 'paas_callback/:app_id/:timestamp/:sign', to: 'common#paas_callback', :via => [:get, :post]
@@ -29,7 +32,6 @@ Rails.application.routes.draw do
   get 'yys', to: 'yys#index'
 
   get 'mitama', to: 'yys#mitama'
-
 
   match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
 

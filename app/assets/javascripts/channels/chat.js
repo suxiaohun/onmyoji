@@ -98,3 +98,37 @@ function send_message() {
     tinyMCE.get('DataToSend').setContent('');
     App.mitama.send({color: "black", message: msg})
 }
+
+
+var message_count = 0;
+
+function subscript_push() {
+
+    App.chat = App.cable.subscriptions.create("PushChannel", {
+        connected: function () {
+            single_notify("已连接到服务器!", {className: "success", autoHide: false, clickToHide: false});
+            // Called when the subscription is ready for use on the server
+            var msg = "<div class='chat_span' style='color:blue'>" + "anonymous： 开始监听推送事件" + "</div>";
+            $('#LogContainer').append(msg)
+        },
+
+        disconnected: function () {
+
+            single_notify("已掉线!", {className: "error", autoHide: false, clickToHide: false});
+            // Called when the subscription has been terminated by the server
+        },
+
+        received: function (data) {
+            message_count += 1;
+
+            $('#LogContainer').append("<label class='drop' style='display: block;' for='_s" + message_count + "'>" + data.user.replace(/\s/g, "&nbsp;") + "</label>");
+            $('#LogContainer').append("<input id='_s" + message_count + "' type='checkbox' style='display: none'>");
+            var msg = "<span class='chat_span' style='color: " + data.color + "'>" + data.message + "</span>";
+
+            $('#LogContainer').append(msg);
+            var LogContainer = document.getElementById("LogContainer");
+            LogContainer.scrollTop = LogContainer.scrollHeight;
+
+        }
+    });
+}
