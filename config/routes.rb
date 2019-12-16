@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root 'common#index'
 
   get 'push',to: 'test#push'
-  get 'push_target',to: 'test#push_target'
-  get 'call_event_push',to: 'test#call_event_push'
-  
+  match 'push_target',to: 'test#push_target', :via => [:get, :post]
+  match 'call_event_push',to: 'test#call_event_push', :via => [:get, :post]
+
   get 'mobile_area', to: 'tools#mobile_area'
   get 'get_mobile_area', to: 'tools#get_mobile_area'
   post 'comment_save', to: 'tools#comment_save'
