@@ -1,6 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
+
+ask :deploy_option, 'simple'
 set :application, "onmyoji"
 set :ruby_version, "2.6.3"
 set :repo_url, "git@github.com:suxiaohun/onmyoji.git"
@@ -133,10 +135,13 @@ namespace :xiaosu do
   # end
 
 
-  after 'deploy:publishing', 'xiaosu:init_books'
-  after 'deploy:publishing', 'xiaosu:rake_db_seed'
+  deploy_option = fetch(:deploy_option)
   after 'deploy:publishing', 'xiaosu:restart'
-  after 'xiaosu:restart', 'xiaosu:notice_refresh'
+  unless deploy_option == 'simple'
+    after 'deploy:publishing', 'xiaosu:init_books'
+    after 'deploy:publishing', 'xiaosu:rake_db_seed'
+    after 'xiaosu:restart', 'xiaosu:notice_refresh'
+  end
 
 end
 
