@@ -33,12 +33,13 @@ set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
 
 
 namespace :xiaosu do
-  desc 'link books'
-  task :link_books do
+  desc 'init books'
+  task :init_books do
     on roles(:all) do
       within release_path do
         puts_front "start link books..."
         execute :ln, '-s', "/home/crystal/books public/"
+        execute :rake, 'book:init', "RAILS_ENV=production"
         puts_end
       end
     end
@@ -132,7 +133,7 @@ namespace :xiaosu do
   # end
 
 
-  after 'deploy:publishing', 'xiaosu:link_books'
+  after 'deploy:publishing', 'xiaosu:init_books'
   after 'deploy:publishing', 'xiaosu:rake_db_seed'
   after 'deploy:publishing', 'xiaosu:restart'
   after 'xiaosu:restart', 'xiaosu:notice_refresh'

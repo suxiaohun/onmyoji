@@ -124,6 +124,30 @@ namespace :book do
             category_id: categories.key('科幻'),
             path: 'public/books/xiaobingchuanqi.txt'
         },
+        {
+            name: 'emofaze',
+            display_name: '恶魔法则',
+            author_id: get_author('跳舞'),
+            tag: '玄幻|架空',
+            category_id: categories.key('玄幻'),
+            path: 'public/books/emofaze.txt'
+        },
+        {
+            name: 'jiuzhoupiaomiaolu',
+            display_name: '幻城',
+            author_id: get_author('/'),
+            tag: '玄幻|架空',
+            category_id: categories.key('玄幻'),
+            path: 'public/books/jiuzhoupiaomiaolu.txt'
+        },
+        {
+            name: 'langqun',
+            display_name: '狼群',
+            author_id: get_author('/'),
+            tag: '军事|雇佣兵',
+            category_id: categories.key('都市'),
+            path: 'public/books/langqun.txt'
+        },
         # {
         #     name: '异世界的美食家',
         #     display_name: '异世界的美食家',
@@ -138,7 +162,7 @@ namespace :book do
     puts '    start init books pre content...'
 
     books.each do |book|
-      puts "....book_name: #{book.name}"
+      puts "....book_name: #{book.display_name}"
       book.pre_content = get_pre_content(book.path)
       book.save!
     end
