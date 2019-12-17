@@ -7,7 +7,7 @@
     <% @books.each do |book| %>
       <article class="post-card">
         <h2 class="post-card-title">
-          <%= link_to book.name, book %>
+          <%= link_to book.display_name, book %>
         </h2>
         <div class="post-card-info">
           <span class="date"><%= book.tag %></span>
