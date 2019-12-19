@@ -145,7 +145,7 @@
 
 <div style="padding-left: 20px;width: 300px;">
   <span style="color: blue;font-size: 20px;padding-right: 20px;">抽卡模拟器</span>
-  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.2.4)</button>
+  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.2.5)</button>
 </div>
 
 <div class="modal" id="versionModal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -158,7 +158,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <span style="color: blue;">v0.2.4:添加了sp鬼切的召唤动画</span>
+        <span style="color: blue;">v0.2.5:添加了ssr云外境的召唤模拟</span>
+        <hr>
+        v0.2.4:添加了sp鬼切的召唤动画
         <hr>
         v0.2.3:<br>暂时移除了排行榜;<br>后续会陆续添加yys相关实用的工具;<br>修正了一些显示问题
         <hr>
@@ -221,14 +223,14 @@
           <%= image_tag image_path('tip.jpg'), size: "32", title: '召唤期内使用神秘的符咒进行召唤时，SP/SSR式神出现概率提升至原来的2.5倍！每位阴阳师大人享受3次SP/SSR概率UP的机会。', style: 'vertical-align:top;' %>
         </td>
       </tr>
-      <!--      <tr>-->
-      <!--        <td colspan="2"><%#= radio_button_tag 'spec_up', 'SSR', false %>-->
-      <!--          <span class="ssr_text">泷夜叉姬</span><span class="ssr_text" style="color: black;">(概率up)</span></td>-->
-      <!--      </tr>-->
-      <tr>
-        <td colspan="2"><%= radio_button_tag 'spec_up', 'SP', false %>
-          <span class="sp_text">天剑韧心鬼切</span><span class="sp_text" style="color: black;">(概率up)</span></td>
-      </tr>
+            <tr>
+              <td colspan="2"><%= radio_button_tag 'spec_up', 'SSR', false %>
+                <span class="ssr_text">云外境</span><span class="ssr_text" style="color: black;">(概率up)</span></td>
+            </tr>
+<!--      <tr>-->
+<!--        <td colspan="2"><%#= radio_button_tag 'spec_up', 'SP', false %>-->
+<!--          <span class="sp_text">天剑韧心鬼切</span><span class="sp_text" style="color: black;">(概率up)</span></td>-->
+<!--      </tr>-->
       <tr>
         <td colspan="2" style="color: green;">  <%= check_box_tag 'cartoon' %><span class="checkbox_text">展示抽卡动画</span>
           <%= image_tag image_path('tip.jpg'), size: "32", title: '在召唤出ssr/sp式神时，会展示对应抽卡动画', style: 'vertical-align:top;' %>

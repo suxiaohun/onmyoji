@@ -53,10 +53,10 @@ class YysController < ApplicationController
         spec_rate = 10
       end
     elsif spec_up == 'SSR'
-      # 泷夜叉姬
-      spec_shi_shen = ShiShen.find_by_sid 338
-      spec_shi_shen.color = 'rgb(248,45,58)'
-      sss = ShiShen.where(kind: 'origin').where.not(sid: 338)
+      # 云外境
+      spec_shi_shen = ShiShen.find_by_sid 344
+      spec_shi_shen.color = 'rgb(232,112,30)'
+      sss = ShiShen.where(kind: 'origin').where.not(sid: 344)
       if mode
         spec_rate = 15
       else
