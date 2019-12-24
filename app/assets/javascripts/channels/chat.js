@@ -1,3 +1,60 @@
+function subscript() {
+    var obj = $("#chat_btn");
+    var v1 = obj.attr("chat");
+
+    if (v1 === "0") {
+
+        // App.cable.open()
+
+        App.chat = App.cable.subscriptions.create("ChatChannel", {
+            connected: function () {
+                single_notify("已连接到服务器!",{ className:"success",autoHide: false,clickToHide: false});
+
+                // Called when the subscription is ready for use on the server
+                obj.attr("chat", "1");
+                obj.css('background', 'yellowgreen');
+                obj.html("已进入聊天室");
+                $("#SendDataContainer").show();
+                //notice all users "new user join in the chat"
+            },
+
+            disconnected: function () {
+
+                single_notify("已掉线!",{ className:"error",autoHide: false,clickToHide: false});
+                // Called when the subscription has been terminated by the server
+            },
+
+            received: function (data) {
+                message_count+=1;
+                // var _msg = "<pre style='color:" + data.color + "'><b>" + data.user + ": </b>" + data.message + "</pre>";
+                // $('#LogContainer').append(_msg);
+
+                $('#LogContainer').append("<label class='drop' style='display: block;' for='_s"+message_count+"'>"+data.user.replace(/\s/g,"&nbsp;")+"</label>");
+                $('#LogContainer').append("<input id='_s"+message_count+"' type='checkbox' style='display: none'>");
+                var msg = "<span class='chat_span' style='color: "+data.color+"'>"+data.message+"</span>";
+
+                $('#LogContainer').append(msg);
+                var LogContainer = document.getElementById("LogContainer");
+                LogContainer.scrollTop = LogContainer.scrollHeight;
+
+                // Called when there's incoming data on the websocket for this channel
+            }
+        });
+
+    } else if (v1 === "1") {
+
+        // alert(1);
+        App.chat.unsubscribe();
+        obj.attr("chat", "0");
+        obj.css('background', 'rgb(221, 221, 221)');
+        obj.html("已离开聊天室");
+        $('.notifyjs-corner').empty();
+
+        $("#SendDataContainer").hide();
+        // count total online users
+    }
+}
+
 function subscript_yys() {
     App.yys = App.cable.subscriptions.create('YysChannel', {
         connected: function () {
@@ -96,7 +153,7 @@ function send_message() {
     }
 
     tinyMCE.get('DataToSend').setContent('');
-    App.mitama.send({color: "black", message: msg})
+    App.chat.send({color: "black", message: msg})
 }
 
 
