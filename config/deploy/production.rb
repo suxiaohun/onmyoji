@@ -44,7 +44,7 @@ server "123.206.25.28", user: "crystal", roles: %w{app db web}, my_property: :my
 # Global options
 # --------------
  set :ssh_options, {
-   keys: %w(/home/crystal/.ssh/id_rsa),
+   keys: %w(/Users/crystal/.ssh/id_rsa),
    forward_agent: true,
    # auth_methods: %w(password)
    auth_methods: %w(publickey)
