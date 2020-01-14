@@ -384,7 +384,9 @@ class YysController < ApplicationController
       end
     end
 
+    set_total_count
     @rate = {}
+    @rate[:total_count] = RATE_REDIS.llen('total_count')
     @rate[:all_count] = RATE_REDIS.llen('all_count')
     @rate[:all_500_spec_count] = RATE_REDIS.llen('all_500_spec_count')
     @rate[:all_500_spec_rate] = ((@rate[:all_500_spec_count] * 1.00 / @rate[:all_count]) * 100).round(2) if @rate[:all_count] > 0
@@ -493,6 +495,9 @@ class YysController < ApplicationController
 
   private
 
+  def set_total_count
+    RATE_REDIS.rpush('total_count', 1)
+  end
 
   def set_rate_total
     RATE_REDIS.rpush('all_count', 1)
