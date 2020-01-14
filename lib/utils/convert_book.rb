@@ -3,13 +3,62 @@ require 'fileutils'
 class ConvertBook
   class << self
 
+    def change_name
+      files = Dir.glob("**/*.*")
+      length = files.size.to_s.size + 1
+      new_names = (1..files.size).to_a
+      files.each do |file|
+        new_file_name = new_names.shift.to_s.rjust(length, '0')
+        extension_arr = file.split('.')
+        unless extension_arr.size == 1
+          new_file_name = new_file_name + '.' + extension_arr[-1]
+        end
+        File.rename(file, new_file_name)
+        #puts new_file_name
+      end
+    end
+
+
+    def convert_1
+      error_files = []
+      count = 0
+      FileUtils.rm_rf('backup')
+      Dir.glob(["**/*.txt", "**/*.TXT"]).each do |file_name|
+        count += 1
+        dirname = File.dirname("backup/#{file_name}")
+        unless File.directory?(dirname)
+          FileUtils.mkdir_p(dirname)
+        end
+
+        begin
+          next if File.zero?(file_name)
+          File.open(file_name) do |input|
+            File.open("backup/#{file_name}", 'w') do |output|
+              content = input.read
+              unless content.valid_encoding?
+                content.force_encoding('GB18030')
+              end
+              output.write(content.encode('UTF-8'))
+            end
+          end
+          puts "\e[32mconverting: #{file_name}\e[0m"
+        rescue
+          error_files << file_name
+          # remove this error file
+          File.unlink(file_name)
+          puts "\e[31m----无法解析文件编码，请手动转码-----------#{file_name}----------------\e[0m"
+        end
+      end
+      puts "........共计#{count}本"
+    end
+
     # 将目录下的所有txt文件，全部遍历，转码成utf8，并生成一份新的utf8编码的文件
     def convert
       error_files = []
       count = 0
       FileUtils.rm_rf('backup')
       Dir.glob(["**/*.txt", "**/*.TXT"]).each do |file_name|
-        count+=1
+        count += 1
         dirname = File.dirname("backup/#{file_name}")
         unless File.directory?(dirname)
           FileUtils.mkdir_p(dirname)

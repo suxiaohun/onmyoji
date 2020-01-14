@@ -19,6 +19,7 @@ puts '    start init base data...'
 ShiShen.delete_all
 # SSR
 shi_shens = []
+shi_shens << {name: '鬼童丸', mode: 'SSR', sid: '345', cartoon: false }
 shi_shens << {name: '云外境', mode: 'SSR', sid: '344', cartoon: false }
 shi_shens << {name: '泷夜叉姬', mode: 'SSR', sid: '338', cartoon: true}
 shi_shens << {name: '黑崎一护', mode: 'SSR', sid: '337', kind: 'linkage'}

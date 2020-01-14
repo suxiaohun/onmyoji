@@ -12,9 +12,9 @@ class YysController < ApplicationController
   end
 
   def app_version
-    AppVersion.create(version:'1')
+    AppVersion.create(version: '1')
     # ActionCable.server.broadcast 'yys',{ message: "大人,您好,我刚刚更新了新版本,请您刷新页面后使用哦.1111111"}
-    render json: {msg:'oooooooooo'}
+    render json: {msg: 'oooooooooo'}
   end
 
   def index
@@ -26,6 +26,200 @@ class YysController < ApplicationController
   # todo 如果票数大于等于500抽,需要进行统计,分别统计全图\非全图的概率,用redis存储,每小时持久化到db中
   # todo 统计500抽不出货的场景
   # todo 统计700抽才出货的场景
+  #def summon
+  #  number = params[:number].to_i # 票数
+  #  number = 3000 if number > 3000
+  #  mode = params[:mode] || false # 是否全图鉴
+  #  up = params[:up] # 是否开启三次up
+  #
+  #  spec_up = params[:spec_up]
+  #
+  #  rate_flag = mode && up && spec_up && number > 499 # 全图活动计数标志
+  #  set_rate_total if rate_flag
+  #
+  #
+  #  if params[:cartoon]
+  #    @show_cartoon = true
+  #  else
+  #    @show_cartoon = false
+  #  end
+  #
+  #  if spec_up == 'SP'
+  #    # 天剑韧心鬼切
+  #    spec_shi_shen = ShiShen.find_by_sid 343
+  #    spec_shi_shen.color = 'rgb(232,112,30)'
+  #    sss = ShiShen.where(kind: 'origin').where.not(sid: 343)
+  #    if mode
+  #      spec_rate = 10
+  #    end
+  #  elsif spec_up == 'SSR'
+  #    # 云外境
+  #    spec_shi_shen = ShiShen.find_by_sid 344
+  #    spec_shi_shen.color = 'rgb(232,112,30)'
+  #    sss = ShiShen.where(kind: 'origin').where.not(sid: 344)
+  #    if mode
+  #      spec_rate = 15
+  #    else
+  #      spec_rate = 4
+  #    end
+  #  else
+  #    spec_up = false
+  #  end
+  #
+  #  if up
+  #    up_count = 3
+  #  else
+  #    up_count = 0
+  #  end
+  #
+  #  ssrs = ShiShen.where(mode: 'SSR', kind: 'origin')
+  #  sps = ShiShen.where(mode: 'SP', kind: 'origin')
+  #
+  #  ShiShen.pluck(:sid)
+  #
+  #  @result = {}
+  #  @msg = {}
+  #  africa_count = params[:africa_count] || 0
+  #
+  #  number.times do |num|
+  #    if num == 199
+  #      europe_common_6(@result)
+  #      europe_common_8(@result)
+  #    end
+  #    # 根据票数提升spec_rate
+  #    if spec_up
+  #      # 全图700抽保底，如果第700抽时依然没有抽取到指定式神，则直接抽出指定式神
+  #      if mode && num == 699
+  #        @result[num + 1] = {}
+  #        @result[num + 1][:sid] = spec_shi_shen.sid
+  #        @result[num + 1][:name] = "<span style='color:#111de0;font-weight:bold;'>#{spec_shi_shen.name}（700抽保底）</span>"
+  #        @result[num + 1][:name_sp] = spec_shi_shen.name_sp
+  #        @result[num + 1][:cartoon] = spec_shi_shen.cartoon
+  #        @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
+  #        spec_up = false
+  #        set_rate_700 if rate_flag
+  #        next
+  #      end
+  #      spec_rate = get_spec_rate(num, spec_up, mode)
+  #    end
+  #
+  #    seed1 = rand * 100
+  #    if up_count > 0
+  #      pick_rate = 1.25 * (1 + 2.5)
+  #    else
+  #      pick_rate = 1.25
+  #    end
+  #    if seed1 < pick_rate
+  #      if up_count > 0
+  #        up_count -= 1
+  #        # 三次up结束时，需要判定"灯鹿就送"
+  #        africa_spec_2(@result, num, spec_shi_shen) if up_count == 0
+  #      end
+  #      # 指定概率提升，仅生效一次
+  #      if spec_up
+  #        spec_seed = rand(100)
+  #        if spec_seed < spec_rate
+  #          europe_spec_1(spec_shi_shen) if num == 0
+  #          @result[num + 1] = {}
+  #          @result[num + 1][:sid] = spec_shi_shen.sid
+  #          @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定概率up：#{spec_rate}%）</span>"
+  #          @result[num + 1][:name_sp] = spec_shi_shen.name_sp
+  #          @result[num + 1][:cartoon] = spec_shi_shen.cartoon
+  #          @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
+  #          set_rate_500 if rate_flag && num > 499
+  #          # 如果是SSR，要重置非酋计数器
+  #          if spec_up == 'SSR'
+  #            africa_vote(africa_count, @msg)
+  #            africa_spec_1 if (num == 499 && africa_count == 499)
+  #            africa_count = 0
+  #          end
+  #          spec_up = false
+  #        else
+  #          # 从其他卡池中随机挑选一个
+  #          rand_ss = sss[rand sss.size]
+  #          @result[num + 1] = {}
+  #          @result[num + 1][:sid] = rand_ss.sid
+  #          @result[num + 1][:name] = rand_ss.name
+  #          @result[num + 1][:name_sp] = rand_ss.name_sp
+  #          @result[num + 1][:cartoon] = rand_ss.cartoon
+  #          @result[num + 1][:cartoon_sp] = rand_ss.cartoon_sp
+  #          # 如果是SSR，要重置非酋计数器
+  #          if rand_ss.mode == 'SSR'
+  #            africa_vote(africa_count, @msg)
+  #            africa_spec_1 if (num == 499 && africa_count == 499)
+  #            africa_count = 0
+  #          end
+  #        end
+  #        next
+  #      end
+  #
+  #      seed2 = rand(125)
+  #      if seed2 < 100 # ssr
+  #        ss = ssrs[rand ssrs.size]
+  #        africa_vote(africa_count, @msg)
+  #        # 如果是小鹿，需要判定高速公鹿成就
+  #        africa_spec_4(africa_count) if ss.sid == '259'
+  #        africa_count = 0
+  #        @result[num + 1] = {}
+  #        @result[num + 1][:sid] = ss.sid
+  #        @result[num + 1][:name] = ss.name
+  #        @result[num + 1][:name_sp] = ss.name_sp
+  #        @result[num + 1][:cartoon] = ss.cartoon
+  #        @result[num + 1][:cartoon_sp] = ss.cartoon_sp
+  #      else # sp
+  #        africa_count += 1
+  #        ss = sps[rand sps.size]
+  #        @result[num + 1] = {}
+  #        @result[num + 1][:sid] = ss.sid
+  #        @result[num + 1][:name] = ss.name
+  #        @result[num + 1][:name_sp] = ss.name_sp
+  #        @result[num + 1][:cartoon] = ss.cartoon
+  #        @result[num + 1][:cartoon_sp] = ss.cartoon_sp
+  #      end
+  #      europe_uniq_1(@result[num + 1]) if num == 0
+  #      europe_common_1(num + 1)
+  #    else
+  #      africa_count += 1
+  #      africa_spec_1 if (num == 499 && africa_count == 499)
+  #    end
+  #  end
+  #
+  #  set_rate_500 if rate_flag && spec_up && number == 500
+  #
+  #  africa_vote(africa_count, @msg)
+  #
+  #
+  #  @africa_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='AFRICA' group by name order by total_score desc limit 10"
+  #  @europe_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='EUROPE' group by name order by total_score desc limit 10"
+  #
+  #  # 同时判定是否sp版本
+  #  @result.each do |k, v|
+  #    if v[:cartoon]
+  #      _seed_sp = rand(100)
+  #      if _seed_sp < 10
+  #        if v[:cartoon_sp]
+  #          v[:name] = "<span style='color:purple;font-weight:bolder;font-size:20px;'>" + v[:name] + '·' + v[:name_sp] + '</span>'
+  #          _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}-1.mp4")
+  #        end
+  #        # 欧皇判定：海豹·幻
+  #        europe_spec_3 if k == 0
+  #      end
+  #      _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4") unless _v_path
+  #      # 暂时统一替换为sp动画
+  #      v[:video_path] = _v_path
+  #    end
+  #  end
+  #
+  #  @rate = {}
+  #  @rate[:all_count] = RATE_REDIS.llen('all_count')
+  #  @rate[:all_500_spec_count] = RATE_REDIS.llen('all_500_spec_count')
+  #  @rate[:all_500_spec_rate] = ((@rate[:all_500_spec_count] * 1.00 / @rate[:all_count]) * 100).round(2) if @rate[:all_count] > 0
+  #  @rate[:all_700_spec_count] = RATE_REDIS.llen('all_700_spec_count')
+  #  @rate[:all_700_spec_rate] = ((@rate[:all_700_spec_count] * 1.00 / @rate[:all_count]) * 100).round(2) if @rate[:all_count] > 0
+  #
+  #  puts @result
+  #end
+
   def summon
     number = params[:number].to_i # 票数
     number = 3000 if number > 3000
@@ -53,202 +247,8 @@ class YysController < ApplicationController
         spec_rate = 10
       end
     elsif spec_up == 'SSR'
-      # 云外境
-      spec_shi_shen = ShiShen.find_by_sid 344
-      spec_shi_shen.color = 'rgb(232,112,30)'
-      sss = ShiShen.where(kind: 'origin').where.not(sid: 344)
-      if mode
-        spec_rate = 15
-      else
-        spec_rate = 4
-      end
-    else
-      spec_up = false
-    end
-
-    if up
-      up_count = 3
-    else
-      up_count = 0
-    end
-
-    ssrs = ShiShen.where(mode: 'SSR', kind: 'origin')
-    sps = ShiShen.where(mode: 'SP', kind: 'origin')
-
-    ShiShen.pluck(:sid)
-
-    @result = {}
-    @msg = {}
-    africa_count = params[:africa_count] || 0
-
-    number.times do |num|
-      if num == 199
-        europe_common_6(@result)
-        europe_common_8(@result)
-      end
-      # 根据票数提升spec_rate
-      if spec_up
-        # 全图700抽保底，如果第700抽时依然没有抽取到指定式神，则直接抽出指定式神
-        if mode && num == 699
-          @result[num + 1] = {}
-          @result[num + 1][:sid] = spec_shi_shen.sid
-          @result[num + 1][:name] = "<span style='color:#111de0;font-weight:bold;'>#{spec_shi_shen.name}（700抽保底）</span>"
-          @result[num + 1][:name_sp] = spec_shi_shen.name_sp
-          @result[num + 1][:cartoon] = spec_shi_shen.cartoon
-          @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
-          spec_up = false
-          set_rate_700 if rate_flag
-          next
-        end
-        spec_rate = get_spec_rate(num, spec_up, mode)
-      end
-
-      seed1 = rand * 100
-      if up_count > 0
-        pick_rate = 1.25 * (1 + 2.5)
-      else
-        pick_rate = 1.25
-      end
-      if seed1 < pick_rate
-        if up_count > 0
-          up_count -= 1
-          # 三次up结束时，需要判定"灯鹿就送"
-          africa_spec_2(@result, num, spec_shi_shen) if up_count == 0
-        end
-        # 指定概率提升，仅生效一次
-        if spec_up
-          spec_seed = rand(100)
-          if spec_seed < spec_rate
-            europe_spec_1(spec_shi_shen) if num == 0
-            @result[num + 1] = {}
-            @result[num + 1][:sid] = spec_shi_shen.sid
-            @result[num + 1][:name] = "<span style='color:#{spec_shi_shen.color};font-weight:bold;'>#{spec_shi_shen.name}（指定概率up：#{spec_rate}%）</span>"
-            @result[num + 1][:name_sp] = spec_shi_shen.name_sp
-            @result[num + 1][:cartoon] = spec_shi_shen.cartoon
-            @result[num + 1][:cartoon_sp] = spec_shi_shen.cartoon_sp
-            set_rate_500 if rate_flag && num > 499
-            # 如果是SSR，要重置非酋计数器
-            if spec_up == 'SSR'
-              africa_vote(africa_count, @msg)
-              africa_spec_1 if (num == 499 && africa_count == 499)
-              africa_count = 0
-            end
-            spec_up = false
-          else
-            # 从其他卡池中随机挑选一个
-            rand_ss = sss[rand sss.size]
-            @result[num + 1] = {}
-            @result[num + 1][:sid] = rand_ss.sid
-            @result[num + 1][:name] = rand_ss.name
-            @result[num + 1][:name_sp] = rand_ss.name_sp
-            @result[num + 1][:cartoon] = rand_ss.cartoon
-            @result[num + 1][:cartoon_sp] = rand_ss.cartoon_sp
-            # 如果是SSR，要重置非酋计数器
-            if rand_ss.mode == 'SSR'
-              africa_vote(africa_count, @msg)
-              africa_spec_1 if (num == 499 && africa_count == 499)
-              africa_count = 0
-            end
-          end
-          next
-        end
-
-        seed2 = rand(125)
-        if seed2 < 100 # ssr
-          ss = ssrs[rand ssrs.size]
-          africa_vote(africa_count, @msg)
-          # 如果是小鹿，需要判定高速公鹿成就
-          africa_spec_4(africa_count) if ss.sid == '259'
-          africa_count = 0
-          @result[num + 1] = {}
-          @result[num + 1][:sid] = ss.sid
-          @result[num + 1][:name] = ss.name
-          @result[num + 1][:name_sp] = ss.name_sp
-          @result[num + 1][:cartoon] = ss.cartoon
-          @result[num + 1][:cartoon_sp] = ss.cartoon_sp
-        else # sp
-          africa_count += 1
-          ss = sps[rand sps.size]
-          @result[num + 1] = {}
-          @result[num + 1][:sid] = ss.sid
-          @result[num + 1][:name] = ss.name
-          @result[num + 1][:name_sp] = ss.name_sp
-          @result[num + 1][:cartoon] = ss.cartoon
-          @result[num + 1][:cartoon_sp] = ss.cartoon_sp
-        end
-        europe_uniq_1(@result[num + 1]) if num == 0
-        europe_common_1(num + 1)
-      else
-        africa_count += 1
-        africa_spec_1 if (num == 499 && africa_count == 499)
-      end
-    end
-
-    set_rate_500 if rate_flag && spec_up && number == 500
-
-    africa_vote(africa_count, @msg)
-
-
-    @africa_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='AFRICA' group by name order by total_score desc limit 10"
-    @europe_bloodlines = Bloodline.find_by_sql "select name,sum(score) total_score,group_concat(concat(remark,'【',score,'】') separator '\n') remark, group_concat(title) title from bloodlines where mode='EUROPE' group by name order by total_score desc limit 10"
-
-    # 同时判定是否sp版本
-    @result.each do |k, v|
-      if v[:cartoon]
-        _seed_sp = rand(100)
-        if _seed_sp < 10
-          if v[:cartoon_sp]
-            v[:name] = "<span style='color:purple;font-weight:bolder;font-size:20px;'>" + v[:name] + '·' + v[:name_sp] + '</span>'
-            _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}-1.mp4")
-          end
-          # 欧皇判定：海豹·幻
-          europe_spec_3 if k == 0
-        end
-        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4") unless _v_path
-        # 暂时统一替换为sp动画
-        v[:video_path] = _v_path
-      end
-    end
-
-    @rate = {}
-    @rate[:all_count] = RATE_REDIS.llen('all_count')
-    @rate[:all_500_spec_count] = RATE_REDIS.llen('all_500_spec_count')
-    @rate[:all_500_spec_rate] = ((@rate[:all_500_spec_count] * 1.00 / @rate[:all_count]) * 100).round(2) if @rate[:all_count] > 0
-    @rate[:all_700_spec_count] = RATE_REDIS.llen('all_700_spec_count')
-    @rate[:all_700_spec_rate] = ((@rate[:all_700_spec_count] * 1.00 / @rate[:all_count]) * 100).round(2) if @rate[:all_count] > 0
-
-    puts @result
-  end
-
-  def summon
-    number = params[:number].to_i # 票数
-    number = 3000 if number > 3000
-    mode = params[:mode] || false # 是否全图鉴
-    up = params[:up] # 是否开启三次up
-
-    spec_up = params[:spec_up]
-
-    rate_flag = mode && up && spec_up && number > 499 # 全图活动计数标志
-    set_rate_total if rate_flag
-
-
-    if params[:cartoon]
-      @show_cartoon = true
-    else
-      @show_cartoon = false
-    end
-
-    if spec_up == 'SP'
-      # 天剑韧心鬼切
-      spec_shi_shen = ShiShen.find_by_sid 343
-      spec_shi_shen.color = 'rgb(232,112,30)'
-      sss = ShiShen.where(kind: 'origin').where.not(sid: 343)
-      if mode
-        spec_rate = 10
-      end
-    elsif spec_up == 'SSR'
-      # 云外境
-      spec_shi_shen = ShiShen.find_by_sid 344
+      # 鬼童丸
+      spec_shi_shen = ShiShen.find_by_sid 345
       spec_shi_shen.color = 'rgb(232,112,30)'
       sss = ShiShen.where(kind: 'origin').where.not(sid: 344)
       if mode
@@ -370,7 +370,7 @@ class YysController < ApplicationController
 
     # 同时判定是否sp版本
     @result.each do |k, v|
-      if v[:cartoon]
+      if Rails.env.production? && v[:cartoon]
         _seed_sp = rand(100)
         if _seed_sp < 10
           if v[:cartoon_sp]
