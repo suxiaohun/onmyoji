@@ -1,7 +1,7 @@
 class ShiShen < ApplicationRecord
 
   has_many :pieces, foreign_key: :sid
-  attr_accessor :color
+  attr_accessor :color, :owned
 
 
   def path
