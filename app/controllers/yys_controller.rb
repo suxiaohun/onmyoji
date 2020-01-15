@@ -420,12 +420,13 @@ class YysController < ApplicationController
   end
 
   def summon_sj(number, mode, up_count, show_cartoon)
+    mode = false
     wei_shou_lu = true
     shen_juan = true
 
     wei_shou_lu_sss = ShiShen.where(kind: 'origin').pluck(:sid) - (Card.find_by(nick_name: cookies[:nick_name]).try(:sids) || [])
 
-    wei_shou_lu_sss << SPEC_SID
+    mode = true if wei_shou_lu_sss.count == 1
 
     ssrs = ShiShen.where(mode: 'SSR', kind: 'origin')
     sps = ShiShen.where(mode: 'SP', kind: 'origin')
@@ -480,7 +481,7 @@ class YysController < ApplicationController
           if spec_seed < spec_rate
             result[:sj] = {}
             result[:sj][:count] = num + 1
-            result[:sj][:name] = "<span style='color:#111de0;font-weight:bold;'>获取神眷符咒</span>"
+            result[:sj][:name] = "<span style='color:#111de0;font-weight:bold;'>获取神眷符咒（#{spec_rate}%）</span>"
             result[:sj][:name_sp] = ''
             result[:sj][:cartoon] = false
             result[:sj][:cartoon_sp] = false
