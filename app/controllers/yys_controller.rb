@@ -427,7 +427,7 @@ class YysController < ApplicationController
     wei_shou_lu_sss = ShiShen.where(kind: 'origin').pluck(:sid) - (Card.find_by(nick_name: cookies[:nick_name]).try(:sids) || [])
 
     # sp不计入全图福利
-    mode_ssrs = ShiShen.where(kind: 'origin',mode: 'SSR').pluck(:sid) - (Card.find_by(nick_name: cookies[:nick_name]).try(:sids) || [])
+    mode_ssrs = ShiShen.where(kind: 'origin', mode: 'SSR').pluck(:sid) - (Card.find_by(nick_name: cookies[:nick_name]).try(:sids) || [])
     mode = true if mode_ssrs.count == 1
 
     ssrs = ShiShen.where(mode: 'SSR', kind: 'origin')
@@ -442,7 +442,7 @@ class YysController < ApplicationController
           result[:sj] = {}
           result[:sj][:count] = 700
           result[:sj][:color] = 'rgb(232,112,30)'
-          result[:sj][:name] = "<span style='color:#111de0;font-weight:bold;'>获取神眷符咒（700抽保底）</span>"
+          result[:sj][:name] = "<span style='color:#111de0;font-weight:bold;'> 神眷（700抽保底）</span>"
           result[:sj][:name_sp] = ''
           result[:sj][:cartoon] = false
           result[:sj][:cartoon_sp] = false
@@ -472,23 +472,18 @@ class YysController < ApplicationController
           result[num + 1][:cartoon] = wsl_ss.cartoon
           result[num + 1][:cartoon_sp] = wsl_ss.cartoon_sp
           wei_shou_lu = false
-          next
-        end
 
-        # sj
-        if shen_juan
-          # 神眷与sp共用同样的概率up
-          spec_rate = get_spec_rate(num, 'SP', mode)
-          spec_seed = rand(100)
-          if spec_seed < spec_rate
-            result[:sj] = {}
-            result[:sj][:count] = num + 1
-            result[:sj][:name] = "<span style='color:#111de0;font-weight:bold;'>获取神眷符咒（#{spec_rate}%）</span>"
-            result[:sj][:name_sp] = ''
-            result[:sj][:cartoon] = false
-            result[:sj][:cartoon_sp] = false
-            shen_juan = false
+          # 未收录也要判定神眷
+          if shen_juan
+            # 神眷与sp共用同样的概率up
+            spec_rate = get_spec_rate(num, 'SP', mode)
+            spec_seed = rand(100)
+            if spec_seed < spec_rate
+              result[num + 1][:name] += "<span style='color:#111de0;font-weight:bold;'> 神眷（#{spec_rate}%）</span>"
+              shen_juan = false
+            end
           end
+          next
         end
 
         seed2 = rand(125)
@@ -509,6 +504,19 @@ class YysController < ApplicationController
           result[num + 1][:cartoon] = ss.cartoon
           result[num + 1][:cartoon_sp] = ss.cartoon_sp
         end
+
+        # sj
+        if shen_juan
+          # 神眷与sp共用同样的概率up
+          spec_rate = get_spec_rate(num, 'SP', mode)
+          spec_seed = rand(100)
+          if spec_seed < spec_rate
+            result[num + 1][:name] += "<span style='color:#111de0;font-weight:bold;'> 神眷（#{spec_rate}%）</span>"
+            shen_juan = false
+          end
+        end
+
+
       end
     end
 
