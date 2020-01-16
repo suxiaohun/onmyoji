@@ -22,8 +22,7 @@
 <body id="yys">
 <% if cookies[:nick_name] %>
   <div>你好，『<span style="color: blue;" id="nick_name"><%= cookies[:nick_name] %></span>』
-<!--    <span style="font-size: 14px;color: green">*建议使用浏览器操作，移动端暂时未做适配</span>-->
-    ？<%= link_to '更换昵称', yys_auth_path %>
+<!--    <span style="font-size: 14px;color: green">*建议使用浏览器操作，移动端暂时未做适配</span>--><%= link_to '更换昵称', yys_auth_path %>
     <hr>
   </div>
 <% end %>

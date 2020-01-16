@@ -442,7 +442,7 @@ class YysController < ApplicationController
           result[:sj] = {}
           result[:sj][:count] = 700
           result[:sj][:color] = 'rgb(232,112,30)'
-          result[:sj][:name] = "<span style='color:#111de0;font-weight:bold;'> 神眷（700抽保底）</span>"
+          result[:sj][:name] = "<span style='color:#111de0;font-weight:bold;'> 神眷(700抽保底)</span>"
           result[:sj][:name_sp] = ''
           result[:sj][:cartoon] = false
           result[:sj][:cartoon_sp] = false
@@ -479,7 +479,7 @@ class YysController < ApplicationController
             spec_rate = get_spec_rate(num, 'SP', mode)
             spec_seed = rand(100)
             if spec_seed < spec_rate
-              result[num + 1][:name] += "<span style='color:#111de0;font-weight:bold;'> 神眷（#{spec_rate}%）</span>"
+              result[num + 1][:name] = "<span style='color:#{wsl_ss.color};font-weight:bold;'>#{wsl_ss.name}</span><span style='color:#007bff;font-weight:bold;'> 未收录+神眷(#{spec_rate}%)</span>"
               shen_juan = false
             end
           end
@@ -511,12 +511,10 @@ class YysController < ApplicationController
           spec_rate = get_spec_rate(num, 'SP', mode)
           spec_seed = rand(100)
           if spec_seed < spec_rate
-            result[num + 1][:name] += "<span style='color:#111de0;font-weight:bold;'> 神眷（#{spec_rate}%）</span>"
+            result[num + 1][:name] += "<span style='color:#111de0;font-weight:bold;'> 神眷(#{spec_rate}%)</span>"
             shen_juan = false
           end
         end
-
-
       end
     end
 
