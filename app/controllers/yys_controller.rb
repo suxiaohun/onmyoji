@@ -426,7 +426,9 @@ class YysController < ApplicationController
 
     wei_shou_lu_sss = ShiShen.where(kind: 'origin').pluck(:sid) - (Card.find_by(nick_name: cookies[:nick_name]).try(:sids) || [])
 
-    mode = true if wei_shou_lu_sss.count == 1
+    # sp不计入全图福利
+    mode_ssrs = ShiShen.where(kind: 'origin',mode: 'SSR').pluck(:sid) - (Card.find_by(nick_name: cookies[:nick_name]).try(:sids) || [])
+    mode = true if mode_ssrs.count == 1
 
     ssrs = ShiShen.where(mode: 'SSR', kind: 'origin')
     sps = ShiShen.where(mode: 'SP', kind: 'origin')
