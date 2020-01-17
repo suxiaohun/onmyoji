@@ -86,15 +86,9 @@
     background: darkgray;
   }
 
-
-  /*.mode-label:has(input:checked){*/
-  /*  background: rebeccapurple;*/
-  /*}*/
-
-  /*.mode-label:not(:has(input:checked)){*/
-  /*  background: darkseagreen;*/
-  /*}*/
-
+  .mode-label > input[type='checkbox']{
+    vertical-align: bottom;
+  }
 
   .tips {
     color: blue;
@@ -104,7 +98,6 @@
 <script type="text/javascript">
     $(function () {
         $("#mode-div").on('click', "input[type='checkbox']", function () {
-            //渲染的元素默认带着checked属性，需要移除
             let check = $(this).prop('checked');
             if (check) {
                 $(this).parent().prop('class', 'mode-label check')
@@ -117,8 +110,6 @@
 
 <div id="tools" style="color: #0681ba;position: absolute;min-height: 200px;left: 570px;min-width: 500px;">
   <table>
-
-
     <tr>
       <td>
         <p>
@@ -340,7 +331,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2"> <%= submit_tag '召唤', :class => 'btn btn-primary' %></td>
+        <td colspan="2"> <%= submit_tag '召唤', :class => 'btn btn-primary' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'yys抽卡概率变迁',{action: 'rate'},target: '_blank' %></td>
       </tr>
     </table>
   <% end %>

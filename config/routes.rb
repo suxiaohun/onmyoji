@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   get 'mitama', to: 'yys#mitama'
   post 'yys/cards', to: 'yys#cards'
+  get 'yys/rate', to: 'yys#rate'
 
   match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
 

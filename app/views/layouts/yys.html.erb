@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-  <title>雲·千羽</title>
+  <title>千羽阁</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
@@ -9,7 +9,7 @@
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <%= javascript_include_tag 'cable'%>
+  <%= javascript_include_tag 'cable' %>
 </head>
 <style type="text/css">
   html, body {
@@ -22,7 +22,7 @@
 <body id="yys">
 <% if cookies[:nick_name] %>
   <div>你好，『<span style="color: blue;" id="nick_name"><%= cookies[:nick_name] %></span>』
-<!--    <span style="font-size: 14px;color: green">*建议使用浏览器操作，移动端暂时未做适配</span>--><%= link_to '更换昵称', yys_auth_path %>
+    <%= link_to '更换昵称', yys_auth_path %>
     <hr>
   </div>
 <% end %>
