@@ -8,7 +8,7 @@ end
 
 rails_env = "production"
 
-worker_processes 8 # 进程数
+worker_processes 20 # 进程数
 
 working_directory Rails.root  # available in 0.94.0+ 在这里修改为项目所在目录
 
