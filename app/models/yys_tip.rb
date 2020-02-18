@@ -1,0 +1,2 @@
+class YysTip < ApplicationRecord
+end

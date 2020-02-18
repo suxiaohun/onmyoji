@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'manage/index'
+  post 'manage/save_tip'
+
+  delete 'manage/destroy_tip'
+  get 'manage/edit_tip'
+  put 'manage/update_tip'
+
+  match 'manage/login',to: 'manage#login', :via => [:get, :post]
+
   root 'common#index'
 
   get 'push',to: 'test#push'

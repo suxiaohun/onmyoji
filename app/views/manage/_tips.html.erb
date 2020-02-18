@@ -1,0 +1,17 @@
+<tr>
+  <td>id</td>
+  <td>content</td>
+  <td>status</td>
+  <td>operation</td>
+</tr>
+<% tips.each do |tip| %>
+  <tr>
+    <td><%= tip.id %></td>
+    <td><%= tip.content %></td>
+    <td><%= tip.status %></td>
+    <td>
+      <%= link_to 'edit', {action: 'edit_tip', :id => tip.id}, remote: true %>&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= link_to 'delete', {action: 'destroy_tip', :id => tip.id}, method: :delete, remote: true %>
+    </td>
+  </tr>
+<% end %>

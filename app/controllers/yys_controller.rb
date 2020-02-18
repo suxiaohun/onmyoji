@@ -50,10 +50,80 @@ class YysController < ApplicationController
     else
       summon_normal(number, mode, up_count, @show_cartoon)
     end
-
-
   end
 
+  def summon
+    number = params[:number].to_i
+    number = 2000 if number > 2000
+    up_count = params[:up] ? 3 : 0
+    @show_cartoon = params[:cartoon] ? true : false
+    hd = params[:hd] ? true : false
+    @result, @summon_count  = summon_common(number, up_count)
+    # 满100抽送皮肤
+    if hd && number >= 100
+      @result[100] ||= {}
+      if @result[100][:name].nil?
+        @result[100][:name] = "<span style='color:#111de0;font-weight:bold;'>丑时之女·椿裳生花</span>"
+      else
+        @result[100][:name] += "<span style='color:#111de0;font-weight:bold;'>「丑时之女·椿裳生花」</span>"
+      end
+    end
+  end
+
+  def summon_common(number, up_count)
+    ssrs = YysShiShen.where(kind: 'SSR', form: 'origin')
+    sps = YysShiShen.where(kind: 'SP', form: 'origin')
+
+    result = {}
+
+    number.times do |num|
+      seed1 = rand * 100
+      if up_count > 0
+        pick_rate = 1.25 * (1 + 2.5)
+      else
+        pick_rate = 1.25
+      end
+      if seed1 < pick_rate
+        if up_count > 0
+          up_count -= 1
+        end
+
+        if seed1 < (pick_rate/1.25)  # ssr
+          ss = ssrs[rand ssrs.size]
+        else # sp
+          ss = sps[rand(sps.size)]
+        end
+        result[num + 1] = {}
+        result[num + 1][:sid] = ss.sid
+        result[num + 1][:name] = ss.name
+        result[num + 1][:name_sp] = ss.name_sp
+        result[num + 1][:cartoon] = ss.cartoon
+        result[num + 1][:cartoon_sp] = ss.cartoon_sp
+      end
+    end
+
+    # 同时判定是否sp版本
+    result.each do |k, v|
+      if Rails.env.production? && v[:cartoon]
+        _seed_sp = rand(100)
+        if _seed_sp < 10
+          if v[:cartoon_sp]
+            v[:name] = "<span style='color:purple;font-weight:bolder;font-size:20px;'>" + v[:name] + '·' + v[:name_sp] + '</span>'
+            _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}-1.mp4")
+          end
+        end
+        _v_path = ActionController::Base.helpers.video_path("#{v[:sid]}.mp4") unless _v_path
+        # 暂时统一替换为sp动画
+        v[:video_path] = _v_path
+      end
+    end
+
+    set_total_count
+    summon_count = {}
+    summon_count[:total_count] = RATE_REDIS.llen('total_count')
+    return result, summon_count
+
+  end
 
   def summon_ssr(number, mode, up_count, show_cartoon)
 

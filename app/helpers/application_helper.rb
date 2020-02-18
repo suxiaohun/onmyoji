@@ -21,10 +21,10 @@ module ApplicationHelper
     spec_shi_shen_id = SPEC_SID
 
     list = []
-    card_list = Card.find_by(nick_name: cookies[:nick_name]).try(:sids) || []
+    card_list = YysCard.find_by(nick_name: cookies[:nick_name]).try(:sids) || []
 
     if card_list.count > 0
-      ShiShen.where(kind: 'origin').where.not(sid: spec_shi_shen_id).order(sid: :desc).each do |x|
+      YysShiShen.where(kind: 'origin').where.not(sid: spec_shi_shen_id).order(sid: :desc).each do |x|
         if card_list.include? x.sid
           x.owned = true
         else
@@ -33,7 +33,7 @@ module ApplicationHelper
         list << x
       end
     else
-      ShiShen.where(kind: 'origin').where.not(sid: spec_shi_shen_id).order(sid: :desc).each do |x|
+      YysShiShen.where(kind: 'origin').where.not(sid: spec_shi_shen_id).order(sid: :desc).each do |x|
         x.owned = true
         list << x
       end

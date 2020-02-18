@@ -1,0 +1,32 @@
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  add
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+      </div>
+      <%= form_tag('/manage/save_tip', method: :post, remote: true) do %>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">content</label>
+            <label for="content"></label><textarea class="form-control" name="content" id="content" placeholder="content"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<table class="table table-bordered table-striped" id="tip-table">
+  <%= render partial: 'tips', locals: {:tips => @tips} %>
+</table>
