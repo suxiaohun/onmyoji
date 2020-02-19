@@ -52,6 +52,7 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (9.7.3)
       execjs
+    bcrypt_pbkdf (1.0.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     bootstrap (4.4.1)
@@ -94,6 +95,7 @@ GEM
     crass (1.0.5)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    ed25519 (1.2.4)
     elasticsearch (7.3.0)
       elasticsearch-api (= 7.3.0)
       elasticsearch-transport (= 7.3.0)
@@ -286,6 +288,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.4, >= 4.4.1)
   bunny
@@ -294,6 +297,7 @@ DEPENDENCIES
   capistrano3-unicorn
   capybara (>= 2.15)
   chromedriver-helper
+  ed25519 (>= 1.2, < 2.0)
   elasticsearch
   elasticsearch-model
   elasticsearch-rails
@@ -321,4 +325,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

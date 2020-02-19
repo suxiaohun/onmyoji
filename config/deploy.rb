@@ -58,11 +58,11 @@ namespace :xiaosu do
   end
 
   desc 'init data'
-  task :rake_db_seed do
+  task :init_yys do
     on roles(:all) do
       within release_path do
-        puts_front "init db books..."
-        execute :rake, 'db:seed', 'RAILS_ENV=production'
+        puts_front "init yys data..."
+        execute :rake, 'yys:init', 'RAILS_ENV=production'
         puts_end
       end
     end
@@ -150,8 +150,8 @@ namespace :xiaosu do
 
   deploy_option = fetch(:deploy_option)
   unless deploy_option == 'simple'
-    after 'deploy:publishing', 'xiaosu:init_books'
-    after 'deploy:publishing', 'xiaosu:rake_db_seed'
+    #after 'deploy:publishing', 'xiaosu:init_books'
+    after 'deploy:publishing', 'xiaosu:init_yys'
     after 'xiaosu:restart', 'xiaosu:notice_refresh'
   end
 

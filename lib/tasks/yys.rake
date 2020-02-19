@@ -61,6 +61,100 @@ namespace :yys do
 
   end
 
+  def init_region
+
+    Region.delete_all
+    regions = []
+
+    # 中国区-iOS
+    regions << {name: '春之樱', mode: 'IOS', key: 'chunzhiying'}
+    regions << {name: '夏之蝉', mode: 'IOS', key: 'xiazhichan'}
+    regions << {name: '夜之月', mode: 'IOS', key: 'yezhiyue'}
+    regions << {name: '竹之幽', mode: 'IOS', key: 'zhuzhiyou'}
+    regions << {name: '松之苍', mode: 'IOS', key: 'songzhicang'}
+    regions << {name: '兰之雅', mode: 'IOS', key: 'langzhiya'}
+    regions << {name: '雀之羽', mode: 'IOS', key: 'quezhiyu'}
+    regions << {name: '云之遏', mode: 'IOS', key: 'yunzhijie'}
+    regions << {name: '莲之净', mode: 'IOS', key: 'lianzhijing'}
+    regions << {name: '桂之馥', mode: 'IOS', key: 'guizhimi'}
+
+    # 中国区-Android
+    regions << {name: '菊之逸', mode: 'ANDROID', key: 'juzhiyi'}
+    regions << {name: '雀之灵', mode: 'ANDROID', key: 'quezhiling'}
+    regions << {name: '暮之霞', mode: 'ANDROID', key: 'muzhixia'}
+    regions << {name: '冬之雪', mode: 'ANDROID', key: 'dongzhixue'}
+    regions << {name: '秋之枫', mode: 'ANDROID', key: 'qiuzhifeng'}
+    regions << {name: '雨之霁', mode: 'ANDROID', key: 'yuzhiji'}
+    regions << {name: '桃之华', mode: 'ANDROID', key: 'taozhihua'}
+    regions << {name: '风之清', mode: 'ANDROID', key: 'fengzhiqing'}
+    regions << {name: '梅之寒', mode: 'ANDROID', key: 'meizhihan'}
+    regions << {name: '樱之华', mode: 'ANDROID', key: 'yingzhihua'}
+
+    # 网易-双平台
+    regions << {name: '携手同心', mode: 'NET', key: 'xieshoutongxin'}
+    regions << {name: '结伴同游', mode: 'NET', key: 'jiebantongyou'}
+    regions << {name: '相伴相随', mode: 'NET', key: 'xiangbanxiangsui'}
+    regions << {name: '情比金坚', mode: 'NET', key: 'qingbijinjian'}
+    regions << {name: '形影不离', mode: 'NET', key: 'xingyingbuli'}
+    regions << {name: '同心一意', mode: 'NET', key: 'tongxinyiyi'}
+    regions << {name: '相知相依', mode: 'NET', key: 'xianzhixianyi'}
+    regions << {name: '心意相通', mode: 'NET', key: 'xinyixiangtong'}
+    regions << {name: '永生之谜', mode: 'NET', key: 'yongshnegzhipi'}
+    regions << {name: '缥缈之旅', mode: 'NET', key: 'piaomiaozhilve'}
+    regions << {name: '遥远之忆', mode: 'NET', key: 'yaoyuanzhiyi'}
+    regions << {name: '孤高之心', mode: 'NET', key: 'gugaozhixin'}
+    regions << {name: '风雨同行', mode: 'NET', key: 'fenyutongxing'}
+    regions << {name: '两情相悦', mode: 'NET', key: 'liangqingxiangyue'}
+    regions << {name: '春樱共赏', mode: 'NET', key: 'chunyinggongshang'}
+    regions << {name: '谜之暗影', mode: 'NET', key: 'mizhianying'}
+
+    # 联运-双平台
+    regions << {name: 'B站~两心无间', mode: 'UNION', key: 'liangxinwujian'}
+    regions << {name: 'B站~亲密无间', mode: 'UNION', key: 'qinmiwujian'}
+    regions << {name: 'B站~情深谊长', mode: 'UNION', key: 'qingshenyichang'}
+    regions << {name: 'B站~情意相投', mode: 'UNION', key: 'qingyixiangtou'}
+
+    # 国际区
+    regions << {name: '海外加速区', mode: 'INT', key: 'haiwaijiasuqu'}
+
+    # 全平台互通新区
+    regions << {name: '相伴同行', mode: 'ALL', key: 'xiangbantongxing'}
+    regions << {name: '旧友新朋', mode: 'ALL', key: 'jiuyouxinpeng'}
+    regions << {name: '深情厚谊', mode: 'ALL', key: 'shenqinghouyi'}
+    regions << {name: '相伴长情', mode: 'ALL', key: 'xiangbanchangqing'}
+    regions << {name: '朝夕相伴', mode: 'ALL', key: 'zhaoxixiangban'}
+    regions << {name: '携手共度', mode: 'ALL', key: 'xieshougongdu'}
+    regions << {name: '举手相庆', mode: 'ALL', key: 'jushouxiangqing'}
+    regions << {name: '欢庆鼓舞', mode: 'ALL', key: 'huanqingguwu'}
+    regions << {name: '追月逐兔', mode: 'ALL', key: 'zhuiyuezhutu'}
+    regions << {name: '依偎相守', mode: 'ALL', key: 'yiweixiangshou'}
+    regions << {name: '暖风春穗', mode: 'ALL', key: 'nuanfengchunhui'}
+    regions << {name: '樱之忆', mode: 'ALL', key: 'yingzhiyi'}
+    regions << {name: '鬼灯的冷彻', mode: 'ALL', key: 'guidengdelengche'}
+    regions << {name: '初心未改', mode: 'ALL', key: 'chuxinweigai'}
+    regions << {name: '狐之宴', mode: 'ALL', key: 'huzhiyan'}
+    regions << {name: '犬夜叉', mode: 'ALL', key: 'quanyecha'}
+    regions << {name: '立秋夕烛', mode: 'ALL', key: 'liqiuxizhu'}
+    regions << {name: '全球国际区', mode: 'ALL', key: 'quanqiuguojiqu'}
+    regions << {name: '枫之舞', mode: 'ALL', key: 'fengzhiwu'}
+    regions << {name: '雪之萤', mode: 'ALL', key: 'xuezhiying'}
+    regions << {name: '游梦迷蝶', mode: 'ALL', key: 'youmengmidie'}
+    regions << {name: '桃映春馨', mode: 'ALL', key: 'taoyingchunxin'}
+    regions << {name: '竹风夏意', mode: 'ALL', key: 'zhufengxiayi'}
+    regions << {name: '一叶禅心', mode: 'ALL', key: 'yiyechanxin'}
+    regions << {name: '夜火离歌', mode: 'ALL', key: 'yehuolige'}
+    regions << {name: '晴空日和', mode: 'ALL', key: 'qingkongrihe'}
+    regions << {name: '瀞灵廷', mode: 'ALL', key: 'jinglingting'}
+    regions << {name: '少时之约', mode: 'ALL', key: 'shaoshizhiyue'}
+    regions << {name: '鸣麓逐浪', mode: 'ALL', key: 'mingluzhulang'}
+    regions << {name: '八岐魅影', mode: 'ALL', key: 'baqimeiying'}
+    regions << {name: '稚羽萌心', mode: 'ALL', key: 'zhiyumengxin'}
+    regions << {name: '愿予必成', mode: 'ALL', key: 'yuanyubicheng'}
+    regions.each do |region|
+      puts "...创建大区：#{region[:name]}"
+      Region.create!(region)
+    end
+  end
 
   def init_tip
     YysTip.delete_all
@@ -74,6 +168,7 @@ namespace :yys do
   desc "init yys base related data"
   task init: :environment do
     init_shi_shen
+    init_region
     init_tip
   end
 
