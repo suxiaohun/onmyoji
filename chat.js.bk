@@ -1,4 +1,4 @@
-var message_count = 0;
+//var message_count = 0;
 function subscript() {
     var obj = $("#chat_btn");
     var v1 = obj.attr("chat");
