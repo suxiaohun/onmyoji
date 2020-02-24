@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'books/es', to: 'books#es'
+
+
   get 'manage/index'
   post 'manage/save_tip'
 
@@ -7,13 +10,13 @@ Rails.application.routes.draw do
   get 'manage/edit_tip'
   put 'manage/update_tip'
 
-  match 'manage/login',to: 'manage#login', :via => [:get, :post]
+  match 'manage/login', to: 'manage#login', :via => [:get, :post]
 
   root 'common#index'
 
-  get 'push',to: 'test#push'
-  match 'push_target',to: 'test#push_target', :via => [:get, :post]
-  match 'call_event_push',to: 'test#call_event_push', :via => [:get, :post]
+  get 'push', to: 'test#push'
+  match 'push_target', to: 'test#push_target', :via => [:get, :post]
+  match 'call_event_push', to: 'test#call_event_push', :via => [:get, :post]
 
   get 'mobile_area', to: 'tools#mobile_area'
   get 'get_mobile_area', to: 'tools#get_mobile_area'

@@ -9,6 +9,11 @@ class BooksController < ApplicationController
 
   end
 
+  def es
+
+    render layout: false
+  end
+
   def category
     if params[:id] == 'all'
       @books = Book.includes(:author).all
