@@ -1,6 +1,6 @@
 class TestJob < ApplicationJob
-  queue_as :default1
-  sidekiq_options :retry => false, :queue => "ssss", :pool => PROJ_SIDEKIQ_REDIS_POOL
+  queue_as :default
+  #sidekiq_options :retry => false, :queue => "test", :pool => REDIS_POOL
 
 
   def perform(*args)
