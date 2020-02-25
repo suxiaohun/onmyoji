@@ -6,7 +6,7 @@ ruby '2.6.3'
 gem 'rest-client', '~> 2.1'
 
 gem 'bunny'
-gem 'sidekiq', '6.0.0'
+gem 'sidekiq', '6.0.5'
 gem 'tinymce-rails', '5.0.4'
 
 gem 'jquery-rails'
@@ -36,8 +36,8 @@ gem 'rack-cors'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
-gem 'redis-namespace', '~> 1.6.0'
+gem 'redis', '4.1.3'
+gem 'redis-namespace', '~> 1.7.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
