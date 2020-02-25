@@ -47,7 +47,7 @@ gem 'unicorn', '~> 5.4.1'
 
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
-# gem 'capistrano-bundler'
+gem 'capistrano-bundler'
 gem 'capistrano3-unicorn'
 
 gem 'kaminari'
