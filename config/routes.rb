@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'books/es', to: 'books#es'
+  post 'books/es_search', to: 'books#es_search'
 
 
   get 'manage/index'

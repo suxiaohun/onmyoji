@@ -5,13 +5,29 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
+
+
     @books = Book.all
+
 
   end
 
   def es
 
-    render layout: false
+    @books = Book.all
+    #render layout: false
+  end
+
+  def es_search
+    es_query = {
+        wildcard: {
+            name: '*' + params[:name] + "*"
+        }
+    }
+
+    logs = Book.__elasticsearch__.search(query: es_query)
+    logs = logs.page(params[:page] || 1)
+    @books = logs.records
   end
 
   def category
@@ -38,7 +54,6 @@ class BooksController < ApplicationController
   def show
     @data = {}
     @data[:id] = params[:id]
-
     File.open(@book.path) do |io|
       @data[:pre_pos] = io.pos
       @data[:curr_pos] = io.pos

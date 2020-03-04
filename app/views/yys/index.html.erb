@@ -15,10 +15,12 @@
   input[type='checkbox'], input[type='radio'] {
     height: 30px;
     width: 30px;
+    zoom:101%;
   }
 
   .checkbox_text {
-    font-size: 30px;
+    /*color: forestgreen;*/
+    font-size: 24px;
     line-height: 30px;
     vertical-align: top;
     padding-left: 10px;
@@ -45,6 +47,7 @@
     vertical-align: top;
     padding-left: 10px;
   }
+
   .hd_text {
     color: blue;
     font-size: 24px;
@@ -97,6 +100,26 @@
   .tips {
     color: blue;
   }
+
+  .main-li {
+    list-style: none;
+  }
+
+  .hd-text{
+    margin-left: 42px;
+    color: blue;
+    font-size: 24px;
+    font-weight: bolder;
+  }
+
+  /*.hd-badge {*/
+  /*  display: inline-block;*/
+  /*  line-height: 30px;*/
+  /*  font-size: 24px;*/
+  /*  vertical-align: top;*/
+  /*  margin-left: 20px;*/
+  /*  padding: 5px;*/
+  /*}*/
 </style>
 
 <script type="text/javascript">
@@ -117,16 +140,17 @@
     <tr>
       <td>
         <p>
-          <a class="btn btn-primary" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">
-            神秘图案-12月
+          <a class="btn btn-danger" data-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">
+            由于最近备案政策变更，本站可能存在无法访问的情况。尝试多刷新几次<br>
+            重新备案预计需要5-10天
           </a>
         </p>
-        <div class="collapse" id="collapse11">
-          <div>
-            传说中的“鸟居”<br><br>
-            <%= image_tag image_path('yys/summon/12-1.png'), size: "500x235", style: 'display:inline' %>
-          </div>
-        </div>
+<!--        <div class="collapse" id="collapse11">-->
+<!--          <div>-->
+<!--            传说中的“鸟居”<br><br>-->
+            <%#= image_tag image_path('yys/summon/12-1.png'), size: "500x235", style: 'display:inline' %>
+<!--          </div>-->
+<!--        </div>-->
         <ul>
           <li>
             日常:
@@ -181,7 +205,7 @@
 
 <div style="padding-left: 20px;width: 300px;">
   <span style="color: blue;font-size: 20px;padding-right: 20px;">抽卡模拟器</span>
-  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.3.0)</button>
+  <button type="button" style="padding: 5px 5px;display: inline" data-toggle="modal" data-target="#versionModal">更新日志(v0.3.2)</button>
 </div>
 
 <div class="modal" id="versionModal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -194,7 +218,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <span style="color: blue;">v0.3.0:修复了未收录时，未计算神眷的bug，合并了神眷的显示</span>
+        <span style="color: blue;">
+          v0.3.2:添加缘结神召唤活动<br>
+          由于召唤活动通常会伴随三次up，所以将三次up和概率up合并了<br>
+        </span>
+        <hr>
+        v0.3.1:添加活动：丑时之女·椿裳生花
+        <hr>
+        v0.3.0:修复了未收录时，未计算神眷的bug，合并了神眷的显示
         <hr>
         v0.2.9:修复了伪全图神眷概率不正确的问题
         <hr>
@@ -239,51 +270,47 @@
 </div>
 
 
-<div style="padding-top: 10px;text-align: center;">
+<div style="padding-top: 10px;">
   <%= form_tag('/yys/summon', method: :post, remote: true) do %>
 
-    <table id="main-table">
-      <tr>
-        <td>
-          <%= image_tag image_path 'card.jpg' %><%= number_field_tag 'number', 100, required: true, :max => @max_count, :class => 'text_tag', required: true %>
-          <%= image_tag image_path('tip.jpg'), size: "32", title: "输入你要抽取的数量，最大" + @max_count.to_s + "抽" %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <%= check_box_tag 'up' %><span class="checkbox_text">三次up</span>
-          <%= image_tag image_path('tip.jpg'), size: "32", title: '召唤期内使用神秘的符咒进行召唤时，SP/SSR式神出现概率提升至原来的2.5倍！每位阴阳师大人享受3次SP/SSR概率UP的机会。', style: 'vertical-align:top;' %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <%= check_box_tag 'hd',1,true %>
-          <span class="badge-primary" style="display: inline-block;line-height: 30px;vertical-align: top;">活动：「丑时之女·椿裳生花」</span>
-        </td>
-      </tr>
-      <!--            <tr>-->
-      <!--              <td colspan="2"><%#= radio_button_tag 'spec_up', 'SSR', false %>-->
-      <!--                <span class="ssr_text">鬼童丸</span><span class="ssr_text" style="color: black;">(概率up)</span></td>-->
-      <!--            </tr>-->
+    <ul id="main-ul">
+      <li class="main-li">
+
+        <%= image_tag image_path 'card.jpg' %><%= number_field_tag 'number', 200, required: true, :max => @max_count, :class => 'text_tag', required: true %>
+        <%= image_tag image_path('tip.jpg'), size: "32", title: "输入你要抽取的数量，最大" + @max_count.to_s + "抽" %>
+
+      </li>
+      <!--      <tr>-->
+      <!--        <td colspan="2">-->
+      <%#= check_box_tag 'hd',1,true %>
+      <!--          <span class="badge-primary" style="display: inline-block;line-height: 30px;vertical-align: top;">活动：「丑时之女·椿裳生花」</span>-->
+      <!--        </td>-->
+      <!--      </tr>-->
+      <li class="main-li">
+        <%= hidden_field_tag 'hd', 'SSR' %>
+        <span class="hd-text">召唤：缘结神</span>
+      </li>
       <!--      <tr>-->
       <!--        <td colspan="2"><%#= radio_button_tag 'spec_up', 'SP', false %>-->
       <!--          <span class="sp_text">天剑韧心鬼切</span><span class="sp_text" style="color: black;">(概率up)</span></td>-->
       <!--      </tr>-->
-<!--      <tr>-->
-<!--        <td colspan="2" style="line-height: 50px;"><%#= hidden_field_tag 'spec_up', 'SJ' %>-->
-<!--          <span class="sj_text">未收录+神眷</span>-->
-<!--          <button type="button" class="btn btn-info" style="padding: 5px 5px;display: inline;line-height: 30px;" data-toggle="modal" data-target="#modeModal">图鉴情况</button>-->
-<!--        </td>-->
-<!--      </tr>-->
-      <tr>
-        <td colspan="2" style="color: green;">  <%= check_box_tag 'cartoon' %><span class="checkbox_text">展示抽卡动画</span>
-          <%= image_tag image_path('tip.jpg'), size: "32", title: '在召唤出ssr/sp式神时，会展示对应抽卡动画', style: 'vertical-align:top;' %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2"> <%= submit_tag '召唤', :class => 'btn btn-primary' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'yys抽卡概率变迁', {action: 'rate'}, target: '_blank' %></td>
-      </tr>
-    </table>
+      <!--      <tr>-->
+      <!--        <td colspan="2" style="line-height: 50px;"><%#= hidden_field_tag 'spec_up', 'SJ' %>-->
+      <!--          <span class="sj_text">未收录+神眷</span>-->
+      <!--          <button type="button" class="btn btn-info" style="padding: 5px 5px;display: inline;line-height: 30px;" data-toggle="modal" data-target="#modeModal">图鉴情况</button>-->
+      <!--        </td>-->
+      <!--      </tr>-->
+      <li class="main-li">
+        <%= check_box_tag 'mode' %><span class="checkbox_text">全图鉴</span>
+      </li>
+      <li class="main-li">
+        <%= check_box_tag 'cartoon' %><span class="checkbox_text">展示抽卡动画</span>
+        <%#= image_tag image_path('tip.jpg'), size: "32", title: '在召唤出ssr/sp式神时，会展示对应抽卡动画', style: 'vertical-align:top;' %>
+      </li>
+      <li class="main-li">
+        <%= submit_tag '召唤', :class => 'btn btn-primary' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'yys抽卡概率变迁', {action: 'rate'}, target: '_blank' %>
+      </li>
+    </ul>
   <% end %>
 </div>
 <div id="result" style="text-indent: 20px;max-width: 335px;">

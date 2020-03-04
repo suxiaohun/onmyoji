@@ -6,18 +6,6 @@ module EsBook
 
     after_commit :update_es_index_async, on: [:create, :update]
 
-    # mapping dynamic: 'strict' do
-    #   indexes :id, type: :integer
-    #   indexes :name, type: :keyword
-    # end
-
-    # settings index: { number_of_shards: 1 } do
-    #   mappings dynamic: 'false' do
-    #     indexes :id, type: :integer
-    #     indexes :name, type: :keyword
-    #   end
-    # end
-
     settings index: {number_of_shards: 1} do
       mapping dynamic: false do
         indexes :id, type: :integer
@@ -25,19 +13,6 @@ module EsBook
         indexes :category, type: :keyword
       end
     end
-
-
-    # settings(number_of_shards: 1) do
-    #   mappings dynamic: false do
-    #     indexes :id, type: :integer
-    #     indexes :name, type: :keyword
-    #   end
-    # end
-
-    # mapping dynamic: 'strict' do
-    #   indexes :name, type: :keyword
-    # end
-    # self.mapping(dynamic: 'strict') { indexes :id, type: 'long' }
   end
 
   def as_indexed_json(options = {})

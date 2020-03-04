@@ -5,6 +5,7 @@ namespace :yys do
 
     # SSR
     shi_shens = []
+    shi_shens << {name: '缘结神', sid: '346', cartoon: false}
     shi_shens << {name: '鬼童丸', sid: '345', cartoon: false}
     shi_shens << {name: '云外镜', sid: '344', cartoon: false}
     shi_shens << {name: '泷夜叉姬', sid: '338', cartoon: true}

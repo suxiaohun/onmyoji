@@ -9,7 +9,6 @@
 #   module QueueName
 #     module ClassMethods
 #       def sidekiq_options(*args)
-#         binding.pry
 #         # self.sidekiq_options = args
 #       end
 #     end
