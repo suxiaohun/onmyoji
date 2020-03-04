@@ -34,7 +34,7 @@ namespace :yys do
     shi_shens << {name: '大天狗', name_sp: '青竹', sid: '217', cartoon: true, cartoon_sp: true}
 
     # SP
-    shi_shens << {name: '聆海金鱼姬', kind: 'SP', sid: '346', cartoon: true}
+    shi_shens << {name: '聆海金鱼姬', kind: 'SP', sid: '346', cartoon: false}
     shi_shens << {name: '天剑韧心鬼切', kind: 'SP', sid: '343', cartoon: true}
     shi_shens << {name: '鬼王酒吞童子', kind: 'SP', sid: '341', cartoon: true}
     shi_shens << {name: '烬天玉藻前', kind: 'SP', sid: '339', cartoon: true}
