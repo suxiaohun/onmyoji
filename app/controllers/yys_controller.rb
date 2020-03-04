@@ -127,7 +127,7 @@ class YysController < ApplicationController
 
   def summon_ssr(number, mode, up_count)
 
-    ssrs = YysShiShen.where(kind: 'SSR', form: 'origin')
+    ssrs = YysShiShen.where(kind: 'SSR', form: 'origin').where.not(sid: SPEC_SID)
     sps = YysShiShen.where(kind: 'SP', form: 'origin')
 
     result = {}
