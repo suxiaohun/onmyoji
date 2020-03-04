@@ -5,6 +5,9 @@ module EsBook
     self.__elasticsearch__.client = ES_BOOK_CLIENT
 
     after_commit :update_es_index_async, on: [:create, :update]
+    # 注意：destroy之后，对象仅存在于内存中，无法再次获取（不太适用于异步调用）
+    after_commit :destroy_index, on: [:destroy]
+
 
     settings index: {number_of_shards: 1} do
       mapping dynamic: false do
@@ -33,12 +36,10 @@ module EsBook
 
   def update_index
     __elasticsearch__.index_document
-    true
   end
 
-  def destory_index
+  def destroy_index
     __elasticsearch__.delete_document
-    true
   end
 
   def update_es_index_async

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <title>千羽阁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
+
+<body>
+
+<div class="container">
+  <%= yield %>
+</div>
+</body>
+</html>

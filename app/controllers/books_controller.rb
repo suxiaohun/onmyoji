@@ -13,9 +13,8 @@ class BooksController < ApplicationController
   end
 
   def es
-
-    @books = Book.all
-    #render layout: false
+    @books = Book.all.page(params[:page] || 1)
+    render layout: 'es'
   end
 
   def es_search

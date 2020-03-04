@@ -1,9 +1,4 @@
-<div style="margin: 0 auto;border: 1px solid black;min-height: 300px;margin-top: 200px;text-align: center">
-  <%= form_tag("/books/es_search", method: 'post', remote: true) do %>
-    <%= text_field_tag :name %>
-    <%= submit_tag '提交' %>
-  <% end %>
-
+<div style="min-height: 600px;margin: 200px auto 0;text-align: center;font-size: 30px;">
   <ul id="test_es">
     <%= render partial: 'book', locals: {:books => @books} %>
   </ul>

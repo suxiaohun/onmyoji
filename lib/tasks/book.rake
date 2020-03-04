@@ -16,7 +16,7 @@ namespace :book do
 
   desc "init the books"
   task init: :environment do
-    Book.delete_all
+    Book.destroy_all
     books = YAML.load_file('lib/utils/files/book1.yml').deep_symbolize_keys
     books.each do |k, v|
       book = Book.new

@@ -38,3 +38,5 @@ dd.sh
 .generators
 
 config/database.yml
+
+nohup.out
