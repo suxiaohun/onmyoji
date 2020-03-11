@@ -7,9 +7,9 @@ class ChatRoomsController < ApplicationController
 
 
   def test2
-     head 200, content_type: 'text/html'
+    head 200, content_type: 'text/html'
 
-   # render :json => {:code=>200,:msg => 'ok2'}
+    # render :json => {:code=>200,:msg => 'ok2'}
   end
 
   def rooms
@@ -35,6 +35,15 @@ class ChatRoomsController < ApplicationController
     data[:data] = {}
     data[:data][:code] = 1000
     data[:data][:msg] = 'ok1'
+
+    cipher = OpenSSL::Cipher::AES.new(256, :ECB)
+    cipher.encrypt
+    cipher.padding = 5
+    cipher.key = 'Udesk*A8B6C4D2E0Udesk*A8B6C4D2E0'
+    encrypted = cipher.update(data[:data].to_json) + cipher.final
+    data_encrypted = Base64.encode64(encrypted)
+    data[:data] = data_encrypted
+
     render json: data
   end
 
