@@ -35,6 +35,7 @@ class ChatRoomsController < ApplicationController
     data[:data] = {}
     data[:data][:code] = 1000
     data[:data][:msg] = 'ok1'
+    render json: data
   end
 
   def join
