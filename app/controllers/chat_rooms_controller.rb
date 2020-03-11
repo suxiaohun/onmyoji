@@ -31,8 +31,10 @@ class ChatRoomsController < ApplicationController
     #
     # result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
     # _ip = request.remote_ip.to_s
-
-    render :json => {:code=>1000,:msg => 'ok1'}
+    data = {}
+    data[:data] = {}
+    data[:data][:code] = 1000
+    data[:data][:msg] = 'ok1'
   end
 
   def join
