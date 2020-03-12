@@ -24,13 +24,20 @@ class ChatRoomsController < ApplicationController
 
 
   def test
-    # payload = params
-    # payload.delete("chat_room")
-    # payload.delete("controller")
-    # payload.delete("action")
+     payload = params
+     payload.delete("chat_room")
+     payload.delete("controller")
+     payload.delete("action")
     #
-    # result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
+     result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
     # _ip = request.remote_ip.to_s
+
+    ActionCable.server.broadcast 'chat',
+                                 message: "#{result}",
+                                 user: 'request',
+                                 color: 'blue'
+
+
     data = {}
     data[:data] = {}
     data[:data][:code] = 1000
@@ -44,6 +51,12 @@ class ChatRoomsController < ApplicationController
     data_encrypted = Base64.encode64(encrypted)
     data[:data] = data_encrypted
 
+
+     result2 = JSON.pretty_generate(JSON.parse(data.to_json)).gsub("\n", "<br>")
+     ActionCable.server.broadcast 'chat',
+                                  message: "#{result2}",
+                                  user: 'response',
+                                  color: 'red'
     render json: data
   end
 
