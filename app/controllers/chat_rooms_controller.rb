@@ -59,7 +59,7 @@ class ChatRoomsController < ApplicationController
     #actual_result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
 
     ActionCable.server.broadcast 'chat',
-                                 message: "#{actual_result}",
+                                 message: "#{actual_result.force_encoding("utf-8")}",
                                  user: 'request_actual_data',
                                  color: 'green'
 
