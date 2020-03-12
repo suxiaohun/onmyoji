@@ -55,6 +55,9 @@ class ChatRoomsController < ApplicationController
     decipher.padding = 5
     decrypted = decipher.update(data) + decipher.final
     payload[:data] = decrypted.strip
+
+    puts payload[:data]
+
     actual_result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
 
     ActionCable.server.broadcast 'chat',
