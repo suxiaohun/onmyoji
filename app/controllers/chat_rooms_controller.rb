@@ -6,11 +6,11 @@ class ChatRoomsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
 
-  def test2
-    head 200, content_type: 'text/html'
-
-    # render :json => {:code=>200,:msg => 'ok2'}
-  end
+  #def test2
+  #  head 200, content_type: 'text/html'
+  #
+  #  # render :json => {:code=>200,:msg => 'ok2'}
+  #end
 
   def rooms
     # respond_to(&:html)
@@ -22,20 +22,45 @@ class ChatRoomsController < ApplicationController
     # @chat_rooms = ChatRoom.all
   end
 
+  def test1
+    data = {}
+    data[:data] = {}
+    data[:data][:code] = 1000
+    data[:data][:msg] = 'ok1'
 
-  def test
-     payload = params
-     payload.delete("chat_room")
-     payload.delete("controller")
-     payload.delete("action")
+    render json: data
+  end
+
+  def test2
+    key = 'Udesk*A8B6C4D2E0Udesk*A8B6C4D2E0'
+    payload = params
+    payload.delete("chat_room")
+    payload.delete("controller")
+    payload.delete("action")
     #
-     result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
+    result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
     # _ip = request.remote_ip.to_s
 
     ActionCable.server.broadcast 'chat',
                                  message: "#{result}",
                                  user: 'request',
                                  color: 'blue'
+
+
+    actual_data = payload['data'] || 'ABFRA3VAdxErbOtCL1fxHkTEkSJqlcJafBaVivlUPGI=\n'
+    data = Base64.decode64(actual_data)
+    decipher = OpenSSL::Cipher::AES.new(256, :ECB)
+    decipher.decrypt
+    decipher.key = key
+    decipher.padding = 5
+    decrypted = decipher.update(data) + decipher.final
+    payload[:data] = decrypted.strip
+    actual_result = JSON.pretty_generate(JSON.parse(payload.to_json)).gsub("\n", "<br>")
+
+    ActionCable.server.broadcast 'chat',
+                                 message: "#{actual_result}",
+                                 user: 'request_actual_data',
+                                 color: 'green'
 
 
     data = {}
@@ -46,17 +71,17 @@ class ChatRoomsController < ApplicationController
     cipher = OpenSSL::Cipher::AES.new(256, :ECB)
     cipher.encrypt
     cipher.padding = 5
-    cipher.key = 'Udesk*A8B6C4D2E0Udesk*A8B6C4D2E0'
+    cipher.key = key
     encrypted = cipher.update(data[:data].to_json) + cipher.final
     data_encrypted = Base64.encode64(encrypted)
     data[:data] = data_encrypted
 
 
-     result2 = JSON.pretty_generate(JSON.parse(data.to_json)).gsub("\n", "<br>")
-     ActionCable.server.broadcast 'chat',
-                                  message: "#{result2}",
-                                  user: 'response',
-                                  color: 'red'
+    result2 = JSON.pretty_generate(JSON.parse(data.to_json)).gsub("\n", "<br>")
+    ActionCable.server.broadcast 'chat',
+                                 message: "#{result2}",
+                                 user: 'response',
+                                 color: 'red'
     render json: data
   end
 
