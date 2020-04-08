@@ -302,6 +302,7 @@ DEPENDENCIES
   elasticsearch
   elasticsearch-model
   elasticsearch-rails
+  execjs
   jquery-rails
   kaminari
   listen

@@ -26,7 +26,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'rack-cors'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-# gem 'execjs'
+ gem 'execjs'
 # gem 'therubyracer'
 
 # Use CoffeeScript for .coffee assets and views
